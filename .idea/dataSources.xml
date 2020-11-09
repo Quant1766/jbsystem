@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="u366573383_d1qoigu3e0fd65@sql170.main-hosting.eu" uuid="32dbee0a-8755-43a5-8d24-b1c2701d7133">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://sql170.main-hosting.eu:3306/u366573383_d1qoigu3e0fd65</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="dd105tj20kkmms@ec2-63-35-60-54.eu-west-1.compute.amazonaws.com" uuid="4a23000c-a1a9-47a9-ad21-56d3c4d41454">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-63-35-60-54.eu-west-1.compute.amazonaws.com:5432/dd105tj20kkmms</jdbc-url>
+    </data-source>
+  </component>
+</project>
