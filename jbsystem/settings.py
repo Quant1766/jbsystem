@@ -111,13 +111,7 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASE_URL = \
-    'postgres://' \
-    'u2pn58tqn0j979' \
-    ':p2751df1170edba9abcbacf9ec6b113e822c14c8aae9c244b1555d5b90387fd93' \
-    '@ec2-63-35-60-54.eu-west-1.compute.amazonaws.com' \
-    ':5432' \
-    '/dd105tj20kkmms'
+DATABASE_URL = 'postgres://u2pn58tqn0j979:p2751df1170edba9abcbacf9ec6b113e822c14c8aae9c244b1555d5b90387fd93@ec2-63-35-60-54.eu-west-1.compute.amazonaws.com:5432/dd105tj20kkmms'
 
 
 DATABASES = {}
