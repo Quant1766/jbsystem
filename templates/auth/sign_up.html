@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <title>CRM Admin panel</title>
+      <!-- Favicon and touch icons -->
+      <link rel="shortcut icon" href="/static/crm/assets/dist/img/ico/favicon.png" type="image/x-icon">
+      <!-- Bootstrap -->
+      <link href="/static/crm/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+      <!-- Bootstrap rtl -->
+      <!--<link href="/static/crm/assets/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet" type="text/css"/>-->
+      <!-- Pe-icon-7-stroke -->
+      <link href="/static/crm/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css">
+      <!-- style css -->
+      <link href="/static/crm/assets/dist/css/stylecrm.css" rel="stylesheet" type="text/css">
+      <!-- Theme style rtl -->
+      <!--<link href="/static/crm/assets/dist/css/stylecrm-rtl.css" rel="stylesheet" type="text/css"/>-->
+   </head>
+   <body>
+      <!-- Content Wrapper -->
+      <div class="login-wrapper">
+         <div class="back-link">
+            <a href="/dashboard/" class="btn btn-add">Back to Dashboard</a>
+         </div>
+         <div class="container-center lg">
+            <div class="login-area">
+               <div class="panel panel-bd panel-custom">
+                  <div class="panel-heading">
+                     <div class="view-header">
+                        <div class="header-icon">
+                           <i class="pe-7s-unlock"></i>
+                        </div>
+                        <div class="header-title">
+                           <h3>Register</h3>
+                           <small><strong>Please enter your data to register.</strong></small>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="panel-body">
+                     <form id="loginForm" action="" method="post">
+                         {% csrf_token %}
+                        <div class="row">
+                           <div class="form-group col-lg-6">
+                              <label>Username</label>
+                              <input type="text" value="" id="username" class="form-control" name="username" required>
+                              <span class="help-block small">Your unique username to app</span>
+                           </div>
+                           <div class="form-group col-lg-6">
+                              <label class="control-label">First Name</label>
+                              <input type="text" id="first_name" name="first_name" placeholder="First Name" class="form-control" required>
+                           </div>
+                           <!-- Text input-->
+                           <div class="form-group col-lg-6">
+                              <label class="control-label">Last Name</label>
+                              <input type="text" id="last_name" name="last_name" placeholder="Surname" class="form-control" required>
+                           </div>
+
+                            <div class="form-group col-lg-6">
+                              <label class="control-label">Role</label>
+                                <select class="form-control" name="role" id="role">
+                                    <option value="doctor">Doctor</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                           </div>
+
+                            <div class="form-group col-lg-6">
+                              <label>Password</label>
+                              <input type="password" onblur="check_password()" value="" id="password" class="form-control" required name="password">
+                              <span class="help-block small">Your hard to guess password</span>
+                           </div>
+                           <div class="form-group col-lg-6">
+                              <label>Repeat Password</label>
+                              <input type="password" value="" onblur="check_password()" id="repeatpassword" class="form-control" required name="repeatpassword">
+                              <span class="help-block small">Please repeat your pasword</span>
+                           </div>
+                           <div class="form-group col-lg-6">Login
+                              <label>Email Address</label>
+                              <input type="text" value="" id="email" class="form-control" name="email" required>
+                              <span class="help-block small">Your address email to contact</span>
+                           </div>
+                            <div class="col-md-4 form-group">
+                              <label class="control-label">Phone</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                           </div>
+
+                        </div>
+                        <div>
+                           <button id="registerbutton" class="btn btn-warning" disabled='true' type="submit">Register</button>
+                           <a class="btn btn-add" href="/login/">Login</a>
+                        </div>
+                         <script>
+
+                             function check_password(){
+                                 password1 = document.getElementById('password').value;
+                                 password2 = document.getElementById('repeatpassword').value;
+
+                                 if (password1 !== password2){
+                                     document.getElementById('password').style.color = 'red';
+                                     document.getElementById('repeatpassword').style.color = 'red';
+                                     document.getElementById("registerbutton").disabled = true;
+                                 }else if (password1 === password2){
+                                     document.getElementById('password').style.color = 'green';
+                                     document.getElementById('repeatpassword').style.color = 'green';
+                                     document.getElementById("registerbutton").disabled = false;
+
+                                 }
+
+                                 return 0;
+                             }
+
+                         </script>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- /.content-wrapper -->
+      <!-- jQuery -->
+      <script src="/static/crm/assets/plugins/jQuery/jquery-1.12.4.min.js" type="text/javascript"></script>
+      <!-- bootstrap js -->
+      <script src="/static/crm/assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+      <app-content ng-version="10.1.5"></app-content>
+   </body>
+   <div></div>
+</html>

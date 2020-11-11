@@ -2,6 +2,8 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+
+
 def gen_aaaannnna(old_id="AAA0000A"):
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     c1,c2,c3,n1,n2,n3,n4,c4 = tuple(old_id)
@@ -88,7 +90,7 @@ class UserProfile(models.Model):
         "role",
         max_length=30,
         null=False,
-        default='client')
+        default='doctor')
 
     phone = models.CharField(
         "phone",
@@ -125,8 +127,8 @@ class UserProfile(models.Model):
         default="")
 
     user_avatar = models.ImageField(
-        upload_to="mobile/img/sample/avatar",
-        default='mobile/img/sample/avatar/341-3415688_no-avatar-png-transparent-png_yfts1p_xfsloz')  # You need to configure media in settings.py
+        upload_to="static/image/avatars/",
+        default='static/image/avatars/doctor_icon.png')  # You need to configure media in settings.py
 
     def __str__(self):
         return "%s %s" % (self.user.username, self.role)
@@ -151,13 +153,13 @@ class MasterTable(models.Model):
     Puckering, dimple or indentation of skin
     Breast rash"""
 
-    screener = models.TextField("Screener",
+    datapoint_7 = models.TextField("Screener",
                                 max_length=1500,
                               default='')
 
-    is_dpoint8 = models.BooleanField("is Datapint8", null=True,blank=True)
+    is_datapoint_8 = models.BooleanField("is Datapint8", null=True,blank=True)
 
-    left_right = models.CharField(max_length=15,
+    datapoint_9 = models.CharField(max_length=15,
                                   choices=(('RL', 'Right & left'),
                                            ('R', 'Right'),
                                            ('L', 'Left'),
@@ -167,7 +169,7 @@ class MasterTable(models.Model):
 
 
 
-    pos_clockR = models.CharField(max_length=45,
+    datapoint_10 = models.CharField(max_length=45,
                                   choices=(('UpOutPir', 'Upper - outer peripheral'),
                                            ('UpInPir', 'Upper - inner peripheral'),
                                            ('LowInPir', 'Lower - inner peripheral'),
@@ -182,7 +184,7 @@ class MasterTable(models.Model):
                                            ),
                                   default='')
 
-    pos_clockL = models.CharField(max_length=45,
+    datapoint_11 = models.CharField(max_length=45,
                                   choices=(('UpOutPir', 'Upper - outer peripheral'),
                                            ('UpInPir', 'Upper - inner peripheral'),
                                            ('LowInPir', 'Lower - inner peripheral'),
@@ -197,7 +199,7 @@ class MasterTable(models.Model):
                                            ),
                                   default='')
 
-    tumor_size = models.CharField(max_length=15,
+    datapoint_12 = models.CharField(max_length=15,
                               choices=(('pea', 'Pea'),
                                        ('peanut', 'Peanut'),
                                        ('grape', 'Grape'),
@@ -212,7 +214,7 @@ class MasterTable(models.Model):
 
 
 
-    found = models.CharField(max_length=15,
+    datapoint_13 = models.CharField(max_length=15,
                               choices=(('couplDay', 'Couple of days ago'),
                                        ('couplWeeks', 'Couple of weeks ago'),
                                        ('fevgWeeks', 'Few weeks ago'),
@@ -225,7 +227,7 @@ class MasterTable(models.Model):
                                        ),
                               default='')
 
-    proggress = models.CharField(max_length=15,
+    datapoint_14 = models.CharField(max_length=15,
                               choices=(('slowGrow', 'slowing growing'),
                                        ('slowGrow', 'rapidly growing'),
                                        ('remainSize', 'remained same in size'),
@@ -257,7 +259,7 @@ class MasterTable(models.Model):
                                       default='')
 
 
-    complication = models.CharField(max_length=15,
+    datapoint_17 = models.CharField(max_length=15,
                                       choices=(('S', 'Soft'),
                                                ('F', 'Firm'),
                                                ('H', 'Hard'),
@@ -272,7 +274,7 @@ class MasterTable(models.Model):
 
 
 
-    Datapoint_21 = models.CharField(max_length=15,
+    datapoint_21 = models.CharField(max_length=15,
                                       choices=(('1m', 'less than one month'),
                                                ('2-3m', '2 - 3 months'),
                                                ('3-6m', '3-6 months'),
@@ -282,7 +284,7 @@ class MasterTable(models.Model):
                                                ),
                                       default='')
 
-    Datapoint_22 = models.CharField(max_length=15,
+    datapoint_22 = models.CharField(max_length=15,
                                     choices=(('<5%', '<5% of weight'),
                                              ('>5%', '>5% of weight'),
                                              ('', ''),
@@ -301,7 +303,7 @@ class MasterTable(models.Model):
 
     is_datapoint_26 = models.BooleanField("is Datapint26", null=True, blank=True)
 
-    armpit_pos = models.CharField(max_length=35,
+    datapoint_27 = models.CharField(max_length=35,
                                     choices=(('RLarpit', 'Right & left armpit'),
                                              ('Rarpit', 'Right armpit'),
                                              ('Larpit', 'Left armpit'),
@@ -309,7 +311,7 @@ class MasterTable(models.Model):
                                              ),
                                     default='')
 
-    neck_groin_pos = models.TextField("neck groin pos",
+    datapoint_28 = models.TextField("neck groin pos",
                                 max_length=2000,
                                 default='')
 
@@ -317,7 +319,7 @@ class MasterTable(models.Model):
                                 max_length=3500,
                                 default='')
 
-    datapoint_30 = models.BooleanField("is Datapint30", null=True, blank=True)
+    is_datapoint_30 = models.BooleanField("is Datapint30", null=True, blank=True)
 
     datapoint_31 = models.CharField(max_length=15,
                               choices=(('pea', 'Pea'),
@@ -428,7 +430,7 @@ class MasterTable(models.Model):
                                              ),
                                     default='')
 
-    datapoint_39 = models.BooleanField("is Datapint39", null=True, blank=True)
+    is_datapoint_39 = models.BooleanField("is Datapint39", null=True, blank=True)
 
 
     datapoint_40 = models.CharField(max_length=15,
@@ -454,7 +456,7 @@ class MasterTable(models.Model):
                                        ),
                               default='')
 
-    datapoint_42 = models.BooleanField("is Datapint42", null=True, blank=True)
+    is_datapoint_42 = models.BooleanField("is Datapint42", null=True, blank=True)
 
     datapoint_43 = models.TextField("Datapint43",
                                       max_length=2000,
@@ -468,15 +470,15 @@ class MasterTable(models.Model):
                                     max_length=2000,
                                     default='')
 
-    datapoint_46 = models.BooleanField("is Datapint46", null=True, blank=True)
+    is_datapoint_46 = models.BooleanField("is Datapint46", null=True, blank=True)
 
-    datapoint_47 = models.BooleanField("is Datapint47", null=True, blank=True)
+    is_datapoint_47 = models.BooleanField("is Datapint47", null=True, blank=True)
 
-    datapoint_48 = models.BooleanField("is Datapint48", null=True, blank=True)
+    is_datapoint_48 = models.BooleanField("is Datapint48", null=True, blank=True)
 
-    datapoint_49 = models.BooleanField("is Datapint49", null=True, blank=True)
+    is_datapoint_49 = models.BooleanField("is Datapint49", null=True, blank=True)
 
-    datapoint_50 = models.BooleanField("is Datapint50", null=True, blank=True)
+    is_datapoint_50 = models.BooleanField("is Datapint50", null=True, blank=True)
 
     datapoint_51 = models.CharField(max_length=15,
                                     choices=(('couplDay', 'Couple of days ago'),
@@ -519,25 +521,25 @@ class MasterTable(models.Model):
                                              ),
                                     default='')
 
-    datapoint_55 = models.BooleanField("is Datapint55", null=True, blank=True)
+    is_datapoint_55 = models.BooleanField("is Datapint55", null=True, blank=True)
 
-    datapoint_56 = models.BooleanField("is Datapint56", null=True, blank=True)
-    datapoint_57 = models.BooleanField("is Datapint57", null=True, blank=True)
-    datapoint_58 = models.BooleanField("is Datapint58", null=True, blank=True)
-    datapoint_59 = models.BooleanField("is Datapint59", null=True, blank=True)
+    is_datapoint_56 = models.BooleanField("is Datapint56", null=True, blank=True)
+    is_datapoint_57 = models.BooleanField("is Datapint57", null=True, blank=True)
+    is_datapoint_58 = models.BooleanField("is Datapint58", null=True, blank=True)
+    is_datapoint_59 = models.BooleanField("is Datapint59", null=True, blank=True)
 
-    datapoint_60 = models.BooleanField("is Datapint60", null=True, blank=True)
+    is_datapoint_60 = models.BooleanField("is Datapint60", null=True, blank=True)
 
-    datapoint_61 = models.BooleanField("is Datapint61", null=True, blank=True)
+    is_datapoint_61 = models.BooleanField("is Datapint61", null=True, blank=True)
 
 
     datapoint_62 = models.TextField("Datapint62",
                                     max_length=2000,
                                     default='')
 
-    datapoint_63 = models.BooleanField("is Datapint63", null=True, blank=True)
+    is_datapoint_63 = models.BooleanField("is Datapint63", null=True, blank=True)
 
-    datapoint_64 = models.BooleanField("is Datapint64", null=True, blank=True)
+    is_datapoint_64 = models.BooleanField("is Datapint64", null=True, blank=True)
 
     datapoint_65 = models.CharField(max_length=15,
                                     choices=(('RL', 'Right & left'),
@@ -547,7 +549,7 @@ class MasterTable(models.Model):
                                              ),
                                     default='')
 
-    datapoint_66 = models.BooleanField("is Datapint66", null=True, blank=True)
+    is_datapoint_66 = models.BooleanField("is Datapint66", null=True, blank=True)
 
     datapoint_67 = models.CharField(max_length=15,
                                     choices=(('1', 'Less than a quarter'),
@@ -571,9 +573,9 @@ class MasterTable(models.Model):
                                       ),
                              default='')
 
-    datapoint_69 = models.BooleanField("is Datapint69", null=True, blank=True)
-    datapoint_70 = models.BooleanField("is Datapint70", null=True, blank=True)
-    datapoint_71 = models.BooleanField("is Datapint71", null=True, blank=True)
+    is_datapoint_69 = models.BooleanField("is Datapint69", null=True, blank=True)
+    is_datapoint_70 = models.BooleanField("is Datapint70", null=True, blank=True)
+    is_datapoint_71 = models.BooleanField("is Datapint71", null=True, blank=True)
 
     datapoint_72 = models.CharField(max_length=15,
                                     choices=(('RL', 'Right & left'),
@@ -596,18 +598,18 @@ class MasterTable(models.Model):
                                              ),
                                     default='')
 
-    datapoint_74 = models.BooleanField("is Datapint74", null=True, blank=True)
-    datapoint_75 = models.BooleanField("is Datapint75", null=True, blank=True)
-    datapoint_76 = models.BooleanField("is Datapint76", null=True, blank=True)
+    is_datapoint_74 = models.BooleanField("is Datapint74", null=True, blank=True)
+    is_datapoint_75 = models.BooleanField("is Datapint75", null=True, blank=True)
+    is_datapoint_76 = models.BooleanField("is Datapint76", null=True, blank=True)
 
-    datapoint_77 = models.BooleanField("is Datapint77", null=True, blank=True)
-    datapoint_78 = models.BooleanField("is Datapint78", null=True, blank=True)
-    datapoint_79 = models.BooleanField("is Datapint79", null=True, blank=True)
+    is_datapoint_77 = models.BooleanField("is Datapint77", null=True, blank=True)
+    is_datapoint_78 = models.BooleanField("is Datapint78", null=True, blank=True)
+    is_datapoint_79 = models.BooleanField("is Datapint79", null=True, blank=True)
 
-    datapoint_80 = models.BooleanField("is Datapint80", null=True, blank=True)
-    datapoint_81 = models.BooleanField("is Datapint81", null=True, blank=True)
-    datapoint_82 = models.BooleanField("is Datapint82", null=True, blank=True)
-    datapoint_83 = models.BooleanField("is Datapint83", null=True, blank=True)
+    is_datapoint_80 = models.BooleanField("is Datapint80", null=True, blank=True)
+    is_datapoint_81 = models.BooleanField("is Datapint81", null=True, blank=True)
+    is_datapoint_82 = models.BooleanField("is Datapint82", null=True, blank=True)
+    is_datapoint_83 = models.BooleanField("is Datapint83", null=True, blank=True)
 
     datapoint_84 = models.CharField(max_length=15,
                                     choices=(('RL', 'Right & left'),
@@ -639,17 +641,17 @@ class MasterTable(models.Model):
                                              ),
                                     default='')
 
-    datapoint_87 = models.BooleanField("is Datapint87", null=True, blank=True)
+    is_datapoint_87 = models.BooleanField("is Datapint87", null=True, blank=True)
 
     datapoint_88 = models.TextField("Datapint88",
                                     max_length=2000,
                                     default='')
 
-    datapoint_89 = models.BooleanField("is Datapint89", null=True, blank=True)
+    is_datapoint_89 = models.BooleanField("is Datapint89", null=True, blank=True)
 
-    datapoint_90 = models.BooleanField("is Datapint90", null=True, blank=True)
+    is_datapoint_90 = models.BooleanField("is Datapint90", null=True, blank=True)
 
-    datapoint_91 = models.BooleanField("is Datapint91", null=True, blank=True)
+    is_datapoint_91 = models.BooleanField("is Datapint91", null=True, blank=True)
 
     datapoint_92 = models.CharField(max_length=15,
                                     choices=(('couplDay', 'Couple of days ago'),
@@ -681,15 +683,15 @@ class MasterTable(models.Model):
                                              ),
                                     default='')
 
-    datapoint_95 = models.BooleanField("is Datapint95", null=True, blank=True)
+    is_datapoint_95 = models.BooleanField("is Datapint95", null=True, blank=True)
 
     datapoint_96 = models.TextField("Datapint96",
                                     max_length=2000,
                                     default='')
 
-    datapoint_97 = models.BooleanField("is Datapint97", null=True, blank=True)
+    is_datapoint_97 = models.BooleanField("is Datapint97", null=True, blank=True)
 
-    datapoint_98 = models.BooleanField("is Datapint98", null=True, blank=True)
+    is_datapoint_98 = models.BooleanField("is Datapint98", null=True, blank=True)
 
     datapoint_99 = models.CharField(max_length=15,
                                     choices=(('RL', 'Right & left'),
@@ -746,35 +748,35 @@ class MasterTable(models.Model):
                                     max_length=2000,
                                     default='')
 
-    datapoint_104 = models.BooleanField("is Datapint104", null=True, blank=True)
+    is_datapoint_104 = models.BooleanField("is Datapint104", null=True, blank=True)
 
-    datapoint_105 = models.BooleanField("is Datapint105", null=True, blank=True)
+    is_datapoint_105 = models.BooleanField("is Datapint105", null=True, blank=True)
 
-    datapoint_106 = models.BooleanField("is Datapint106", null=True, blank=True)
+    is_datapoint_106 = models.BooleanField("is Datapint106", null=True, blank=True)
 
-    datapoint_107 = models.BooleanField("is Datapint107", null=True, blank=True)
+    is_datapoint_107 = models.BooleanField("is Datapint107", null=True, blank=True)
 
-    datapoint_108 = models.BooleanField("is Datapint108", null=True, blank=True)
+    is_datapoint_108 = models.BooleanField("is Datapint108", null=True, blank=True)
 
-    datapoint_109 = models.BooleanField("is Datapint109", null=True, blank=True)
+    is_datapoint_109 = models.BooleanField("is Datapint109", null=True, blank=True)
 
-    datapoint_110 = models.BooleanField("is Datapint110", null=True, blank=True)
+    is_datapoint_110 = models.BooleanField("is Datapint110", null=True, blank=True)
 
-    datapoint_111 = models.BooleanField("is Datapint111", null=True, blank=True)
+    is_datapoint_111 = models.BooleanField("is Datapint111", null=True, blank=True)
 
-    datapoint_112 = models.BooleanField("is Datapint112", null=True, blank=True)
+    is_datapoint_112 = models.BooleanField("is Datapint112", null=True, blank=True)
 
-    datapoint_113 = models.BooleanField("is Datapint113", null=True, blank=True)
+    is_datapoint_113 = models.BooleanField("is Datapint113", null=True, blank=True)
 
-    datapoint_114 = models.BooleanField("is Datapint114", null=True, blank=True)
+    is_datapoint_114 = models.BooleanField("is Datapint114", null=True, blank=True)
 
-    datapoint_115 = models.BooleanField("is Datapint115", null=True, blank=True)
+    is_datapoint_115 = models.BooleanField("is Datapint115", null=True, blank=True)
 
-    datapoint_116 = models.BooleanField("is Datapint116", null=True, blank=True)
+    is_datapoint_116 = models.BooleanField("is Datapint116", null=True, blank=True)
 
-    datapoint_117 = models.BooleanField("is Datapint117", null=True, blank=True)
+    is_datapoint_117 = models.BooleanField("is Datapint117", null=True, blank=True)
 
-    datapoint_118 = models.BooleanField("is Datapint118", null=True, blank=True)
+    is_datapoint_118 = models.BooleanField("is Datapint118", null=True, blank=True)
 
-    datapoint_119 = models.BooleanField("is Datapint119", null=True, blank=True)
+    is_datapoint_119 = models.BooleanField("is Datapint119", null=True, blank=True)
 

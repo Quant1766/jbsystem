@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>CRM Admin Dashboard</title>
+      <!-- Favicon and touch icons -->
+      <link rel="shortcut icon" href="https://thememinister.com/crm/assets/dist/img/ico/favicon.png" type="image/x-icon">
+      <!-- Start Global Mandatory Style
+         =====================================================================-->
+      <!-- jquery-ui css -->
+      <link href="/static/crm/assets/plugins/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css">
+      <!-- Bootstrap -->
+      <link href="/static/crm/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+      <!-- Bootstrap rtl -->
+      <!--<link href="https://thememinister.com/crm/assets/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet" type="text/css"/>-->
+      <!-- Lobipanel css -->
+      <link href="/static/crm/assets/plugins/lobipanel/lobipanel.min.css" rel="stylesheet" type="text/css">
+      <!-- Pace css -->
+      <link href="/static/crm/assets/plugins/pace/flash.css" rel="stylesheet" type="text/css">
+      <!-- Font Awesome -->
+      <link href="/static/crm/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <!-- Pe-icon -->
+      <link href="/static/crm/assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css">
+      <!-- Themify icons -->
+      <link href="/static/crm/assets/themify-icons/themify-icons.css" rel="stylesheet" type="text/css">
+      <!-- dataTables css -->
+      <link href="/static/crm/assets/plugins/datatables/dataTables.min.css" rel="stylesheet" type="text/css">
+      <!-- End Global Mandatory Stylefonts/themify.eot
+         =====================================================================-->
+      <!-- Start Theme Layout Style
+         =====================================================================-->
+      <!-- Theme style -->
+      <link href="/static/crm/assets/dist/css/stylecrm.css" rel="stylesheet" type="text/css">
+      <!-- Theme style rtl -->
+      <!--<link href="https://thememinister.com/crm/assets/dist/css/stylecrm-rtl.css" rel="stylesheet" type="text/css"/>-->
+      <!-- End Theme Layout Style
+         =====================================================================-->
+   </head>
+   <body class="sidebar-mini  pace-done">
+      <div class="pace  pace-inactive">
+         <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+            <div class="pace-progress-inner"></div>
+         </div>
+         <div class="pace-activity"></div>
+      </div>
+      <!--preloader-->
+      <div id="preloader" style="display: none;">
+         <div id="status" style="display: none;"></div>
+      </div>
+      <!-- Site wrapper -->
+      <div class="wrapper">
+         <header class="main-header">
+            <a href="/" class="logo">
+               <!-- Logo -->
+               <span class="logo-mini">
+               <img src="https://thememinister.com/crm/assets/dist/img/mini-logo.png" alt="">
+               </span>
+               <span class="logo-lg">
+               <img src="https://thememinister.com/crm/assets/dist/img/logo.png" alt="">
+               </span>
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top">
+               <a href="#" class="sidebar-toggle" onclick="window.history.back();" role="button">
+                  <!-- Sidebar toggle button-->
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="pe-7s-angle-left-circle"></span>
+               </a>
+               <!-- searchbar-->
+               <a href="#" data-toggle="modal" data-target="#searchmodal"><span class="pe-7s-search"></span></a>
+               <div id="search">
+                  <button type="button" class="close">×</button>
+                  <form>
+                     <input type="search" value="" placeholder="type keyword(s) here">
+                     <button type="submit" class="btn btn-add">Search...</button>
+                  </form>
+               </div>
+               <div class="navbar-custom-menu">
+                  <ul class="nav navbar-nav">
+                     <!-- Help -->
+
+                     <!-- user -->
+                     <li class="dropdown dropdown-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="https://thememinister.com/crm/assets/dist/img/avatar5.png" class="img-circle" width="45" height="45" alt="user"></a>
+                        <ul class="dropdown-menu">
+
+                           <li><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
+                           <li><a href="/login/">
+                              <i class="fa fa-sign-out"></i> Signout</a>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+               </div>
+            </nav>
+         </header>
+         <!-- =============================================== -->
+         <!-- Left side column. contains the sidebar -->
+         <aside class="main-sidebar">
+            <!-- sidebar -->
+            <div class="sidebar" style="height: auto;">
+               <!-- sidebar menu -->
+               <ul class="sidebar-menu">
+                  <li class="active">
+                     <a href="#"><i class="fa fa-tachometer"></i><span>Dashboard</span>
+                     <span class="pull-right-container">
+                     </span>
+                     </a>
+                  </li>
+                  <li class="treeview">
+                     <a href="/master/">
+                     <span>Master Table</span>
+                     <span class="pull-right-container">
+                     </span>
+                     </a>
+                  </li>
+                   <li class="treeview">
+                     <a href="/pacients/">
+                     <i class="fa fa-users"></i><span>Pacients Table</span>
+                     <span class="pull-right-container">
+                     <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                     </a>
+                  </li>
+                  <li>
+                     <a href="items.html">
+                     <i class="fa fa-file-o"></i><span>Items</span>
+                     <span class="pull-right-container">
+                     </span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+            <!-- /.sidebar -->
+         </aside>
+         <!-- =============================================== -->
+         <!-- Content Wrapper. Contains page content -->
+         <div class="content-wrapper" style="min-height: 1276px;">
+            <!-- Main content -->
+            <section class="content" style="padding: 0 0 0 0 !important;">
+               <div class="row">
+                  <div class="col-sm-12 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="EENBvLiKlJ">
+                     <div class="panel panel-bd lobidrag lobipanel lobipanel-sortable" data-inner-id="EENBvLiKlJ" data-index="0">
+                        <div class="panel-heading ui-sortable-handle">
+                           <div class="btn-group" id="buttonexport">
+                              <a href="#">
+                                 <h4>Pacients</h4>
+                              </a>
+                           </div>
+
+                        </div>
+                        <div class="panel-body">
+                           <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
+                           <div class="btn-group">
+                              <div class="buttonexport">
+                                 <a href="#" class="btn btn-add" data-toggle="modal" data-target="#add_pacient"><i class="fa fa-plus"></i> Add Pacient</a>
+                              </div>
+                               <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Table Data</button>
+                               <a class="btn btn-add" data-toggle="modal" data-target="#load_pacient" style="margin-left: 21px;"><i class="fa fa-bars"></i> Import Data</a>
+                              <ul class="dropdown-menu exp-drop" role="menu">
+
+                                 <li class="divider"></li>
+                                 <li>
+                                    <a href="/pacients/download/?{{ res_params }}&format_file=csv">
+                                    <img src="https://thememinister.com/crm/assets/dist/img/csv.png" width="24" alt="logo"> CSV</a>
+                                 </li>
+                                 <li>
+                                    <a href="/pacients/download/?{{ res_params }}&format_file=csv">
+                                    <img src="https://thememinister.com/crm/assets/dist/img/txt.png" width="24" alt="logo"> TXT</a>
+                                 </li>
+                                 <li class="divider"></li>
+                                 <li>
+                                    <a href="/pacients/download/?{{ res_params }}&format_file=xls">
+                                    <img src="https://thememinister.com/crm/assets/dist/img/xls.png" width="24" alt="logo"> XLS</a>
+                                 </li>
+
+                                 </li>
+                              </ul>
+                           </div>
+                           <!-- ./Plugin content:powerpoint,txt,pdf,png,word,xl -->
+                           <div class="table-responsive">
+                              <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
+                                 <thead>
+                                    <tr class="info">
+                                       <th>ID</th>
+                                        <th>NSH ID</th>
+                                       <th>First Name</th>
+                                       <th>Last Name</th>
+                                       <th>Date of birth</th>
+                                       <th>Pacient phone</th>
+                                       <th>Email</th>
+                                        <th>City</th>
+                                        <th>Address</th>
+                                    </tr>
+                                 </thead>
+                                  <tbody>
+                                  {% for pacient in pacients %}
+                                      <tr>
+                                          <td><p style="width: 20px;">{{ pacient.id }}</p></td>
+                                          <td><p style="width: 80px;">{{ pacient.nsh_id }}</p></td>
+                                          <td><p style="width: 150px;">{{ pacient.first_name }}</p></td>
+
+                                          <td><p style="width: 150px;">{{ pacient.last_name }}</p></td>
+                                          <td><p style="width: 150px;">{{ pacient.date_of_birth }}</p></td>
+                                          <td><p style="width: 150px;">{{ pacient.phone }}</p></td>
+
+                                          <td><p style="width: 150px;">{{ pacient.email }}</p></td>
+                                          <td><p style="width: 250px;">{{ pacient.default_city }}</p></td>
+                                          <td> <p style="width: 250px;">{{ pacient.home_addres }}</p></td>
+                                      </tr>
+                                  {% endfor %}
+
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+                <div class="modal fade" id="searchmodal" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-plus m-r-5"></i>Shearch Pacients</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal" id="search_form">
+                                    <fieldset>
+                                       <!-- Text input-->
+                                       <div class="col-md-4 form-group">
+                                          <label class="control-label">First Name</label>
+                                          <input type="text" id="first_name" placeholder="First Name" class="form-control">
+                                       </div>
+                                       <!-- Text input-->
+                                       <div class="col-md-4 form-group">
+                                          <label class="control-label">Last Name</label>
+                                          <input type="text" id="last_name" placeholder="Surname" class="form-control">
+                                       </div>
+                                        <div class="col-md-4 form-group">
+                                          <label class="control-label">NSH ID</label>
+                                          <input type="text" id="nsh_id" placeholder="AAA000A" class="form-control">
+                                       </div>
+
+                                        <div class="col-md-4 form-group">
+                                          <label class="control-label">Date of birth from</label>
+                                            <input type="date" id="birth_from" class="form-control" name="trip-start" min="1900-01-01" max="2025-12-31">
+
+                                       </div>
+
+                                        <div class="col-md-4 form-group">
+                                          <label class="control-label">Date of birth to</label>
+                                        <input type="date" id="birth_to" class="form-control" name="trip-start" min="1900-01-01" max="2025-12-31">
+                                       </div>
+
+                                        <div class="col-md-4 form-group">
+                                          <label class="control-label">Phone</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                       </div>
+
+                                        <div class="col-md-4 form-group">
+                                            <label class="control-label">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email">
+                                        </div>
+
+                                        <div class="col-md-12 form-group user-form-group">
+                                          <div class="pull-right">
+                                             <button type="button" id="form_shearch_cancle" class="btn btn-danger btn-sm">Cancel</button>
+                                             <button type="button" id="form_shearch_go" onclick="search_pacient();" class="btn btn-add btn-sm">Save</button>
+                                              <script>
+                                                  function search_pacient(){
+                                                      url = '/pacients/?'
+
+                                                      first_name = document.getElementById('first_name').value
+                                                      last_name = document.getElementById('last_name').value
+                                                      nsh_id = document.getElementById('nsh_id').value
+
+                                                      date_birth_form = document.getElementById('birth_from').value
+                                                      date_birth_to = document.getElementById('birth_to').value
+                                                      phone = document.getElementById('phone').value
+
+                                                      email = document.getElementById('email').value
+
+                                                      if (first_name !== ""){
+                                                          url = url+"first_name="+first_name+"&"
+                                                      }
+                                                      if (last_name !== ""){
+                                                          url = url+"last_name="+last_name+"&"
+                                                      }
+                                                      if (nsh_id !== ""){
+                                                          url = url+"nsh_id="+nsh_id+"&"
+                                                      }
+                                                      if (date_birth_form !== ""){
+                                                          url = url+"birth_from="+date_birth_form+"&"
+                                                      }
+                                                      if (date_birth_to !== ""){
+                                                          url = url+"birth_to="+date_birth_to+"&"
+                                                      }
+                                                      if (email !== ""){
+                                                          url = url+"email="+email+"&"
+                                                      }
+                                                      if (phone !== ""){
+                                                          url = url+"phone="+phone+"&"
+                                                      }
+
+                                                      window.location = url
+
+                                                  }
+
+                                                  function search_pacient_clean(){
+                                                      window.location = '/pacients/'
+                                                  }
+                                                  {#function parseUrl(){#}
+                                                  {#    #}
+                                                  {#    var url = window.location#}
+                                                  {#    #}
+                                                  {#    #}
+                                                  {#    #}
+                                                  {#    document.getElementById('first_name').value = first_name#}
+                                                  {#    document.getElementById('last_name').value = last_name#}
+                                                  {#    document.getElementById('nsh_id').value = nsh_id#}
+                                                  {##}
+                                                  {#    document.getElementById('date_birth_form').value = date_birth_form#}
+                                                  {#    document.getElementById('date_birth_to').value = date_birth_to#}
+                                                  {#    document.getElementById('phone').value = phone#}
+                                                  {##}
+                                                  {#    document.getElementById('email').value = email}#}
+
+                                              </script>
+                                          </div>
+                                       </div>
+                                    </fieldset>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+
+                <div class="modal fade" id="add_pacient" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-plus m-r-5"></i>Add Pacient</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal" method="post" id="add_pacient_form" action="">
+                                    {% csrf_token %}
+                                     <fieldset>
+                                       <!-- Text input-->
+                                       <div class="col-md-4 form-group">
+                                          <label class="control-label">First Name</label>
+                                          <input type="text" id="first_name" name="first_name" placeholder="First Name" class="form-control">
+                                       </div>
+                                       <!-- Text input-->
+                                       <div class="col-md-4 form-group">
+                                          <label class="control-label">Last Name</label>
+                                          <input type="text" id="last_name" name="last_name" placeholder="Surname" class="form-control">
+                                       </div>
+
+                                        <div class="col-md-4 form-group">
+                                          <label class="control-label">Date of birth</label>
+                                            <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" name="trip-start" min="1900-01-01" max="2025-12-31">
+
+                                       </div>
+
+
+                                        <div class="col-md-4 form-group">
+                                          <label class="control-label">Phone</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                       </div>
+
+                                        <div class="col-md-4 form-group">
+                                            <label class="control-label">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email">
+                                        </div>
+
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">City</label>
+                                          <input type="text" id="city" name="city" placeholder="city" class="form-control">
+                                       </div>
+
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">Addres</label>
+                                          <input type="text" id="addres" name="addres" placeholder="addres" class="form-control">
+                                       </div>
+
+                                        <div class="col-md-12 form-group user-form-group">
+                                          <div class="pull-right">
+                                             <button type="button" id="form_shearch_cancle" class="btn btn-danger btn-sm">Cancel</button>
+                                             <button type="submit" id="form_shearch_go" class="btn btn-add btn-sm">Save</button>
+                                          </div>
+                                       </div>
+                                    </fieldset>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+
+
+               <!-- items Modal1 -->
+               <div class="modal fade" id="load_pacient" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-plus m-r-5"></i>Add Pacient From file</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal" method="post" id="add_pacient_form" action="">
+                                    {% csrf_token %}
+                                     <fieldset>
+                                       <!-- Text input-->
+                                       <div class="col-md-4 form-group">
+                                          <label class="control-label">File</label>
+                                          <input type="file" id="file_pacients" name="file_pacients" accept="text/xml; text/csv" class="form-control">
+                                       </div>
+                                       <div class="col-md-4 form-group">
+                                          <label class="control-label">Url google drive</label>
+                                          <input type="text" id="google_drive_url" name="google_drive_url" placeholder="First Name" class="form-control">
+                                       </div>
+                                       <div class="col-md-4 form-group">
+                                          <label class="control-label">Google drive user</label>
+                                          <input type="text" id="google_drive_usermane" name="google_drive_usermane" placeholder="First Name" class="form-control">
+                                       </div>
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">Google drive pass</label>
+                                          <input type="text" id="google_drive_pass" name="google_drive_pass" placeholder="First Name" class="form-control">
+                                       </div>
+
+                                    </fieldset>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+               <!-- /.modal -->
+               <!-- Modal -->
+            </section>
+            <!-- /.content -->
+         </div>
+         <!-- /.content-wrapper -->
+         <footer class="main-footer">
+            <strong>Copyright © 2016-2017 <a href="#">thememinister</a>.</strong> All rights reserved.
+         </footer>
+      </div>
+      <!-- ./wrapper -->
+      <!-- ./wrapper -->
+      <!-- Start Core Plugins
+         =====================================================================-->
+      <!-- jQuery -->
+      <script src="/static/crm/assets/plugins/jQuery/jquery-1.12.4.min.js" type="text/javascript"></script>
+      <!-- jquery-ui -->
+      <script src="/static/crm/assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+      <!-- Bootstrap -->
+      <script src="/static/crm/assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+      <!-- lobipanel -->
+      <script src="/static/crm/assets/plugins/lobipanel/lobipanel.min.js" type="text/javascript"></script>
+      <!-- Pace js -->
+      <script src="/static/crm/assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+      <!-- table-export js -->
+      <script src="/static/crm/assets/plugins/table-export/tableExport.js" type="text/javascript"></script>
+      <script src="/static/crm/assets/plugins/table-export/jquery.base64.js" type="text/javascript"></script>
+      <script src="/static/crm/assets/plugins/table-export/html2canvas.js" type="text/javascript"></script>
+      <script src="/static/crm/assets/plugins/table-export/sprintf.js" type="text/javascript"></script>
+      <script src="/static/crm/assets/plugins/table-export/jspdf.js" type="text/javascript"></script>
+      <script src="/static/crm/assets/plugins/table-export/base64.js" type="text/javascript"></script>
+      <!-- dataTables js -->
+      <script src="/static/crm/assets/plugins/datatables/dataTables.min.js" type="text/javascript"></script>
+      <!-- SlimScroll -->
+      <script src="/static/crm/assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+      <!-- FastClick -->
+      <script src="/static/crm/assets/plugins/fastclick/fastclick.min.js" type="text/javascript"></script>
+      <!-- CRMadmin frame -->
+      <script src="/static/crm/assets/dist/js/custom.js" type="text/javascript"></script>
+      <!-- End Core Plugins
+         =====================================================================-->
+      <!-- Start Theme label Script
+         =====================================================================-->
+      <!-- Dashboard js -->
+      <script src="/static/crm/assets/dist/js/dashboard.js" type="text/javascript"></script>
+      <!-- End Theme label Script
+         =====================================================================-->
+      <div id="toTop" class="btn back-top" style="display: none;"><span class="ti-arrow-up"></span></div>
+      <app-content ng-version="10.1.5"></app-content>
+   </body>
+   <div></div>
+</html>
