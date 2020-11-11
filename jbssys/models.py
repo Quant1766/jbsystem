@@ -128,7 +128,7 @@ class UserProfile(models.Model):
 
     user_avatar = models.ImageField(
         upload_to="static/image/avatars/",
-        default='static/image/avatars/doctor_icon.png')  # You need to configure media in settings.py
+        default='/static/image/avatars/doctor_icon.png')  # You need to configure media in settings.py
 
     def __str__(self):
         return "%s %s" % (self.user.username, self.role)

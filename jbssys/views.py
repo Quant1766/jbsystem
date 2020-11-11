@@ -446,6 +446,9 @@ def login_view(request):
     else:
         return render(request, 'auth/login.html')
 
+def datadictionary_view(request):
+    if request.method == "GET":
+        return render(request,'ddactionary/ddactionary.html')
 
 def master_table_view(request):
     if request.method == "GET":
