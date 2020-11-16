@@ -44,3 +44,9 @@ python-memcached
 django-simple-captcha
 django-avatar
 xlwt
+bs4
+pandas
+lxml
+googledrivedownloader
+gsheets
+google_auth_oauthlib

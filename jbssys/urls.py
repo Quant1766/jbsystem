@@ -10,8 +10,13 @@ urlpatterns = [
     path('pacients/', views.pacientsView, name="pacientsView"),
     path('datadictionary/', views.datadictionary_view, name="datadictionary_view"),
 
+
+    path('pacient/del/<str:req_id>/', views.pacientDelete, name='pacientDelete'),
     path('pacients/download/',views.pacientDownloadFile,name='pacientDownloadFile'),
     path('master/download/', views.master_tableDownloadFile, name='master_tableDownloadFile'),
+    path('pacients/load/',views.pacientDownLoadFile,name='pacientDownLoadFile'),
+    path('master/load/', views.master_tableLoadFile, name='master_tableLoadFile'),
+
 
 
 

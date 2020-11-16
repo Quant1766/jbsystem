@@ -177,7 +177,6 @@
                                     <img src="https://thememinister.com/crm/assets/dist/img/xls.png" width="24" alt="logo"> XLS</a>
                                  </li>
 
-                                 </li>
                               </ul>
                            </div>
                            <!-- ./Plugin content:powerpoint,txt,pdf,png,word,xl -->
@@ -185,6 +184,7 @@
                               <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
                                  <thead>
                                     <tr class="info">
+                                        <th>Action</th>
                                        <th>ID</th>
                                         <th>NSH ID</th>
                                        <th>First Name</th>
@@ -199,6 +199,12 @@
                                   <tbody>
                                   {% for pacient in pacients %}
                                       <tr>
+                                          <td style="position: absolute">
+
+                                              <button type="button" class="btn btn-add btn-xs" onclick="modelUpdateSetID('{{ pacient.id }}')" data-toggle="modal" data-target="#update"><i class="fa fa-pencil"></i></button>
+                                              <button type="button" class="btn btn-danger btn-xs" onclick="modelDeleteSetID('{{ pacient.id }}')" data-toggle="modal" data-target="#delt"><i class="fa fa-trash-o"></i> </button>
+
+                                          </td>
                                           <td><p style="width: 20px;">{{ pacient.id }}</p></td>
                                           <td><p style="width: 80px;">{{ pacient.nsh_id }}</p></td>
                                           <td><p style="width: 150px;">{{ pacient.first_name }}</p></td>
@@ -209,7 +215,7 @@
 
                                           <td><p style="width: 150px;">{{ pacient.email }}</p></td>
                                           <td><p style="width: 250px;">{{ pacient.default_city }}</p></td>
-                                          <td> <p style="width: 250px;">{{ pacient.home_addres }}</p></td>
+                                          <td><p style="width: 250px;">{{ pacient.home_addres }}</p></td>
                                       </tr>
                                   {% endfor %}
 
@@ -232,6 +238,8 @@
                            <div class="row">
                               <div class="col-md-12">
                                  <form class="form-horizontal" id="search_form">
+                                   {% csrf_token %}
+
                                     <fieldset>
                                        <!-- Text input-->
                                        <div class="col-md-4 form-group">
@@ -420,6 +428,99 @@
                   <!-- /.modal-dialog -->
                </div>
 
+                <div class="modal fade" id="update" tabindex="-1" role="dialog">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-plus m-r-5"></i> Update notice board</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal" id="editactionfrom" method="post">
+                                    {% csrf_token %}
+
+                                    <fieldset>
+                                       <!-- Text input-->
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">Notice title</label>
+                                          <input type="text" placeholder="Notice title" class="form-control">
+                                       </div>
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">Publish date</label>
+                                          <input type="number" placeholder="Notice title" class="form-control">
+                                       </div>
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">Start date</label>
+                                          <input type="number" placeholder="Notice title" class="form-control">
+                                       </div>
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">End date</label>
+                                          <input type="number" placeholder="Notice title" class="form-control">
+                                       </div>
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">description</label>
+                                          <input type="text" placeholder="description" class="form-control">
+                                       </div>
+                                       <!-- Text input-->
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">status</label>
+                                          <input type="text" placeholder="status" class="form-control">
+                                       </div>
+                                       <div class="col-md-12 form-group user-form-group">
+                                          <div class="pull-right">
+                                             <button type="button" class="btn btn-danger btn-sm">Cancel</button>
+                                             <button type="submit" class="btn btn-add btn-sm">Update</button>
+                                          </div>
+                                       </div>
+                                    </fieldset>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+
+            <div class="modal fade" id="delt" tabindex="-1" role="dialog">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-user m-r-5"></i> Delete Notice</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal" id="deleteactionfrom" method="post" >
+                                    {% csrf_token %}
+                                     <fieldset>
+                                       <div class="col-md-12 form-group user-form-group">
+                                          <label class="control-label">Delete Notice</label>
+                                          <div class="pull-right">
+                                             <button type="button" class="btn btn-danger btn-sm">NO</button>
+                                             <button type="submit" class="btn btn-add btn-sm">YES</button>
+                                          </div>
+                                       </div>
+                                    </fieldset>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
 
                <!-- items Modal1 -->
                <div class="modal fade" id="load_pacient" tabindex="-1" role="dialog" aria-hidden="true">
@@ -444,14 +545,7 @@
                                           <label class="control-label">Url google drive</label>
                                           <input type="text" id="google_drive_url" name="google_drive_url" placeholder="First Name" class="form-control">
                                        </div>
-                                       <div class="col-md-4 form-group">
-                                          <label class="control-label">Google drive user</label>
-                                          <input type="text" id="google_drive_usermane" name="google_drive_usermane" placeholder="First Name" class="form-control">
-                                       </div>
-                                         <div class="col-md-4 form-group">
-                                          <label class="control-label">Google drive pass</label>
-                                          <input type="text" id="google_drive_pass" name="google_drive_pass" placeholder="First Name" class="form-control">
-                                       </div>
+
 
                                     </fieldset>
                                  </form>
@@ -491,6 +585,16 @@
       <!-- Pace js -->
       <script src="/static/crm/assets/plugins/pace/pace.min.js" type="text/javascript"></script>
       <!-- table-export js -->
+      <script>
+          function modelDeleteSetID(id_){
+              document.getElementById('deleteactionfrom').action = '/pacient/del/'+id_+"/"
+          }
+
+          function modelUpdateSetID(id_){
+              document.getElementById('editactionfrom').action = '/pacient/edit/'+id_+"/"
+          }
+
+      </script>
       <script src="/static/crm/assets/plugins/table-export/tableExport.js" type="text/javascript"></script>
       <script src="/static/crm/assets/plugins/table-export/jquery.base64.js" type="text/javascript"></script>
       <script src="/static/crm/assets/plugins/table-export/html2canvas.js" type="text/javascript"></script>

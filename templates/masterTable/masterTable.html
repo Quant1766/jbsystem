@@ -198,6 +198,7 @@
                               <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
                                  <thead>
                                     <tr class="info">
+                                        <th>Action</th>
                                        <th>Create</th>
                                        <th>First Name</th>
                                        <th>Surname</th>
@@ -336,6 +337,12 @@
                                   <tbody>
                                   {% for recor in master_table %}
                                       <tr>
+                                          <td style="position: absolute">
+
+                                              <button type="button" class="btn btn-add btn-xs" onclick="modelDeleteSetID('{{ recor.id }}')" data-toggle="modal" data-target="#update"><i class="fa fa-pencil"></i></button>
+                                              <button type="button" class="btn btn-danger btn-xs" onclick="modelDeleteSetID('{{ recor.id }}')" data-toggle="modal" data-target="#delt"><i class="fa fa-trash-o"></i> </button>
+
+                                          </td>
                                           <td><p style="width: 150px;">{{ recor.create_datetime }}</p></td>
                                           <td><p style="width: 80px;">{{ recor.pacient.first_name }}</p></td>
                                           <td><p style="width: 80px;">{{ recor.pacient.last_name }}</p></td>
@@ -343,12 +350,7 @@
                                           <td><p style="width: 100px;">{{ recor.pacient.phone }}</p></td>
                                           <td> <p style="width: 70px;">{{ recor.pacient.nsh_id }}</p></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_7 }}</textarea></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkbox{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_8 %}checked{% elif recor.is_datapoint_8 is False %}unchecked{% endif %} >
-                                                  <label for="checkbox{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_8_display }}</p></td>
                                           <td> <p style="width: 70px;">{{ recor.get_datapoint_9_display }}</p></td>
                                           <td> <p style="width: 100px;">{{ recor.get_datapoint_10_display }}</p></td>
 
@@ -356,67 +358,30 @@
                                           <td> <p style="width: 100px;">{{ recor.get_datapoint_12_display }}</p></td>
                                           <td> <p style="width: 100px;">{{ recor.get_datapoint_13_display }}</p></td>
                                           <td> <p style="width: 100px;">{{ recor.get_datapoint_14_display }}</p></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP15{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_15 %}checked{% elif recor.is_datapoint_15 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP15{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP16{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_16 %}checked{% elif recor.is_datapoint_16 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP16{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_15_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_16_display }}</p></td>
+
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_16_a_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_16_b_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_17_display }}</p></td>
-
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP18{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_18 %}checked{% elif recor.is_datapoint_18 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP18{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                      <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP19{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_19 %}checked{% elif recor.is_datapoint_19 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP19{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                      <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP20{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_20 %}checked{% elif recor.is_datapoint_20 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP20{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_18_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_19_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_20_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_21_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_22_display }}</p></td>
 
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP23{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_23 %}checked{% elif recor.is_datapoint_23 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP23{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_23_display }}</p></td>
+
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_24 }}</textarea></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_25 }}</textarea></td>
 
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP26{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_26 %}checked{% elif recor.is_datapoint_26 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP26{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                         <td> <p style="width: 30px;">{{ recor.get_datapoint_26_display }}</p></td>
+
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_27_display }}</p></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_28 }}</textarea></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_29 }}</textarea></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP30{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_30 %}checked{% elif recor.is_datapoint_30 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP30{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_30_display }}</p></td>
+
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_31_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_32_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_33_display }}</p></td>
@@ -425,352 +390,92 @@
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_36_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_37_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_38_display }}</p></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP39{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_39 %}checked{% elif recor.is_datapoint_39 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP39{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_39_display }}</p></td>
 
 
 
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_40_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_41_display }}</p></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP42{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_42 %}checked{% elif recor.is_datapoint_42 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP42{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_42_display }}</p></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_43 }}</textarea></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_44 }}</textarea></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_45 }}</textarea></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP46{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_46 %}checked{% elif recor.is_datapoint_46 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP46{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP47{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_47 %}checked{% elif recor.is_datapoint_47 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP47{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP48{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_48 %}checked{% elif recor.is_datapoint_48 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP48{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP49{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_49 %}checked{% elif recor.is_datapoint_49 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP49{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_46_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_47_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_48_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_49_display }}</p></td>
 
 
 
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP50{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_50 %}checked{% elif recor.is_datapoint_50 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP50{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_50_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_51_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_52_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_53_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_54_display }}</p></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP55{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_55 %}checked{% elif recor.is_datapoint_55 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP55{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP56{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_56 %}checked{% elif recor.is_datapoint_56 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP56{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>l
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP57{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_57 %}checked{% elif recor.is_datapoint_57 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP57{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP58{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_58 %}checked{% elif recor.is_datapoint_58 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP58{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP59{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_59 %}checked{% elif recor.is_datapoint_59 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP59{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP60{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_60 %}checked{% elif recor.is_datapoint_60 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP60{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP61{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_61 %}checked{% elif recor.is_datapoint_61 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP61{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_55_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_56_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_57_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_58_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_59_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_60_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_61_display }}</p></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint62 }}</textarea></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP62{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_62 %}checked{% elif recor.is_datapoint_62 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP62{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP63{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_63 %}checked{% elif recor.is_datapoint_63 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP63{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_62_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_63_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_67_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_68_display }}</p></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP69{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_69 %}checked{% elif recor.is_datapoint_69 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP69{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_69_display }}</p></td>
 
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP70{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_70 %}checked{% elif recor.is_datapoint_70 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP70{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP71{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_71 %}checked{% elif recor.is_datapoint_71 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP71{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_70_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_71_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_72_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_73_display }}</p></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP74{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_74 %}checked{% elif recor.is_datapoint_74 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP74{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP75{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_75 %}checked{% elif recor.is_datapoint_75 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP75{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP76{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_76 %}checked{% elif recor.is_datapoint_76 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP76{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP77{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_77 %}checked{% elif recor.is_datapoint_77 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP77{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP78{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_78 %}checked{% elif recor.is_datapoint_78 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP78{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP79{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_79 %}checked{% elif recor.is_datapoint_79 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP79{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP80{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_80 %}checked{% elif recor.is_datapoint_80 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP80{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP81{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_81 %}checked{% elif recor.is_datapoint_81 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP81{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP82{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_82 %}checked{% elif recor.is_datapoint_82 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP82{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP83{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_83 %}checked{% elif recor.is_datapoint_83 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP83{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_74_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_75_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_76_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_77_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_78_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_79_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_80_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_81_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_82_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_83_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_84_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_85_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_86_display }}</p></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP87{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_87 %}checked{% elif recor.is_datapoint_87 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP87{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_87_display }}</p></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint62 }}</textarea></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP89{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_89 %}checked{% elif recor.is_datapoint_89 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP89{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP90{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_90 %}checked{% elif recor.is_datapoint_90 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP90{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP91{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_91 %}checked{% elif recor.is_datapoint_91 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP91{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_89_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_90_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_91_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_92_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_93_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_94_display }}</p></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP95{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_95 %}checked{% elif recor.is_datapoint_95 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP95{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_95_display }}</p></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_96 }}</textarea></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP97{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_97 %}checked{% elif recor.is_datapoint_97 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP97{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP98{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_98 %}checked{% elif recor.is_datapoint_98 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP98{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_97_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_98_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_99_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_100_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_101_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_102_display }}</p></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_103 }}</textarea></td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP104{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_104 %}checked{% elif recor.is_datapoint_104 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP104{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP105{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_105 %}checked{% elif recor.is_datapoint_105 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP105{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP106{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_106 %}checked{% elif recor.is_datapoint_106 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP106{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP107{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_107 %}checked{% elif recor.is_datapoint_107 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP107{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP108{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_108 %}checked{% elif recor.is_datapoint_108 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP108{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP109{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_109 %}checked{% elif recor.is_datapoint_109 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP109{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP110{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_110 %}checked{% elif recor.is_datapoint_110 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP110{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP111{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_111 %}checked{% elif recor.is_datapoint_111 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP111{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP112{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_112 %}checked{% elif recor.is_datapoint_112 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP112{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP113{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_113 %}checked{% elif recor.is_datapoint_113 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP113{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP114{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_114 %}checked{% elif recor.is_datapoint_114 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP114{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP115{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_115 %}checked{% elif recor.is_datapoint_115 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP115{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP116{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_116 %}checked{% elif recor.is_datapoint_116 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP116{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP117{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_117 %}checked{% elif recor.is_datapoint_117 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP117{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP118{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_118 %}checked{% elif recor.is_datapoint_118 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP118{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
-                                          <td>
-                                              <div class="checkbox checkbox-info">
-                                                  <input id="checkboxDP119{{ recor.id }}" type="checkbox" {% if recor.is_datapoint_119 %}checked{% elif recor.is_datapoint_119 is False %}unchecked{% endif %} >
-                                                  <label for="checkboxDP119{{ recor.id }}"></label>
-                                              </div>
-                                          </td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_104_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_105_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_106_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_107_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_108_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_109_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_110_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_111_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_112_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_113_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_114_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_115_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_116_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_117_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_118_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_119_display }}</p></td>
 
                                        <td><span class="label-danger label label-default">Available</span>
                                        </td>
@@ -986,6 +691,97 @@
                                           <div class="pull-right">
                                              <button type="button" class="btn btn-danger btn-sm">Cancel</button>
                                              <button type="submit" class="btn btn-add btn-sm">Save</button>
+                                          </div>
+                                       </div>
+                                    </fieldset>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+
+                <div class="modal fade" id="update" tabindex="-1" role="dialog">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-plus m-r-5"></i> Update notice board</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal">
+                                    <fieldset>
+                                       <!-- Text input-->
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">Notice title</label>
+                                          <input type="text" placeholder="Notice title" class="form-control">
+                                       </div>
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">Publish date</label>
+                                          <input type="number" placeholder="Notice title" class="form-control">
+                                       </div>
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">Start date</label>
+                                          <input type="number" placeholder="Notice title" class="form-control">
+                                       </div>
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">End date</label>
+                                          <input type="number" placeholder="Notice title" class="form-control">
+                                       </div>
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">description</label>
+                                          <input type="text" placeholder="description" class="form-control">
+                                       </div>
+                                       <!-- Text input-->
+                                       <div class="col-md-6 form-group">
+                                          <label class="control-label">status</label>
+                                          <input type="text" placeholder="status" class="form-control">
+                                       </div>
+                                       <div class="col-md-12 form-group user-form-group">
+                                          <div class="pull-right">
+                                             <button type="button" class="btn btn-danger btn-sm">Cancel</button>
+                                             <button type="submit" class="btn btn-add btn-sm">Update</button>
+                                          </div>
+                                       </div>
+                                    </fieldset>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+
+            <div class="modal fade" id="delt" tabindex="-1" role="dialog">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-user m-r-5"></i> Delete Notice</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal">
+                                    <fieldset>
+                                       <div class="col-md-12 form-group user-form-group">
+                                          <label class="control-label">Delete Notice</label>
+                                          <div class="pull-right">
+                                             <button type="button" class="btn btn-danger btn-sm">NO</button>
+                                             <button type="submit" class="btn btn-add btn-sm">YES</button>
                                           </div>
                                        </div>
                                     </fieldset>

@@ -4,10 +4,10 @@ import xlwt
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from requests import Response
 from rest_framework.decorators import api_view
-
+from .googledriveprocces import GoogleDrive
 from .models import (
     MasterTable,
     Pacient,
@@ -17,6 +17,14 @@ from .models import (
 )
 import jbssys.validators as vaidator_data
 
+
+def master_tableLoadFile(request):
+    if request.method =='GET':
+
+        return
+
+def pacientDownLoadFile(request):
+    pass
 
 def master_tableDownloadFile(request):
     if request.method =='GET':
@@ -63,6 +71,8 @@ def master_tableDownloadFile(request):
             last_name = vaidator_data.validate_firstname(str(last_name))
             print(last_name)
             search_param['last_name'] = last_name
+
+        search_param['is_hide'] = False
 
         if phone:
             phone = vaidator_data.validate_phone(str(phone))
@@ -147,7 +157,7 @@ def master_tableDownloadFile(request):
 
 
 
-                    master_data.is_datapoint_8,
+                    master_data.get_datapoint8_display(),
 
 
                     master_data.get_datapoint_9_display(),
@@ -163,9 +173,9 @@ def master_tableDownloadFile(request):
 
                     master_data.get_datapoint_14_display(),
 
-                    master_data.is_datapoint_15,
+                    master_data.get_datapoint15_display(),
 
-                    master_data.is_datapoint_16,
+                    master_data.get_datapoint16_display(),
 
                     master_data.get_datapoint_16_b_display(),
 
@@ -174,23 +184,23 @@ def master_tableDownloadFile(request):
 
                     master_data.get_datapoint_17_display(),
 
-                    master_data.is_datapoint_18,
-                    master_data.is_datapoint_19,
+                    master_data.get_datapoint18_display(),
+                    master_data.get_datapoint19_display(),
 
-                    master_data.is_datapoint_20,
+                    master_data.get_datapoint20_display(),
 
 
                     master_data.get_datapoint_21_display(),
 
                     master_data.get_datapoint_22_display(),
 
-                    master_data.is_datapoint_23,
+                    master_data.get_datapoint23_display(),
 
                     master_data.datapoint_24,
 
                     master_data.datapoint_25,
 
-                    master_data.is_datapoint_26,
+                    master_data.get_datapoint26_display(),
 
                     master_data.get_datapoint_27_display(),
 
@@ -198,7 +208,7 @@ def master_tableDownloadFile(request):
 
                     master_data.datapoint_29,
 
-                    master_data.is_datapoint_30,
+                    master_data.get_datapoint30_display(),
 
                     master_data.get_datapoint_31_display(),
 
@@ -218,13 +228,13 @@ def master_tableDownloadFile(request):
 
                     master_data.get_datapoint_38_display(),
 
-                    master_data.is_datapoint_39,
+                    master_data.get_datapoint39_display(),
 
                     master_data.get_datapoint_40_display(),
 
                     master_data.get_datapoint_41_display(),
 
-                    master_data.is_datapoint_42,
+                    master_data.get_datapoint42_display(),
 
                     master_data.datapoint_43,
 
@@ -232,11 +242,11 @@ def master_tableDownloadFile(request):
 
                     master_data.datapoint_45,
 
-                    master_data.is_datapoint_46,
-                    master_data.is_datapoint_47,
-                    master_data.is_datapoint_48,
-                    master_data.is_datapoint_49,
-                    master_data.is_datapoint_50,
+                    master_data.get_datapoint46_display(),
+                    master_data.get_datapoint47_display(),
+                    master_data.get_datapoint48_display(),
+                    master_data.get_datapoint49_display(),
+                    master_data.get_datapoint50_display(),
 
                     master_data.get_datapoint_51_display(),
 
@@ -246,52 +256,52 @@ def master_tableDownloadFile(request):
                     master_data.get_datapoint_54_display(),
 
 
-                    master_data.is_datapoint_55,
-                    master_data.is_datapoint_56,
-                    master_data.is_datapoint_57,
-                    master_data.is_datapoint_58,
-                    master_data.is_datapoint_59,
+                    master_data.get_datapoint55_display(),
+                    master_data.get_datapoint56_display(),
+                    master_data.get_datapoint57_display(),
+                    master_data.get_datapoint58_display(),
+                    master_data.get_datapoint59_display(),
 
-                    master_data.is_datapoint_60,
+                    master_data.get_datapoint60_display(),
 
-                    master_data.is_datapoint_61,
+                    master_data.get_datapoint61_display(),
 
                     master_data.datapoint_62,
 
-                    master_data.is_datapoint_63,
-                    master_data.is_datapoint_64,
+                    master_data.get_datapoint63_display(),
+                    master_data.get_datapoint64_display(),
 
                     master_data.get_datapoint_65_display(),
 
-                    master_data.is_datapoint_66,
+                    master_data.get_datapoint66_display(),
 
                     master_data.get_datapoint_67_display(),
 
                     master_data.get_datapoint_68_display(),
 
-                    master_data.is_datapoint_69,
-                    master_data.is_datapoint_70,
-                    master_data.is_datapoint_71,
+                    master_data.get_datapoint69_display(),
+                    master_data.get_datapoint70_display(),
+                    master_data.get_datapoint71_display(),
 
 
                     master_data.get_datapoint_72_display(),
                     master_data.get_datapoint_73_display(),
 
-                    master_data.is_datapoint_74,
-                    master_data.is_datapoint_75,
+                    master_data.get_datapoint74_display(),
+                    master_data.get_datapoint75_display(),
 
 
-                    master_data.is_datapoint_76,
-                    master_data.is_datapoint_77,
-                    master_data.is_datapoint_78,
+                    master_data.get_datapoint76_display(),
+                    master_data.get_datapoint77_display(),
+                    master_data.get_datapoint78_display(),
 
 
-                    master_data.is_datapoint_79,
-                    master_data.is_datapoint_80,
+                    master_data.get_datapoint79_display(),
+                    master_data.get_datapoint80_display(),
 
-                    master_data.is_datapoint_81,
-                    master_data.is_datapoint_82,
-                    master_data.is_datapoint_83,
+                    master_data.get_datapoint81_display(),
+                    master_data.get_datapoint82_display(),
+                    master_data.get_datapoint83_display(),
 
 
                     master_data.get_datapoint_84_display(),
@@ -300,15 +310,15 @@ def master_tableDownloadFile(request):
 
                     master_data.get_datapoint_86_display(),
 
-                    master_data.is_datapoint_87,
+                    master_data.get_datapoint87_display(),
 
                     master_data.datapoint_88,
 
-                    master_data.is_datapoint_89,
+                    master_data.get_datapoint89_display(),
 
-                    master_data.is_datapoint_90,
+                    master_data.get_datapoint90_display(),
 
-                    master_data.is_datapoint_91,
+                    master_data.get_datapoint91_display(),
 
                     master_data.get_datapoint_92_display(),
 
@@ -316,13 +326,13 @@ def master_tableDownloadFile(request):
 
                     master_data.get_datapoint_94_display(),
 
-                    master_data.is_datapoint_95,
+                    master_data.get_datapoint95_display(),
 
                     master_data.datapoint_96,
 
-                    master_data.is_datapoint_97,
+                    master_data.get_datapoint97_display(),
 
-                    master_data.is_datapoint_98,
+                    master_data.get_datapoint98_display(),
 
                     master_data.get_datapoint_99_display(),
 
@@ -332,29 +342,29 @@ def master_tableDownloadFile(request):
 
                     master_data.get_datapoint_102_display(),
                     master_data.datapoint_103,
-                    master_data.is_datapoint_104,
-                    master_data.is_datapoint_105,
-                    master_data.is_datapoint_106,
-                    master_data.is_datapoint_107,
-                    master_data.is_datapoint_108,
-                    master_data.is_datapoint_109,
-                    master_data.is_datapoint_110,
-                    master_data.is_datapoint_111,
-                    master_data.is_datapoint_112,
+                    master_data.get_datapoint104_display(),
+                    master_data.get_datapoint105_display(),
+                    master_data.get_datapoint106_display(),
+                    master_data.get_datapoint107_display(),
+                    master_data.get_datapoint108_display(),
+                    master_data.get_datapoint109_display(),
+                    master_data.get_datapoint110_display(),
+                    master_data.get_datapoint111_display(),
+                    master_data.get_datapoint112_display(),
 
-                    master_data.is_datapoint_113,
+                    master_data.get_datapoint113_display(),
 
-                    master_data.is_datapoint_114,
+                    master_data.get_datapoint114_display(),
 
-                    master_data.is_datapoint_115,
+                    master_data.get_datapoint115_display(),
 
-                    master_data.is_datapoint_116,
+                    master_data.get_datapoint116_display(),
 
-                    master_data.is_datapoint_117,
+                    master_data.get_datapoint117_display(),
 
-                    master_data.is_datapoint_118,
+                    master_data.get_datapoint118_display(),
 
-                    master_data.is_datapoint_119
+                    master_data.get_datapoint119_display()
 
                 ])
 
@@ -403,31 +413,31 @@ def master_tableDownloadFile(request):
                 ws.write(row_num, a.__next__(), master_data.pacient.phone,              font_style)
                 ws.write(row_num, a.__next__(), master_data.pacient.nsh_id,             font_style)
                 ws.write(row_num, a.__next__(), master_data.datapoint_7,                font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_8,             font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint8_display(),             font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_9_display(),    font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_10_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_11_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_12_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_13_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_14_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_15,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_16,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint15_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint16_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_16_b_display(), font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_16_b_display(), font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_17_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_18,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_19,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_20,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint18_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint19_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint20_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_21_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_22_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_23,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint23_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.datapoint_24,               font_style)
                 ws.write(row_num, a.__next__(), master_data.datapoint_25,               font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_26,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint26_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_27_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.datapoint_28,               font_style)
-                ws.write(row_num, a.__next__(), master_data.datapoint_29,               font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_30,            font_style)
+                ws.write(row_num, a.__next__(), master_data.datapoint_28_display(),               font_style)
+                ws.write(row_num, a.__next__(), master_data.datapoint_29_display(),               font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint30_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_31_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_32_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_33_display(),   font_style)
@@ -436,87 +446,87 @@ def master_tableDownloadFile(request):
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_36_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_37_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_38_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_39,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint39_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_40_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_41_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_42,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint42_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.datapoint_43,               font_style)
                 ws.write(row_num, a.__next__(), master_data.datapoint_44,               font_style)
                 ws.write(row_num, a.__next__(), master_data.datapoint_45,               font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_46,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_47,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_48,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_49,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_50,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint46_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint47_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint48_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint49_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint50_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_51_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_52_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_53_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_54_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_55,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_56,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_57,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_58,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_59,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_60,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_61,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint55_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint56_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint57_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint58_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint59_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint60_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint61_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.datapoint_62,               font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_63,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_64,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint63_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint64_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_65_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_66,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint66_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_67_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_68_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_69,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_70,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_71,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint69_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint70_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint71_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_72_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_73_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_74,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_75,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_76,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_77,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_78,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_79,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_80,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_81,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_82,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_83,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint74_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint75_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint76_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint77_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint78_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint79_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint80_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint81_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint82_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint83_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_84_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_85_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_86_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_87,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint87_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.datapoint_88,               font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_89,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_90,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_91,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint89_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint90_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint91_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_92_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_93_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_94_display(),   font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_95,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint95_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.datapoint_96,               font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_97,            font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_98,            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint97_display(),            font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint98_display(),            font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_99_display(),   font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_100_display(),  font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_101_display(),  font_style)
                 ws.write(row_num, a.__next__(), master_data.get_datapoint_102_display(),  font_style)
                 ws.write(row_num, a.__next__(), master_data.datapoint_103,              font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_104,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_105,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_106,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_107,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_108,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_109,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_110,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_111,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_112,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_113,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_114,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_115,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_116,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_117,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_118,           font_style)
-                ws.write(row_num, a.__next__(), master_data.is_datapoint_119,           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint104_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint105_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint106_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint107_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint108_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint109_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint110_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint111_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint112_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint113_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint114_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint115_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint116_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint117_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint118_display(),           font_style)
+                ws.write(row_num, a.__next__(), master_data.get_datapoint119_display(),           font_style)
 
 
             wb.save(response)
@@ -585,7 +595,7 @@ def master_table_view(request):
         birth_from = request.GET.get('birth_from')
 
         birth_to = request.GET.get('birth_to')
-
+        search_param['is_hide'] = False
         if email:
             email = vaidator_data.validate_email(str(email))
 
@@ -597,14 +607,11 @@ def master_table_view(request):
             search_param['pacient__nsh_id'] = nsh_id
 
         if first_name:
-            first_name = vaidator_data.validate_firstname(str(first_name))
 
             search_param['pacient__first_name'] = first_name
 
         if last_name:
-            print(last_name)
-            last_name = vaidator_data.validate_firstname(str(last_name))
-            print(last_name)
+
             search_param['pacient__last_name'] = last_name
 
         if phone:
@@ -622,23 +629,6 @@ def master_table_view(request):
 
             search_param['pacient__home_addres'] = home_addres
 
-        # if birth_from and birth_to:
-        #     birth_from = vaidator_data.validate_date(str(birth_from))
-        #
-        #     search_param['date_of_birth__range'] = [birth_from, birth_to]
-        #
-        # elif birth_from:
-        #     birth_from = vaidator_data.validate_date(str(birth_from))
-        #
-        #     search_param['date_of_birth__range'] = [birth_from, '2023-12-30']
-        #
-        # elif birth_to:
-        #     birth_to = vaidator_data.validate_date(str(birth_to))
-        #
-        #     search_param['date_of_birth__range'] = ['1900-01-01',birth_to]
-        #
-        # else:
-        #     search_param['date_of_birth__range'] = ['1900-01-01','2023-12-30']
 
 
 
@@ -678,6 +668,21 @@ def master_table_view(request):
 #
 #     return "ok"
 
+def pacientDelete(request,req_id):
+    if request.method == "POST":
+        pacient = Pacient.objects.get(id=req_id)
+        pacient.is_hide = True
+        pacient.save()
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def masterTableDelete(request,req_id):
+    if request.method == "POST":
+        mastab = MasterTable.objects.get(id=req_id)
+        mastab.is_hide = True
+        mastab.save()
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def pacientDownloadFile(request):
     if request.method =='GET':
@@ -715,14 +720,11 @@ def pacientDownloadFile(request):
             search_param['nsh_id'] = nsh_id
 
         if first_name:
-            first_name = vaidator_data.validate_firstname(str(first_name))
 
             search_param['first_name'] = first_name
 
         if last_name:
-            print(last_name)
-            last_name = vaidator_data.validate_firstname(str(last_name))
-            print(last_name)
+
             search_param['last_name'] = last_name
 
         if phone:
@@ -739,7 +741,7 @@ def pacientDownloadFile(request):
             home_addres = str(home_addres)
 
             search_param['home_addres'] = home_addres
-
+        search_param['is_hide'] = False
         # if birth_from and birth_to:
         #     birth_from = vaidator_data.validate_date(str(birth_from))
         #
@@ -863,6 +865,16 @@ def pacientDownloadFile(request):
 
             return response
 
+def pacientLoad(request):
+    if request.method == "POST":
+        fileuploadInput = request.FILES['fileuploadInput']
+
+        linkGD = request.POST.get('linkGD')
+
+        gd = GoogleDrive(linkGD)
+        gd.request()
+        gd.data_from_jjson()
+
 
 
 def pacientsView(request):
@@ -977,21 +989,21 @@ def pacientsView(request):
 
             search_param['email'] = email
 
+
+
+        search_param['is_hide'] = False
+
         if nsh_id:
             nsh_id = str(nsh_id)
 
             search_param['nsh_id'] = nsh_id
 
         if first_name:
-            first_name = vaidator_data.validate_firstname(str(first_name))
 
-            search_param['first_name'] = first_name
+            search_param['first_name'] = str(first_name)
 
         if last_name:
-            print(last_name)
-            last_name = vaidator_data.validate_firstname(str(last_name))
-            print(last_name)
-            search_param['last_name'] = last_name
+            search_param['last_name'] = str(last_name)
 
         if phone:
             phone = vaidator_data.validate_phone(str(phone))
