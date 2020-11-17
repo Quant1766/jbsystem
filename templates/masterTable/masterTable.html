@@ -168,11 +168,11 @@
                         <div class="panel-body">
                            <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
                            <div class="btn-group">
-                              <div class="buttonexport">
-                                 <a href="#" class="btn btn-add" data-toggle="modal" data-target="#additem"><i class="fa fa-plus"></i> Add Items</a>
-                              </div>
+{#                              <div class="buttonexport">#}
+{#                                 <a href="#" class="btn btn-add" data-toggle="modal" data-target="#additem"><i class="fa fa-plus"></i> Add Items</a>#}
+{#                              </div>#}
                                <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Table Data</button>
-                               <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown" style="margin-left: 21px;"><i class="fa fa-bars"></i> Import Data</button>
+                               <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="modal" data-target="#load_pacient" style="margin-left: 21px;"><i class="fa fa-bars"></i> Import Data</button>
                               <ul class="dropdown-menu exp-drop" role="menu">
 
                                  <li class="divider"></li>
@@ -190,7 +190,24 @@
                                     <img src="https://thememinister.com/crm/assets/dist/img/xls.png" width="24" alt="logo"> XLS</a>
                                  </li>
 
-                                 </li>
+                              </ul>
+                           </div>
+                            <div class="btn-group">
+                                <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"  style="margin-left: 21px;"><i class="fa fa-bars"></i> Sample Template</button>
+                                <ul class="dropdown-menu exp-drop" role="menu">
+
+                                     <li class="divider"></li>
+                                     <li>
+                                        <a href="/static/sample_template/Data-FormTemp.xlsx">
+                                            <img src="https://thememinister.com/crm/assets/dist/img/xls.png" width="24" alt="logo"> XLS Data-FormTemp
+                                        </a>
+                                     </li>
+                                     <li>
+                                        <a href="/static/sample_template/Profile-formTemp.xlsx">
+                                            <img src="https://thememinister.com/crm/assets/dist/img/xls.png" width="24" alt="logo"> XLS Profile-formTemp
+                                        </a>
+                                     </li>
+
                               </ul>
                            </div>
                            <!-- ./Plugin content:powerpoint,txt,pdf,png,word,xl -->
@@ -569,6 +586,98 @@
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_118_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_119_display }}</p></td>
 
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_sex_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_10_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_11_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_12 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_13a }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_13b }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_14 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_15 }}</p></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_16 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_17 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_18 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_19 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_20 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_21 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_22 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_23 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_24 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_25 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_26 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_27 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_28 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;"></textarea></td>
+                                          <td><textarea readonly style="width: 250px;"></textarea></td>
+                                          <td><textarea readonly style="width: 250px;"></textarea></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_33 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_34_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_35_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_36_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_37_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_38 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_39 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_40 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_41 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_42 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_43_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_44 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_45_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_46_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_47_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_48_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_49_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_50 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_51 }}</p></td>
+                                          <td> <p style="width: 30px;"></p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_53_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_54_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_55_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_55_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_56 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_57_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_58_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_59_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.datapoint_60 }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_61_display }}</p></td>
+                                          <td> <p style="width: 30px;"></p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_63_display }}</p></td>
+                                          <td> <p style="width: 30px;"></p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_65_display }}</p></td>
+                                          <td> <p style="width: 30px;"></p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_67_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_68_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_69_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_70_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_71_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_72_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_73_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_74_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_75_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_76_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_77_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_78_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_79_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_80_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_81_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_82_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_83_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_84_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_85_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_86_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_87_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_88_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_89_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_90_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_91_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_92_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_93_display }}</p></td>
+                                          <td> <p style="width: 30px;">{{ recor.profile_data.get_datapoint_94_display }}</p></td>
+
+
+
+
+
                                        <td><span class="label-danger label label-default">Available</span>
                                        </td>
                                     </tr>
@@ -845,6 +954,108 @@
                                        </div>
                                     </fieldset>
                                  </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+
+            <div class="modal fade" id="load_pacient" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-plus m-r-5"></i>Add Pacient From file</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal" method="post" id="add_pacient_form" action="">
+                                    {% csrf_token %}
+                                     <fieldset>
+                                       <!-- Text input-->
+                                          <label class="control-label">File ProfileForm</label>
+                                          <input type="file" id="file_ProfileForm" name="file_ProfileForm"  onblur="loadChecker()" accept="text/xml;" class="form-control">
+                                          <label class="control-label">File DataForm</label>
+                                          <input type="file" id="file_DataForm" name="file_DataForm"  onblur="loadChecker()" accept="text/xml;" class="form-control">
+
+
+
+                                          <label class="control-label">Url google drive ProfileForm</label>
+                                          <input type="url" pattern="https://docs.google.com/spreadsheets/d/.+" id="google_drive_url_ProfileForm" name="google_drive_url_ProfileForm" onblur="loadChecker()" placeholder="url to google disk" class="form-control">
+
+
+
+
+                                          <label class="control-label">Url google drive DataForm</label>
+                                          <input type="url" pattern="https://docs.google.com/spreadsheets/d/.+" id="google_drive_url_DataForm" name="google_drive_url_DataForm" onblur="loadChecker()" placeholder="url to google disk" class="form-control">
+
+
+                                    </fieldset>
+
+                                     <button type="submit" class="btn btn-add btn-sm" disabled='true' id="buttonimportdata">Save</button>
+                                 </form>
+                                  <script>
+                                         function loadChecker(){
+                                             google_drive_url_file_DataForm = document.getElementById('google_drive_url_file_DataForm').value;
+                                             google_drive_url_ProfileForm = document.getElementById('google_drive_url_ProfileForm').value;
+                                             file_ProfileForm = document.getElementById('file_ProfileForm').value;
+                                             file_DataForm = document.getElementById('file_DataForm').value;
+
+                                             if (google_drive_url_file_DataForm || google_drive_url_ProfileForm || file_ProfileForm || file_DataForm){
+                                                 document.getElementById('buttonimportdata').disabled = false;
+
+                                             }else {
+                                                 document.getElementById('buttonimportdata').disabled = true;
+                                             }
+                                         }
+                                     </script>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+            <div class="modal fade" id="load_templates" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-plus m-r-5"></i>Add Pacient From file</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                       <!-- Text input-->
+                                  <ul class="dropdown-menu exp-drop show" role="menu">
+
+                                     <li class="divider"></li>
+                                     <li>
+                                        <a href="/static/sample_template/Data-FormTemp.xlsx">
+                                            <img src="https://thememinister.com/crm/assets/dist/img/xls.png" width="24" alt="logo"> XLS Data-FormTemp
+                                        </a>
+                                     </li>
+                                     <li>
+                                        <a href="/static/sample_template/Profile-formTemp.xlsx">
+                                            <img src="https://thememinister.com/crm/assets/dist/img/xls.png" width="24" alt="logo"> XLS Profile-formTemp
+                                        </a>
+                                     </li>
+
+                              </ul>
+
+
+
                               </div>
                            </div>
                         </div>

@@ -14,6 +14,8 @@ urlpatterns = [
     path('pacient/del/<str:req_id>/', views.pacientDelete, name='pacientDelete'),
     path('pacients/download/',views.pacientDownloadFile,name='pacientDownloadFile'),
     path('master/download/', views.master_tableDownloadFile, name='master_tableDownloadFile'),
+    path('master/download/templates/',views.master_tableDownloadFileTemps,name='master_tableDownloadFileTemps'),
+
     path('pacients/load/',views.pacientDownLoadFile,name='pacientDownLoadFile'),
     path('master/load/', views.master_tableLoadFile, name='master_tableLoadFile'),
 

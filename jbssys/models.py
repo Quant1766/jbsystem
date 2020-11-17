@@ -242,6 +242,10 @@ class Pacient(models.Model):
                               null=True,
                               default='')
 
+    
+
+class ProfileFormTable(models.Model):
+    create_datetime = models.DateTimeField("create datetime", auto_now_add=True)
     nsh_id_gdisk = models.CharField(
         'nsh id gdisk',
         max_length=25,
@@ -249,9 +253,6 @@ class Pacient(models.Model):
         null=True,
         default=''
     )
-
-class ProfileFormTable(models.Model):
-    create_datetime = models.DateTimeField("create datetime", auto_now_add=True)
 
     pacient = models.ForeignKey(Pacient,related_name="PacientProfileForm",on_delete=models.PROTECT)
 
@@ -980,14 +981,14 @@ class ProfileFormTable(models.Model):
 
 
 
-
 class DataFormTable(models.Model):
     "DEFAULT USE storename as username casser"
     create_datetime = models.DateTimeField("create datetime", auto_now_add=True)
-    is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
+    is_hide = models.BooleanField("is hide",null=True,blank=True,default=False)
 
     pacient = models.ForeignKey(Pacient,related_name="PacientDataForm",on_delete=models.PROTECT)
 
+    profile_data = models.ForeignKey(ProfileFormTable,related_name="PacientDataProfileForm",on_delete=models.PROTECT)
 
     datapoint_7 = models.TextField("Screener",
                                 max_length=1500,
@@ -2088,3 +2089,5 @@ class DataFormTable(models.Model):
     )
 
     datapoint_120 = models.CharField("Id in disk", max_length=30, default='')
+
+

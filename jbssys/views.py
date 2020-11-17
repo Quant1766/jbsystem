@@ -1,10 +1,12 @@
 import csv
+import threading
 
 import xlwt
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils.encoding import smart_str
 from requests import Response
 from rest_framework.decorators import api_view
 from .googledriveprocces import GoogleDrive
@@ -25,6 +27,64 @@ def master_tableLoadFile(request):
 
 def pacientDownLoadFile(request):
     pass
+
+
+def master_tableDownloadFileTemps(request):
+    if request.method == "GET":
+        columns_names1 = ['Create', 'First Name', 'Surname', 'Date of birth', 'Client phone',
+                         'NHS ID', 'Screener', 'Datapoint 8', 'Datapoint 9', 'Datapoint 10',
+                         'Datapoint 11', 'Datapoint 12', 'Datapoint 13', 'Datapoint 14', 'Datapoint 15',
+                         'Datapoint 16', 'Datapoint 16A', 'Datapoint 16B', 'Datapoint 17', 'Datapoint 18',
+                         'Datapoint 19', 'Datapoint 20',
+                         'Datapoint 21', 'Datapoint 22', 'Datapoint 23', 'Datapoint 24', 'Datapoint 25',
+                         'Datapoint 26', 'Datapoint 27', 'Datapoint 28', 'Datapoint 29', 'Datapoint 30',
+                         'Datapoint 31', 'Datapoint 32', 'Datapoint 33', 'Datapoint 34', 'Datapoint 35',
+                         'Datapoint 36', 'Datapoint 37', 'Datapoint 38', 'Datapoint 39', 'Datapoint 40',
+                         'Datapoint 41', 'Datapoint 42', 'Datapoint 43', 'Datapoint 44', 'Datapoint 45',
+                         'Datapoint 46', 'Datapoint 47', 'Datapoint 48', 'Datapoint 49', 'Datapoint 50',
+                         'Datapoint 51', 'Datapoint 52', 'Datapoint 53', 'Datapoint 54', 'Datapoint 55',
+                         'Datapoint 56', 'Datapoint 57', 'Datapoint 58', 'Datapoint 59', 'Datapoint 60',
+                         'Datapoint 61', 'Datapoint 62', 'Datapoint 63', 'Datapoint 64', 'Datapoint 65',
+                         'Datapoint 66', 'Datapoint 67', 'Datapoint 68', 'Datapoint 69', 'Datapoint 70',
+                         'Datapoint 71', 'Datapoint 72', 'Datapoint 73', 'Datapoint 74', 'Datapoint 75',
+                         'Datapoint 76', 'Datapoint 77', 'Datapoint 78', 'Datapoint 79', 'Datapoint 80',
+                         'Datapoint 81', 'Datapoint 82', 'Datapoint 83', 'Datapoint 84', 'Datapoint 85',
+                         'Datapoint 86', 'Datapoint 87', 'Datapoint 88', 'Datapoint 89', 'Datapoint 90',
+                         'Datapoint 91', 'Datapoint 92', 'Datapoint 93', 'Datapoint 94', 'Datapoint 95',
+                         'Datapoint 96', 'Datapoint 97', 'Datapoint 98', 'Datapoint 99', 'Datapoint 100',
+                         'Datapoint 101', 'Datapoint 102', 'Datapoint 103', 'Datapoint 104', 'Datapoint 105',
+                         'Datapoint 106', 'Datapoint 107', 'Datapoint 108', 'Datapoint 109', 'Datapoint 110',
+                         'Datapoint 111', 'Datapoint 112', 'Datapoint 113', 'Datapoint 114', 'Datapoint 115',
+                         'Datapoint 116', 'Datapoint 117', 'Datapoint 118', 'Datapoint 119','GD id']
+
+        columns_names2 = ['Create', 'First Name', 'Surname', 'Date of birth', 'Client phone',
+                          'NHS ID', 'Datapoint 8', 'Datapoint 8', 'Datapoint 9', 'Datapoint 10',
+                          'Datapoint 11', 'Datapoint 12', 'Datapoint 13a', 'Datapoint 13b', 'Datapoint 14', 'Datapoint 15',
+                          'Datapoint 16', 'Datapoint 17', 'Datapoint 18','Datapoint 19', 'Datapoint 20',
+                          'Datapoint 21', 'Datapoint 22', 'Datapoint 23', 'Datapoint 24', 'Datapoint 25',
+                          'Datapoint 26', 'Datapoint 27', 'Datapoint 28', 'Datapoint 29', 'Datapoint 30',
+                          'Datapoint 31', 'Datapoint 32', 'Datapoint 33', 'Datapoint 34', 'Datapoint 35',
+                          'Datapoint 36', 'Datapoint 37', 'Datapoint 38', 'Datapoint 39', 'Datapoint 40',
+                          'Datapoint 41', 'Datapoint 42', 'Datapoint 43', 'Datapoint 44', 'Datapoint 45',
+                          'Datapoint 46', 'Datapoint 47', 'Datapoint 48', 'Datapoint 49', 'Datapoint 50',
+                          'Datapoint 51', 'Datapoint 52', 'Datapoint 53', 'Datapoint 54', 'Datapoint 55',
+                          'Datapoint 56', 'Datapoint 57', 'Datapoint 58', 'Datapoint 59', 'Datapoint 60',
+                          'Datapoint 61', 'Datapoint 62', 'Datapoint 63', 'Datapoint 64', 'Datapoint 65',
+                          'Datapoint 66', 'Datapoint 67', 'Datapoint 68', 'Datapoint 69', 'Datapoint 70',
+                          'Datapoint 71', 'Datapoint 72', 'Datapoint 73', 'Datapoint 74', 'Datapoint 75',
+                          'Datapoint 76', 'Datapoint 77', 'Datapoint 78', 'Datapoint 79', 'Datapoint 80',
+                          'Datapoint 81', 'Datapoint 82', 'Datapoint 83', 'Datapoint 84', 'Datapoint 85',
+                          'Datapoint 86', 'Datapoint 87', 'Datapoint 88', 'Datapoint 89', 'Datapoint 90',
+                          'Datapoint 91', 'Datapoint 92', 'Datapoint 93', 'Datapoint 94','GD id']
+
+
+        response = HttpResponse(content_type='application/force-download')
+
+        response['Content-Disposition'] = 'attachment; filename=%s' % 'Data-FormTemp.xlsx'
+
+        response['X-Sendfile'] = 'static/sample_template/Data-FormTemp.xlsx'
+
+        return response
 
 def master_tableDownloadFile(request):
     if request.method =='GET':
@@ -569,11 +629,256 @@ def login_view(request):
 def datadictionary_view(request):
     if request.method == "GET":
         return render(request,'ddactionary/ddactionary.html')
+def loadbusinessbuysale(data_):
+    if data_:
+        parse_id = str(uuid4())
+        for company_ in data_:
+
+            #   name = "БЕРЕЗКА ПЛЮС, ООО",
+
+            try:
+                name = str(company_['name']).strip().replace(" ", "")
+            except BaseException:
+                name = ""
+
+            #  type_company = "ООО",
+            try:
+                type_company = str(
+                    company_['type_company']).strip().replace(
+                    " ", "")
+            except BaseException:
+                type_company = ""
+
+            #  brand = "БЕРЕЗКА ПЛЮС",
+            try:
+                brand = str(company_['brand']).strip().replace(" ", "")
+            except BaseException:
+                brand = ""
+
+            #  mail_company = null,
+            try:
+                mail_company = str(
+                    company_['mail_company']).strip().replace(
+                    " ", "")
+            except BaseException:
+                mail_company = ""
+
+            #  inn_company = null,
+            try:
+                inn_company = str(
+                    company_['inn_company']).strip().replace(
+                    " ", "")
+            except BaseException:
+                inn_company = ""
+
+            #  check_date = 02.07.2014",
+            try:
+                check_date = str(
+                    company_['check_date']).strip().replace(
+                    " ", "")
+            except BaseException:
+                check_date = ""
+
+            #  manager_ceo = "Алистратов Олег Александрович",
+            try:
+                manager_ceo = str(
+                    company_['manager_ceo']).strip().replace(
+                    " ", "")
+            except BaseException:
+                manager_ceo = ""
+
+            #  manager_fin = "Алистратов Олег Александрович",
+            try:
+                manager_fin = str(
+                    company_['manager_fin']).strip().replace(
+                    " ", "")
+            except BaseException:
+                manager_fin = ""
+
+            #  q_employ = 6
+            try:
+                q_employ = str(company_['q_employ']).strip().replace(" ", "")
+            except BaseException:
+                q_employ = ""
+
+            #  title = ""
+            try:
+                title = str(company_['title']).strip().replace(" ", "")
+            except BaseException:
+                title = ""
+
+            #  site = ""
+            try:
+                site = str(company_['site']).strip().replace(" ", "")
+            except BaseException:
+                site = ""
+
+            #  adress_fact = "83059 г. Донецк, ул. 8-го Марта, 34а"
+            try:
+                adress_fact = str(
+                    company_['adress_fact']).strip().replace(
+                    " ", "")
+            except BaseException:
+                adress_fact = ""
+
+            #  adress_yure = "83059 г. Донецк, ул. 8-го Марта, 34а"
+            try:
+                adress_yure = str(
+                    company_['adress_yure']).strip().replace(
+                    " ", "")
+            except BaseException:
+                adress_yure = ""
+
+            #  adress_post = ""
+            try:
+                adress_post = str(
+                    company_['adress_post']).strip().replace(
+                    " ", "")
+            except BaseException:
+                adress_post = ""
+
+            #  phone_company = "380506233143"
+            try:
+                phone_company = str(
+                    company_['phone_company']).strip().replace(
+                    " ", "")
+            except BaseException:
+                phone_company = ""
+
+            #  phone_company = "380506233143"
+            try:
+                phone_ceo = str(company_['phone_ceo']).strip().replace(" ", "")
+            except BaseException:
+                phone_ceo = ""
+
+            #  phone_fin = "380506233143"
+            try:
+                phone_fin = str(company_['phone_fin']).strip().replace(" ", "")
+            except BaseException:
+                phone_fin = ""
+
+            #  phone_fax = "380506233143"
+            try:
+                phone_fax = str(company_['phone_fax']).strip().replace(" ", "")
+            except BaseException:
+                phone_fax = ""
+
+            #  phone_contact = "[380506233143]"
+            try:
+                phone_contact = company_['phone_contact']
+            except BaseException:
+                phone_contact = []
+
+            #  prod_serv = "Формирование и обработка листового стекла"
+            try:
+                prod_serv = str(company_['prod_serv']).strip().replace(" ", "")
+            except BaseException:
+                prod_serv = ""
+
+            #  webpage = "https://www.ua-region.info/35711197"
+            try:
+                webpage = str(company_['webpage']).strip().replace(" ", "")
+            except BaseException:
+                webpage = ""
+
+            #  description = "https://www.ua-region.info/35711197"
+            try:
+                description = str(
+                    company_['description']).strip().replace(
+                    " ", "")
+            except BaseException:
+                description = ""
+
+            #  company_logo = "https://www.ua-region.info/35711197"
+
+            try:
+                company_logo = str(
+                    company_['company_logo']).strip().replace(
+                    " ", "")
+            except BaseException:
+                company_logo = None
+
+            #  person_slug = "dsfgsdfexawe"
+
+            try:
+                person_slug = str(
+                    company_['person_slug']).strip().replace(
+                    " ", "")
+            except BaseException:
+                person_slug = None
+
+            #  source = ""
+
+            try:
+                source = str(company_['source']).strip().replace(" ", "")
+            except BaseException:
+                source = ""
+
+            #  source = list
+            try:
+                activities = company_['activities']
+            except BaseException:
+                activities = []
+
+            #  industry = list
+            try:
+                industry = company_['industry']
+            except BaseException:
+                industry = []
+
+            businessBuySale_ = BusinessBuySale.objects.create(
+                person_slug=person_slug,
+                brand=brand,
+                title=title,
+                offname=name,
+                type=type_company,
+                type_company=type_company,
+                descrition=description,
+                prod_serv=prod_serv,
+                webpage=webpage,
+                company_logo=company_logo,
+                source=source,
+                adress_yure=adress_yure,
+                adress_fact=adress_fact,
+                adress_post=adress_post,
+                mail_company=mail_company,
+                mail_ceo="",
+                mail_contact="",
+                mail_info="",
+                mail_is_find=False,
+                mail_is_send=False,
+                mail_is_recived=False,
+                site_is_work=False,
+                disscus_mail="",
+                disscus_phone="",
+                disscus_name="",
+                disscus_status="",
+                manager_ceo=manager_ceo,
+                manager_fin=manager_fin,
+                mail_link="",
+                unique_id=parse_id,
+                phone_company=phone_company,
+                phone_contact=phone_contact,
+                phone_ceo=phone_ceo,
+                phone_fin=phone_fin,
+                phone_fax=phone_fax,
+                q_employ=q_employ,
+                inn_company=inn_company,
+                site=site)
+            businessBuySale_.set_phone_contact(phone_contact)
+            businessBuySale_.set_activities(activities)
+            businessBuySale_.set_industries(industry)
+            businessBuySale_.save()
+
 
 def master_table_view(request):
     if request.method == "GET":
 
+
         search_param = {}
+
+        page = request.GET.get('page') if request.GET.get('page') else 1
+        page = int(page)
 
         first_name = request.GET.get('first_name')
 
@@ -626,43 +931,41 @@ def master_table_view(request):
             search_param['pacient__home_addres'] = home_addres
 
 
-
-
-        master_table = DataFormTable.objects.filter(**search_param).order_by('id')[:50]
+        master_table = DataFormTable.objects.filter(**search_param).order_by('id')[(page-1)*50:50*page]
         return render(request,'masterTable/masterTable.html',{
             'master_table':master_table,'user':request.user,
         })
 
+    if request.method == "POST":
+        file_ProfileForm = request.FILES['file_ProfileForm']
+        file_ProfileForm = file_ProfileForm if file_ProfileForm else None
 
-# def createPacient(request):
-#
-#     if request.method == "GET":
-#
-#     elif request.method == "POST":
-#         try:
-#             nsh_id_old = Pacient.objects.all().order_by('-id')[0]
-#             print(nsh_id_old)
-#             nsh_id_old = str(nsh_id_old.nsh_id)
-#
-#             print(str(nsh_id_old))
-#             nsh_id_new = gen_aaaannnna(nsh_id_old)
-#         except:
-#             nsh_id_new = gen_aaaannnna()
-#
-#         new_pacient = Pacient.objects.create(
-#             email="s.hones@gmail.com",
-#             phone="380953958123",
-#             first_name="Sherlok",
-#             last_name="Homes",
-#             default_city="London",
-#             home_addres="Baker str 13 a",
-#             date_of_birth="1987-02-23"
-#         )
-#
-#         new_pacient.nsh_id = nsh_id_new
-#         new_pacient.save()
-#
-#     return "ok"
+        file_DataForm = request.FILES['file_DataForm']
+        file_DataForm = file_DataForm if file_DataForm else None
+
+        google_drive_url_ProfileForm = request.POST.get('google_drive_url_ProfileForm')
+        google_drive_url_ProfileForm = google_drive_url_ProfileForm if google_drive_url_ProfileForm else None
+
+        google_drive_url_DataForm = request.POST.get('google_drive_url_DataForm')
+        google_drive_url_DataForm = google_drive_url_DataForm if google_drive_url_DataForm else None
+
+        if google_drive_url_DataForm:
+
+            gg_drive_proccess1 = GoogleDrive(google_drive_url_DataForm)
+            gg_drive_proccess1.request()
+            gg_drive_proccess1.gog_drive_to_json()
+
+
+
+        if google_drive_url_ProfileForm:
+
+            gg_drive_proccess2 = GoogleDrive(google_drive_url_ProfileForm)
+            gg_drive_proccess2.request()
+            gg_drive_proccess2.gog_drive_to_json()
+
+        return render(request, 'desctop/succsespage/suucsespage.html')
+
+
 
 def pacientDelete(request,req_id):
     if request.method == "POST":
@@ -1084,6 +1387,8 @@ def register_view(request):
             profile, created = UserProfile.objects.get_or_create(
                 user=user_, phone=phone,role=role)
             profile.save()
+
+
 
 
 
