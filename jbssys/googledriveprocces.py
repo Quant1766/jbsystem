@@ -64,7 +64,9 @@ class GoogleDrive:
     def data_from_jjson(self):
         self.table_ = self.json_data['changes']['firstchunk']
         for data in self.table_:
+            print('data', data)
             if 25813757 in data:
+
                 table_data = json.loads(data[1])
 
         self.table_size = (table_data[0][4],table_data[0][2])
@@ -157,11 +159,10 @@ class GoogleDrive:
         dataFrame.to_excel('Geeks11.xls',index=False,header=False)
 
 
-# url = 'https://docs.google.com/spreadsheets/d/1RCVk3YviL53o01Q4MIgJUkbVs1EvyOPHrpyrv0CctgU/edit#gid=1663257486'
+# url = 'https://docs.google.com/spreadsheets/d/1-1EzamJKHG4CGoqnkPt4CeTrWMKBk2BkPLdWcb8ZByQ/edit#gid=218707951'
 # gd = GoogleDrive(url)
 # gd.request()
+# gd.gog_drive_to_json()
 # gd.data_from_jjson()
-# # gd.data_from_jjson()
-# # gd.table_gd_list_to_list()
 # gd.table_to_xls()
 

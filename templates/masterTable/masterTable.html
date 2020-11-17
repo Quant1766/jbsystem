@@ -198,7 +198,6 @@
                               <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
                                  <thead>
                                     <tr class="info">
-                                        <th>Action</th>
                                        <th>Create</th>
                                        <th>First Name</th>
                                        <th>Surname</th>
@@ -332,17 +331,110 @@
                                         <th>Datapoint 118</th>
                                         <th>Datapoint 119</th>
 
+                                        <th>Datapoint P9</th>
+                                        <th>Datapoint P10</th>
+
+                                        <th>Datapoint P11</th>
+                                        <th>Datapoint P12</th>
+                                        <th>Datapoint P13</th>
+                                        <th>Datapoint P14</th>
+                                        <th>Datapoint P15</th>
+                                        <th>Datapoint P16</th>
+                                        <th>Datapoint P16A</th>
+                                        <th>Datapoint P16B</th>
+                                        <th>Datapoint P17</th>
+                                        <th>Datapoint P18</th>
+                                        <th>Datapoint P19</th>
+                                        <th>Datapoint P20</th>
+
+                                        <th>Datapoint P21</th>
+                                        <th>Datapoint P22</th>
+                                        <th>Datapoint P23</th>
+                                        <th>Datapoint P24</th>
+                                        <th>Datapoint P25</th>
+                                        <th>Datapoint P26</th>
+                                        <th>Datapoint P27</th>
+                                        <th>Datapoint P28</th>
+                                        <th>Datapoint P29</th>
+                                        <th>Datapoint P30</th>
+
+                                        <th>Datapoint P31</th>
+                                        <th>Datapoint P32</th>
+                                        <th>Datapoint P33</th>
+                                        <th>Datapoint P34</th>
+                                        <th>Datapoint P35</th>
+                                        <th>Datapoint P36</th>
+                                        <th>Datapoint P37</th>
+                                        <th>Datapoint P38</th>
+                                        <th>Datapoint P39</th>
+                                        <th>Datapoint P40</th>
+
+                                        <th>Datapoint P41</th>
+                                        <th>Datapoint P42</th>
+                                        <th>Datapoint P43</th>
+                                        <th>Datapoint P44</th>
+                                        <th>Datapoint P45</th>
+                                        <th>Datapoint P46</th>
+                                        <th>Datapoint P47</th>
+                                        <th>Datapoint P48</th>
+                                        <th>Datapoint P49</th>
+                                        <th>Datapoint P50</th>
+
+                                        <th>Datapoint P51</th>
+                                        <th>Datapoint P52</th>
+                                        <th>Datapoint P53</th>
+                                        <th>Datapoint P54</th>
+                                        <th>Datapoint P55</th>
+                                        <th>Datapoint P56</th>
+                                        <th>Datapoint P57</th>
+                                        <th>Datapoint P58</th>
+                                        <th>Datapoint P59</th>
+                                        <th>Datapoint P60</th>
+
+                                        <th>Datapoint P61</th>
+                                        <th>Datapoint P62</th>
+                                        <th>Datapoint P63</th>
+                                        <th>Datapoint P64</th>
+                                        <th>Datapoint P65</th>
+                                        <th>Datapoint P66</th>
+                                        <th>Datapoint P67</th>
+                                        <th>Datapoint P68</th>
+                                        <th>Datapoint P69</th>
+                                        <th>Datapoint P70</th>
+
+                                        <th>Datapoint P71</th>
+                                        <th>Datapoint P72</th>
+                                        <th>Datapoint P73</th>
+                                        <th>Datapoint P74</th>
+                                        <th>Datapoint P75</th>
+                                        <th>Datapoint P76</th>
+                                        <th>Datapoint P77</th>
+                                        <th>Datapoint P78</th>
+                                        <th>Datapoint P79</th>
+                                        <th>Datapoint P80</th>
+
+                                        <th>Datapoint P81</th>
+                                        <th>Datapoint P82</th>
+                                        <th>Datapoint P83</th>
+                                        <th>Datapoint P84</th>
+                                        <th>Datapoint P85</th>
+                                        <th>Datapoint P86</th>
+                                        <th>Datapoint P87</th>
+                                        <th>Datapoint P88</th>
+                                        <th>Datapoint P89</th>
+                                        <th>Datapoint P90</th>
+
+                                        <th>Datapoint P91</th>
+                                        <th>Datapoint P92</th>
+                                        <th>Datapoint P93</th>
+                                        <th>Datapoint P94</th>
+
                                     </tr>
                                  </thead>
                                   <tbody>
                                   {% for recor in master_table %}
                                       <tr>
-                                          <td style="position: absolute">
 
-                                              <button type="button" class="btn btn-add btn-xs" onclick="modelDeleteSetID('{{ recor.id }}')" data-toggle="modal" data-target="#update"><i class="fa fa-pencil"></i></button>
-                                              <button type="button" class="btn btn-danger btn-xs" onclick="modelDeleteSetID('{{ recor.id }}')" data-toggle="modal" data-target="#delt"><i class="fa fa-trash-o"></i> </button>
-
-                                          </td>
                                           <td><p style="width: 150px;">{{ recor.create_datetime }}</p></td>
                                           <td><p style="width: 80px;">{{ recor.pacient.first_name }}</p></td>
                                           <td><p style="width: 80px;">{{ recor.pacient.last_name }}</p></td>

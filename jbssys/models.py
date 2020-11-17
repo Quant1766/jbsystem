@@ -3,7 +3,69 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+class UserProfile(models.Model):
+    "DEFAULT USE storename as username casser"
+    is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
 
+    user = models.OneToOneField(
+        User,
+        related_name="profile",
+        on_delete=models.PROTECT)
+
+    "admin|doctor"
+    role = models.CharField(
+        "role",
+        max_length=30,
+        null=False,
+        default='doctor')
+
+    phone = models.CharField(
+        "phone",
+        max_length=20,
+        blank=True,
+        null=True,
+        default="")
+
+    default_city = models.CharField(
+        "city",
+        max_length=50,
+        blank=True,
+        null=True,
+        default='')
+
+    sex = models.CharField(
+        "male female",
+        max_length=50,
+        blank=True,
+        null=True,
+        default='')
+
+    home_addres = models.CharField(
+        "home",
+        max_length=100,
+        blank=True,
+        null=True,
+        default='')
+    work_addres = models.CharField(
+        "work",
+        max_length=100,
+        blank=True,
+        null=True,
+        default='')
+
+    telegram = models.CharField(
+        "telegram",
+        max_length=60,
+        blank=True,
+        null=True,
+        default="")
+
+    user_avatar = models.ImageField(
+        upload_to="static/image/avatars/",
+        default='/static/image/avatars/doctor_icon.png')  # You need to configure media in settings.py
+
+    def __str__(self):
+        return "%s %s" % (self.user.username, self.role)
 
 def gen_aaaannnna(old_id="AAA0000A"):
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -58,10 +120,15 @@ class DataDictionary(models.Model):
 
 
 
+
 class Cancer(models.Model):
     is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
 
     title = models.CharField('title', max_length=20, null=True, blank=True)
+
+class CancerHistory(models.Model):
+    cancer = models.ForeignKey(Cancer,related_name="CancerHistory",on_delete=models.PROTECT)
+    date_detect = models.DateField("Date detect", default=None, blank=True, null=True)
 
 class ChldPacientDurBreast(models.Model):
     is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
@@ -74,6 +141,7 @@ class ChldPacientDurBreast(models.Model):
 
 
 class RelationhipPacient(models.Model):
+
     is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
 
     relation = models.CharField(max_length=40,
@@ -96,6 +164,13 @@ class RelationhipPacient(models.Model):
 
     type_cancer = models.ForeignKey(Cancer,on_delete=models.PROTECT, related_name='rel_tcanc')
 
+    position_cancer = models.CharField(max_length=40,
+                                  choices=(('one side', 'one side'),
+                                           ('both sides', 'both sides'),
+                                           ('', ''),
+                                           ),
+                                  default='')
+
 class Drug(models.Model):
     is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
 
@@ -106,11 +181,12 @@ class Drug(models.Model):
         max_length=2500,
         default='')
 
-    prescription = models.CharField(max_length=40,
+    routing = models.CharField(max_length=40,
                                   choices=(('Convenience', 'Convenience'),
                                            ('Desired target effect', 'Desired target effect'),
-                                           ('Oral','Oral'),
+                                               ('Oral','Oral'),
                                            ('Local', 'Local'),
+
                                            ('Mouth inhalation', 'Mouth inhalation'),
                                            ('Nasal inhalation', 'Nasal inhalation'),
                                            ('Parenteral', 'Parenteral'),
@@ -121,15 +197,23 @@ class Drug(models.Model):
                                            ),
                                   default='')
 
+class MedicalOperation(models.Model):
+    title = models.CharField('title operation', max_length=100, blank=True,null=True,default="")
+    date_operation = models.DateField("Date operation", default=None, blank=True, null=True)
+    num_operation = models.IntegerField("num operation", validators=[
+        MaxValueValidator(120),
+        MinValueValidator(1)
+    ],
+                                       default="1")
 
 
 class Pacient(models.Model):
     first_name = models.CharField('first name', max_length=30, blank=True)
-    last_name = models.CharField('last name', max_length=150, blank=True,default='')
+    last_name = models.CharField('last name', max_length=150, blank=True, default='')
 
     email = models.EmailField('email address', blank=True)
 
-    is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
+    is_hide = models.BooleanField("is hide", null=True, blank=True, default=False, )
 
     phone = models.CharField(
         "phone",
@@ -138,7 +222,7 @@ class Pacient(models.Model):
         null=True,
         default="")
 
-    date_of_birth = models.DateField("Date of birth",default=None,blank=True,null=True)
+    date_of_birth = models.DateField("Date of birth", default=None, blank=True, null=True)
 
     default_city = models.CharField(
         "city",
@@ -154,9 +238,9 @@ class Pacient(models.Model):
         null=True,
         default='')
 
-    nsh_id = models.CharField('nsh id', max_length=9,blank=True,
-        null=True,
-        default='')
+    nsh_id = models.CharField('nsh id', max_length=9, blank=True,
+                              null=True,
+                              default='')
 
     nsh_id_gdisk = models.CharField(
         'nsh id gdisk',
@@ -165,6 +249,12 @@ class Pacient(models.Model):
         null=True,
         default=''
     )
+
+class ProfileFormTable(models.Model):
+    create_datetime = models.DateTimeField("create datetime", auto_now_add=True)
+
+    pacient = models.ForeignKey(Pacient,related_name="PacientProfileForm",on_delete=models.PROTECT)
+
 
     sex = models.CharField(
         max_length=20,
@@ -280,27 +370,27 @@ class Pacient(models.Model):
         max_length=1500,
         default='')
 
-    datapoint_29 = models.TextField(
+    datapoint_29 = models.ManyToManyField(Drug,related_name="Drug1")
+
+
+    datapoint_30 = models.ManyToManyField(Drug,related_name="Drug2")
+
+
+    datapoint_31 = models.ManyToManyField(MedicalOperation,related_name="MedicalOperation1")
+
+
+
+    datapoint_32 = models.TextField(
         null=True, blank=True,
         max_length=1500,
         default='')
 
-    datapoint_30 = models.TextField(
-        null=True, blank=True,
-        max_length=1500,
-        default='')
-
-    datapoint_31 = models.TextField(
-        null=True, blank=True,
-        max_length=1500,
-        default='')
-
-    datapoint_32 = models.DateField("Datapoin 33",default=None,blank=True,null=True)
+    datapoint_33 = models.DateField("Datapoin 33",default=None,blank=True,null=True)
 
 
 
 
-    datapoint_33 = models.CharField(
+    datapoint_34 = models.CharField(
         max_length=40,
         choices=(
             ('Never', 'Never'),
@@ -312,7 +402,7 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_34 = models.CharField(
+    datapoint_35 = models.CharField(
         max_length=50,
         choices=(
             ('I consume a low-fibre diet', 'I consume a low-fibre diet'),
@@ -322,7 +412,7 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_35 = models.CharField(
+    datapoint_36 = models.CharField(
         max_length=40,
         choices=(
             ('1-6 units', '1-6 units'),
@@ -337,7 +427,7 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_36 = models.CharField(
+    datapoint_37 = models.CharField(
         max_length=40,
         choices=(
             ('Yes', 'Yes'),
@@ -348,43 +438,29 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_37 = models.CharField(max_length=15,
-                                     null=True, blank=True,
-                                     default='')
-
     datapoint_38 = models.CharField(max_length=15,
                                      null=True, blank=True,
                                      default='')
 
-    datapoint_39 = models.TextField(
+    datapoint_39 = models.CharField(max_length=15,
+                                     null=True, blank=True,
+                                     default='')
+
+    datapoint_40 = models.TextField(
         null=True, blank=True,
         max_length=1500,
         default='')
-
-    datapoint_40 = models.CharField(max_length=15,
-                                    null=True, blank=True,
-                                    default='')
 
     datapoint_41 = models.CharField(max_length=15,
                                     null=True, blank=True,
                                     default='')
 
-
-    datapoint_42 = models.CharField(
-        max_length=40,
-        choices=(
-            ('Yes', 'Yes'),
-            ('No', 'No'),
-            ('', ''),
-        ),
-        default=''
-    )
-
-    datapoint_43 = models.CharField(max_length=15,
+    datapoint_42 = models.CharField(max_length=15,
                                     null=True, blank=True,
                                     default='')
 
-    datapoint_44 = models.CharField(
+
+    datapoint_43 = models.CharField(
         max_length=40,
         choices=(
             ('Yes', 'Yes'),
@@ -393,6 +469,10 @@ class Pacient(models.Model):
         ),
         default=''
     )
+
+    datapoint_44 = models.CharField(max_length=15,
+                                    null=True, blank=True,
+                                    default='')
 
     datapoint_45 = models.CharField(
         max_length=40,
@@ -434,19 +514,28 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_49 = models.CharField(max_length=15,
-                                    null=True, blank=True,
-                                    default='')
+    datapoint_49 = models.CharField(
+        max_length=40,
+        choices=(
+            ('Yes', 'Yes'),
+            ('No', 'No'),
+            ('', ''),
+        ),
+        default=''
+    )
 
     datapoint_50 = models.CharField(max_length=15,
                                     null=True, blank=True,
                                     default='')
-    datapoint_51 = models.TextField(
-        null=True, blank=True,
-        max_length=1500,
-        default='')
 
-    datapoint_52 = models.CharField(
+    datapoint_51 = models.CharField(max_length=15,
+                                    null=True, blank=True,
+                                    default='')
+
+    datapoint_52 = models.ManyToManyField(ChldPacientDurBreast,related_name='ChldPacientDurBreast1')
+
+
+    datapoint_53 = models.CharField(
         max_length=10,
         choices=(
             ('Yes', 'Yes'),
@@ -456,19 +545,24 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_53 = models.CharField(max_length=15,
-                                    null=True, blank=True,
-                                    default='')
+    datapoint_54 = models.CharField(
+        max_length=10,
+        choices=(
+            ('Couple of days', 'Couple of days'),
+            ('Couple of weeks', 'Couple of weeks'),
+            ('Few weeks', 'Few weeks'),
+            ('Couple of months', 'Couple of months'),
+            ('Few months', 'Few months'),
+            ('A year', 'A year'),
+            ('Couple of years', 'Couple of years'),
+            ('Many years', 'Many years'),
+            ('More than a decade','More than a decade'),
+            ('', ''),
+        ),
+        default=''
+    )
 
-    datapoint_54 = models.CharField(max_length=15,
-                                    null=True, blank=True,
-                                    default='')
-
-    datapoint_55 = models.CharField(max_length=15,
-                                    null=True, blank=True,
-                                    default='')
-
-    datapoint_56 = models.CharField(
+    datapoint_55 = models.CharField(
         max_length=10,
         choices=(
             ('Yes', 'Yes'),
@@ -477,6 +571,10 @@ class Pacient(models.Model):
         ),
         default=''
     )
+
+    datapoint_56 = models.CharField(max_length=15,
+                                    null=True, blank=True,
+                                    default='')
 
     datapoint_57 = models.CharField(
         max_length=10,
@@ -488,18 +586,40 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_58 = models.TextField(
-        null=True, blank=True,
-        max_length=1500,
-        default='')
+    datapoint_58 = models.CharField(
+        max_length=10,
+        choices=(
+            ('Yes', 'Yes'),
+            ('No', 'No'),
+            ('', ''),
+        ),
+        default=''
+    )
 
-    datapoint_59 = models.CharField(max_length=15,
+    datapoint_59 = models.CharField(
+        max_length=10,
+        choices=(
+            ('Couple of days', 'Couple of days'),
+            ('Couple of weeks', 'Couple of weeks'),
+            ('Few weeks', 'Few weeks'),
+            ('Couple of months', 'Couple of months'),
+            ('Few months', 'Few months'),
+            ('A year', 'A year'),
+            ('Couple of years', 'Couple of years'),
+            ('Many years', 'Many years'),
+            ('More than a decade','More than a decade'),
+            ('', ''),
+        ),
+        default=''
+    )
+
+    datapoint_60 = models.CharField(max_length=15,
                                     null=True, blank=True,
                                     default='')
 
 
 
-    datapoint_60 = models.CharField(
+    datapoint_61 = models.CharField(
         max_length=10,
         choices=(
             ('Yes', 'Yes'),
@@ -509,9 +629,9 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_61 = models.ManyToManyField(RelationhipPacient,)
+    datapoint_62 = models.ManyToManyField(RelationhipPacient,related_name='RelationhipPacient1')
 
-    datapoint_62 = models.CharField(
+    datapoint_63 = models.CharField(
         max_length=10,
         choices=(
             ('Yes', 'Yes'),
@@ -521,12 +641,9 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_63 = models.TextField(
-        null=True, blank=True,
-        max_length=2500,
-        default='')
+    datapoint_64 = models.ManyToManyField(RelationhipPacient,related_name='RelationhipPacient2')
 
-    datapoint_64 = models.CharField(
+    datapoint_65 = models.CharField(
         max_length=10,
         choices=(
             ('Yes', 'Yes'),
@@ -536,12 +653,9 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_65 = models.TextField(
-        null=True, blank=True,
-        max_length=1500,
-        default='')
+    datapoint_66 = models.ManyToManyField(CancerHistory,related_name='CancerHistory1')
 
-    datapoint_66 = models.CharField(
+    datapoint_67 = models.CharField(
         max_length=20,
         choices=(
             ('Unknown', 'Unknown'),
@@ -549,16 +663,6 @@ class Pacient(models.Model):
             ('No', 'No'),
             ('', 'Unknown'),
 
-        ),
-        default=''
-    )
-
-    datapoint_67 = models.CharField(
-        max_length=10,
-        choices=(
-            ('Yes', 'Yes'),
-            ('No', 'No'),
-            ('', ''),
         ),
         default=''
     )
@@ -574,6 +678,16 @@ class Pacient(models.Model):
     )
 
     datapoint_69 = models.CharField(
+        max_length=10,
+        choices=(
+            ('Yes', 'Yes'),
+            ('No', 'No'),
+            ('', ''),
+        ),
+        default=''
+    )
+
+    datapoint_70 = models.CharField(
         max_length=280,
         choices=(
             ('Peutz-Jeghers syndrome (STK11 altered gene)', 'Peutz-Jeghers syndrome (STK11 altered gene)'),
@@ -586,15 +700,6 @@ class Pacient(models.Model):
     )
 
 
-    datapoint_70 = models.CharField(
-        max_length=10,
-        choices=(
-            ('Yes', 'Yes'),
-            ('No', 'No'),
-            ('', ''),
-        ),
-        default=''
-    )
     datapoint_71 = models.CharField(
         max_length=10,
         choices=(
@@ -622,18 +727,34 @@ class Pacient(models.Model):
         ),
         default=''
     )
-
-    datapoint_74 = models.TextField(
-        null=True, blank=True,
-        max_length=1500,
-        default='')
-
-    datapoint_75 = models.CharField(
+    datapoint_74 = models.CharField(
         max_length=10,
         choices=(
             ('Yes', 'Yes'),
             ('No', 'No'),
             ('', ''),
+        ),
+        default=''
+    )
+
+    datapoint_75 = models.CharField(
+        max_length=10,
+        choices=(
+            ('Help Bathing', 'Help Bathing'),
+            ('Help Dressing', 'Help Dressing'),
+            ('Help getting in/out of Chair', 'Help getting in/out of Chair'),
+            ('Help Walking around house', 'Help Walking around house'),
+            ('Help Eating', 'Help Eating'),
+            ('Help Grooming', 'Help Grooming'),
+            ('Help Using Toilet', 'Help Using Toilet'),
+            ('Help up/down Stairs', 'Help up/down Stairs'),
+            ('Help lifting 10 lbs', 'Help lifting 10 lbs'),
+            ('Help Shopping', 'Help Shopping'),
+            ('Help with meal Preparations', 'Help with meal Preparations'),
+            ('Help taking Medication', 'Help taking Medication'),
+            ('Help with Housework', 'Help with Housework'),
+            ('', ''),
+
         ),
         default=''
     )
@@ -641,11 +762,9 @@ class Pacient(models.Model):
     datapoint_76 = models.CharField(
         max_length=10,
         choices=(
-            ('Yes, less than 3 days a week', 'Yes, less than 3 days a week'),
-            ('Yes, at least 3 days a week', 'Yes, at least 3 days a week'),
+            ('Yes', 'Yes'),
             ('No', 'No'),
-            ('', 'No'),
-
+            ('', ''),
         ),
         default=''
     )
@@ -653,9 +772,11 @@ class Pacient(models.Model):
     datapoint_77 = models.CharField(
         max_length=10,
         choices=(
-            ('Yes', 'Yes'),
+            ('Yes, less than 3 days a week', 'Yes, less than 3 days a week'),
+            ('Yes, at least 3 days a week', 'Yes, at least 3 days a week'),
             ('No', 'No'),
-            ('', ''),
+            ('', 'No'),
+
         ),
         default=''
     )
@@ -689,6 +810,7 @@ class Pacient(models.Model):
         ),
         default=''
     )
+
     datapoint_81 = models.CharField(
         max_length=10,
         choices=(
@@ -698,7 +820,6 @@ class Pacient(models.Model):
         ),
         default=''
     )
-
     datapoint_82 = models.CharField(
         max_length=10,
         choices=(
@@ -735,12 +856,22 @@ class Pacient(models.Model):
             ('Yes', 'Yes'),
             ('No', 'No'),
             ('', ''),
-
         ),
         default=''
     )
 
     datapoint_86 = models.CharField(
+        max_length=10,
+        choices=(
+            ('Yes', 'Yes'),
+            ('No', 'No'),
+            ('', ''),
+
+        ),
+        default=''
+    )
+
+    datapoint_87 = models.CharField(
         max_length=50,
         choices=(
             ('Lost more than 10 lbs in last year', 'Lost more than 10 lbs in last year'),
@@ -752,18 +883,6 @@ class Pacient(models.Model):
             ('Feel Lonely', 'Feel Lonely'),
             ('Have Trouble getting going', 'Have Trouble getting going'),
             ('', ''),
-        ),
-        default=''
-    )
-
-    datapoint_87 = models.CharField(
-        max_length=10,
-        choices=(
-            ('Most times', 'Most times'),
-            ('Sometimes', 'Sometimes'),
-            ('Rarely', 'Rarely'),
-            ('', ''),
-
         ),
         default=''
     )
@@ -819,6 +938,18 @@ class Pacient(models.Model):
     datapoint_92 = models.CharField(
         max_length=10,
         choices=(
+            ('Most times', 'Most times'),
+            ('Sometimes', 'Sometimes'),
+            ('Rarely', 'Rarely'),
+            ('', ''),
+
+        ),
+        default=''
+    )
+
+    datapoint_93 = models.CharField(
+        max_length=10,
+        choices=(
             ('Worse', 'Worse'),
             ('Same', 'Same'),
             ('Better', 'Better'),
@@ -828,7 +959,7 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_93 = models.CharField(
+    datapoint_94 = models.CharField(
         max_length=10,
         choices=(
             ('Poor', 'Poor'),
@@ -842,96 +973,21 @@ class Pacient(models.Model):
         default=''
     )
 
-    datapoint_94 = models.TextField("datapoint 94",
+    datapoint_95 = models.TextField("datapoint 94",
                                    max_length=1500,
                                    default='')
 
 
 
-class UserProfile(models.Model):
+
+
+class DataFormTable(models.Model):
     "DEFAULT USE storename as username casser"
+    create_datetime = models.DateTimeField("create datetime", auto_now_add=True)
     is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
 
-    user = models.OneToOneField(
-        User,
-        related_name="profile",
-        on_delete=models.PROTECT)
+    pacient = models.ForeignKey(Pacient,related_name="PacientDataForm",on_delete=models.PROTECT)
 
-    "admin|doctor"
-    role = models.CharField(
-        "role",
-        max_length=30,
-        null=False,
-        default='doctor')
-
-    phone = models.CharField(
-        "phone",
-        max_length=20,
-        blank=True,
-        null=True,
-        default="")
-
-    default_city = models.CharField(
-        "city",
-        max_length=50,
-        blank=True,
-        null=True,
-        default='')
-
-    sex = models.CharField(
-        "male female",
-        max_length=50,
-        blank=True,
-        null=True,
-        default='')
-
-    home_addres = models.CharField(
-        "home",
-        max_length=100,
-        blank=True,
-        null=True,
-        default='')
-    work_addres = models.CharField(
-        "work",
-        max_length=100,
-        blank=True,
-        null=True,
-        default='')
-
-    telegram = models.CharField(
-        "telegram",
-        max_length=60,
-        blank=True,
-        null=True,
-        default="")
-
-    user_avatar = models.ImageField(
-        upload_to="static/image/avatars/",
-        default='/static/image/avatars/doctor_icon.png')  # You need to configure media in settings.py
-
-    def __str__(self):
-        return "%s %s" % (self.user.username, self.role)
-
-
-class MasterTable(models.Model):
-    "DEFAULT USE storename as username casser"
-    create_datetime = models.DateTimeField("Registry DTime", auto_now_add=True)
-    updated_datetime = models.DateTimeField("Update DTime", auto_now=True)
-    is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
-
-    pacient = models.ForeignKey(Pacient,related_name="Pacientmaster",on_delete=models.PROTECT)
-
-    """
-    Screnner one or some field
-    
-    Breast lump
-    Lump in axilla or armpit
-    Breast pain
-    Nipple discharge
-    Skin redness of breast
-    Retraction of nipple
-    Puckering, dimple or indentation of skin
-    Breast rash"""
 
     datapoint_7 = models.TextField("Screener",
                                 max_length=1500,

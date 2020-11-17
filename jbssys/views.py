@@ -9,7 +9,7 @@ from requests import Response
 from rest_framework.decorators import api_view
 from .googledriveprocces import GoogleDrive
 from .models import (
-    MasterTable,
+    DataFormTable,
     Pacient,
     gen_aaaannnna,
     UserProfile,
@@ -62,14 +62,10 @@ def master_tableDownloadFile(request):
             search_param['nsh_id'] = nsh_id
 
         if first_name:
-            first_name = vaidator_data.validate_firstname(str(first_name))
 
             search_param['first_name'] = first_name
 
         if last_name:
-            print(last_name)
-            last_name = vaidator_data.validate_firstname(str(last_name))
-            print(last_name)
             search_param['last_name'] = last_name
 
         search_param['is_hide'] = False
@@ -106,29 +102,29 @@ def master_tableDownloadFile(request):
         #
         # else:
         #     search_param['date_of_birth__range'] = ['1900-01-01','2023-12-30']
-        master_table = MasterTable.objects.filter(**search_param).order_by('id')
+        master_table = DataFormTable.objects.filter(**search_param).order_by('id')
 
 
         columns_names = ['Create', 'First Name', 'Surname', 'Date of birth', 'Client phone',
                          'NHS ID', 'Screener', 'Datapoint 8', 'Datapoint 9', 'Datapoint 10',
-                         'Datapoint 11', 'Datapoint 12', 'Datapoint 13', 'Datapoint 14', 'Datapoint 15',
-                         'Datapoint 16', 'Datapoint 16A','Datapoint 16B', 'Datapoint 17', 'Datapoint 18', 'Datapoint 19', 'Datapoint 20',
-                         'Datapoint 21', 'Datapoint 22', 'Datapoint 23', 'Datapoint 24', 'Datapoint 25',
-                         'Datapoint 26', 'Datapoint 27', 'Datapoint 28', 'Datapoint 29', 'Datapoint 30',
-                         'Datapoint 31', 'Datapoint 32', 'Datapoint 33', 'Datapoint 34', 'Datapoint 35',
-                         'Datapoint 36', 'Datapoint 37', 'Datapoint 38', 'Datapoint 39', 'Datapoint 40',
-                         'Datapoint 41', 'Datapoint 42', 'Datapoint 43', 'Datapoint 44', 'Datapoint 45',
-                         'Datapoint 46', 'Datapoint 47', 'Datapoint 48', 'Datapoint 49', 'Datapoint 50',
-                         'Datapoint 51', 'Datapoint 52', 'Datapoint 53', 'Datapoint 54', 'Datapoint 55',
-                         'Datapoint 56', 'Datapoint 57', 'Datapoint 58', 'Datapoint 59', 'Datapoint 60',
-                         'Datapoint 61', 'Datapoint 62', 'Datapoint 63', 'Datapoint 64', 'Datapoint 65',
-                         'Datapoint 66', 'Datapoint 67', 'Datapoint 68', 'Datapoint 69', 'Datapoint 70',
-                         'Datapoint 71', 'Datapoint 72', 'Datapoint 73', 'Datapoint 74', 'Datapoint 75',
-                         'Datapoint 76', 'Datapoint 77', 'Datapoint 78', 'Datapoint 79', 'Datapoint 80',
-                         'Datapoint 81', 'Datapoint 82', 'Datapoint 83', 'Datapoint 84', 'Datapoint 85',
-                         'Datapoint 86', 'Datapoint 87', 'Datapoint 88', 'Datapoint 89', 'Datapoint 90',
-                         'Datapoint 91', 'Datapoint 92', 'Datapoint 93', 'Datapoint 94', 'Datapoint 95',
-                         'Datapoint 96', 'Datapoint 97', 'Datapoint 98', 'Datapoint 99', 'Datapoint 100',
+                         'Datapoint 11',  'Datapoint 12',  'Datapoint 13',  'Datapoint 14', 'Datapoint 15',
+                         'Datapoint 16',  'Datapoint 16A', 'Datapoint 16B', 'Datapoint 17', 'Datapoint 18', 'Datapoint 19', 'Datapoint 20',
+                         'Datapoint 21',  'Datapoint 22',  'Datapoint 23',  'Datapoint 24', 'Datapoint 25',
+                         'Datapoint 26',  'Datapoint 27',  'Datapoint 28',  'Datapoint 29', 'Datapoint 30',
+                         'Datapoint 31',  'Datapoint 32',  'Datapoint 33',  'Datapoint 34', 'Datapoint 35',
+                         'Datapoint 36',  'Datapoint 37',  'Datapoint 38',  'Datapoint 39', 'Datapoint 40',
+                         'Datapoint 41',  'Datapoint 42',  'Datapoint 43',  'Datapoint 44', 'Datapoint 45',
+                         'Datapoint 46',  'Datapoint 47',  'Datapoint 48',  'Datapoint 49', 'Datapoint 50',
+                         'Datapoint 51',  'Datapoint 52',  'Datapoint 53',  'Datapoint 54', 'Datapoint 55',
+                         'Datapoint 56',  'Datapoint 57',  'Datapoint 58',  'Datapoint 59', 'Datapoint 60',
+                         'Datapoint 61',  'Datapoint 62',  'Datapoint 63',  'Datapoint 64', 'Datapoint 65',
+                         'Datapoint 66',  'Datapoint 67',  'Datapoint 68',  'Datapoint 69', 'Datapoint 70',
+                         'Datapoint 71',  'Datapoint 72',  'Datapoint 73',  'Datapoint 74', 'Datapoint 75',
+                         'Datapoint 76',  'Datapoint 77',  'Datapoint 78',  'Datapoint 79', 'Datapoint 80',
+                         'Datapoint 81',  'Datapoint 82',  'Datapoint 83',  'Datapoint 84', 'Datapoint 85',
+                         'Datapoint 86',  'Datapoint 87',  'Datapoint 88',  'Datapoint 89', 'Datapoint 90',
+                         'Datapoint 91',  'Datapoint 92',  'Datapoint 93',  'Datapoint 94', 'Datapoint 95',
+                         'Datapoint 96',  'Datapoint 97',  'Datapoint 98',  'Datapoint 99', 'Datapoint 100',
                          'Datapoint 101', 'Datapoint 102', 'Datapoint 103', 'Datapoint 104', 'Datapoint 105',
                          'Datapoint 106', 'Datapoint 107', 'Datapoint 108', 'Datapoint 109', 'Datapoint 110',
                          'Datapoint 111', 'Datapoint 112', 'Datapoint 113', 'Datapoint 114', 'Datapoint 115',
@@ -632,7 +628,7 @@ def master_table_view(request):
 
 
 
-        master_table = MasterTable.objects.filter(**search_param).order_by('id')[:50]
+        master_table = DataFormTable.objects.filter(**search_param).order_by('id')[:50]
         return render(request,'masterTable/masterTable.html',{
             'master_table':master_table,'user':request.user,
         })
@@ -678,7 +674,7 @@ def pacientDelete(request,req_id):
 
 def masterTableDelete(request,req_id):
     if request.method == "POST":
-        mastab = MasterTable.objects.get(id=req_id)
+        mastab = DataFormTable.objects.get(id=req_id)
         mastab.is_hide = True
         mastab.save()
 
