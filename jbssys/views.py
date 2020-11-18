@@ -1,4 +1,5 @@
 import csv
+import re
 import threading
 
 import xlwt
@@ -15,7 +16,7 @@ from .models import (
     Pacient,
     gen_aaaannnna,
     UserProfile,
-    User,
+    User, ProfileFormTable, Drug,
 )
 import jbssys.validators as vaidator_data
 
@@ -870,7 +871,66 @@ def loadbusinessbuysale(data_):
             businessBuySale_.set_industries(industry)
             businessBuySale_.save()
 
+def procces_pacient(record_list):
+    first_name = record_list[1]
+    last_name = record_list[2]
+    date_of_birth = record_list[3]
+    phone = record_list[4]
+    email = record_list[7]
+    email = email if vaidator_data.validate_email(email) else ""
 
+
+
+    date_of_birth = vaidator_data.validate_date(date_of_birth)
+    if first_name and last_name and date_of_birth:
+
+        pacient, created = Pacient.objects.get_or_create(
+            first_name=first_name,
+            last_name=last_name,
+            date_of_birth=date_of_birth,
+
+        )
+    else: return None
+
+    if created:
+        try:
+            nsh_id_old = Pacient.objects.all().order_by('-id')[1]
+            nsh_id_old = str(nsh_id_old.nsh_id)
+
+            nsh_id_new = gen_aaaannnna(nsh_id_old)
+        except:
+            nsh_id_new = gen_aaaannnna()
+
+        pacient.nsh_id = nsh_id_new
+    pacient_id = pacient.id
+
+    pacient.phone = phone
+    pacient.email = email
+
+    pacient.save()
+
+    return pacient_id
+
+def parse_drugs(data):
+    return_data = []
+    l = re.split(r"(\: \d\,)* unique\:\d\[\]\:", data.replace('\n', ' '))
+
+    for i in l:
+        if i:
+            prep = i.replace(":", "").replace(",", "").strip()
+            if prep and len(prep) >= 3:
+                return_data.append(prep)
+
+
+    if not return_data:
+        drugs = Drug.objects.all().values('name')
+        for drug_name in drugs:
+            if str(drug_name) in str(data):
+                return_data.append(drug_name)
+
+
+
+    return return_data
 def master_table_view(request):
     if request.method == "GET":
 
@@ -937,11 +997,19 @@ def master_table_view(request):
         })
 
     if request.method == "POST":
-        file_ProfileForm = request.FILES['file_ProfileForm']
-        file_ProfileForm = file_ProfileForm if file_ProfileForm else None
+        try:
+            file_ProfileForm = request.FILES['file_ProfileForm']
+            file_ProfileForm = file_ProfileForm if file_ProfileForm else None
+        except:
+            file_ProfileForm = None
 
-        file_DataForm = request.FILES['file_DataForm']
-        file_DataForm = file_DataForm if file_DataForm else None
+
+        try:
+
+            file_DataForm = request.FILES['file_DataForm']
+            file_DataForm = file_DataForm if file_DataForm else None
+        except:
+            file_DataForm = None
 
         google_drive_url_ProfileForm = request.POST.get('google_drive_url_ProfileForm')
         google_drive_url_ProfileForm = google_drive_url_ProfileForm if google_drive_url_ProfileForm else None
@@ -954,6 +1022,14 @@ def master_table_view(request):
             gg_drive_proccess1 = GoogleDrive(google_drive_url_DataForm)
             gg_drive_proccess1.request()
             gg_drive_proccess1.gog_drive_to_json()
+            gg_drive_proccess1.data_from_jjson()
+            for row_ in gg_drive_proccess1.table_data:
+                pacient_id = procces_pacient(row_[:8])
+
+                if pacient_id ==  None: continue
+
+
+
 
 
 
@@ -962,6 +1038,154 @@ def master_table_view(request):
             gg_drive_proccess2 = GoogleDrive(google_drive_url_ProfileForm)
             gg_drive_proccess2.request()
             gg_drive_proccess2.gog_drive_to_json()
+            gg_drive_proccess2.data_from_jjson()
+            print('gg_drive_proccess2',gg_drive_proccess2.table_data)
+
+            for row_ in gg_drive_proccess2.table_data:
+                pacient_id = procces_pacient(row_[:8])
+
+                if pacient_id == None: continue
+                else:
+
+                    create_datetime = row_[0]
+
+                    profile_form, created = ProfileFormTable.objects.get_or_create(
+                        pacient=pacient_id,
+                        create_datetime=create_datetime
+                    )
+                    if created:
+                        profile_form.sex = row_[8]
+                        profile_form.datapoint_10 = row_[9]
+
+                        profile_form.datapoint_11 = row_[10]
+                        profile_form.datapoint_12 = row_[11]
+                        profile_form.datapoint_13a = row_[12]
+                        profile_form.datapoint_13b = row_[13]
+                        profile_form.datapoint_14 = row_[14]
+                        profile_form.datapoint_15 = row_[15]
+                        profile_form.datapoint_16 = row_[16]
+                        profile_form.datapoint_17 = row_[17]
+                        profile_form.datapoint_18 = row_[18]
+                        profile_form.datapoint_19 = row_[19]
+
+                        profile_form.datapoint_20 = row_[20]
+                        profile_form.datapoint_21 = row_[21]
+                        profile_form.datapoint_22 = row_[22]
+                        profile_form.datapoint_23 = row_[23]
+                        profile_form.datapoint_24 = row_[24]
+                        profile_form.datapoint_25 = row_[25]
+                        profile_form.datapoint_26 = row_[26]
+                        profile_form.datapoint_27 = row_[27]
+                        profile_form.datapoint_28 = row_[28]
+
+                        datapoint_29 = row_[29]
+                        if datapoint_29:
+                            datapoint_29_list_id = []
+                            datapoint_29_list = parse_drugs(datapoint_29)
+                            if datapoint_29_list:
+                                for datapoint_29_name in datapoint_29_list:
+                                    drug,created_dr1 = Drug.objects.get_or_create(name=datapoint_29_name)
+                                    if created_dr1:
+                                        drug.save()
+                                    datapoint_29_list_id.append(drug)
+
+                            profile_form.datapoint_29.add(datapoint_29_list_id)
+
+                        datapoint_30 = row_[30]
+                        if datapoint_30:
+                            datapoint_30_list_id = []
+                            datapoint_30_list = parse_drugs(datapoint_30)
+                            if datapoint_30_list:
+                                for datapoint_30_name in datapoint_30_list:
+                                    drug, created_dr1 = Drug.objects.get_or_create(name=datapoint_30_name)
+                                    if created_dr1:
+                                        drug.save()
+                                    datapoint_30_list_id.append(drug)
+
+                            profile_form.datapoint_30.add(datapoint_30_list_id)
+                        datapoint_31 = row_[31]
+
+                        profile_form.datapoint_29 = datapoint_29
+                        profile_form.datapoint_30 = datapoint_30
+                        profile_form.datapoint_31 = datapoint_31
+
+                        profile_form.datapoint_32 = row_[32]
+                        profile_form.datapoint_33 = row_[33]
+                        profile_form.datapoint_34 = row_[34]
+                        profile_form.datapoint_35 = row_[35]
+                        profile_form.datapoint_36 = row_[36]
+                        profile_form.datapoint_37 = row_[37]
+                        profile_form.datapoint_38 = row_[38]
+                        profile_form.datapoint_39 = row_[39]
+
+                        profile_form.datapoint_40 = row_[40]
+                        profile_form.datapoint_41 = row_[41]
+                        profile_form.datapoint_42 = row_[42]
+                        profile_form.datapoint_43 = row_[43]
+                        profile_form.datapoint_44 = row_[44]
+                        profile_form.datapoint_45 = row_[45]
+                        profile_form.datapoint_46 = row_[46]
+                        profile_form.datapoint_47 = row_[47]
+                        profile_form.datapoint_48 = row_[48]
+                        profile_form.datapoint_49 = row_[49]
+
+                        profile_form.datapoint_50 = row_[50]
+                        profile_form.datapoint_51 = row_[51]
+                        profile_form.datapoint_52 = row_[52]
+                        profile_form.datapoint_53 = row_[53]
+                        profile_form.datapoint_54 = row_[54]
+                        profile_form.datapoint_55 = row_[55]
+                        profile_form.datapoint_56 = row_[56]
+                        profile_form.datapoint_57 = row_[57]
+                        profile_form.datapoint_58 = row_[58]
+                        profile_form.datapoint_59 = row_[59]
+
+                        profile_form.datapoint_60 = row_[60]
+                        profile_form.datapoint_61 = row_[61]
+                        profile_form.datapoint_62 = row_[62]
+                        profile_form.datapoint_63 = row_[63]
+                        profile_form.datapoint_64 = row_[64]
+                        profile_form.datapoint_65 = row_[65]
+                        profile_form.datapoint_66 = row_[66]
+                        profile_form.datapoint_67 = row_[67]
+                        profile_form.datapoint_68 = row_[68]
+                        profile_form.datapoint_69 = row_[69]
+
+                        profile_form.datapoint_70 = row_[70]
+                        profile_form.datapoint_71 = row_[71]
+                        profile_form.datapoint_72 = row_[72]
+                        profile_form.datapoint_73 = row_[73]
+                        profile_form.datapoint_74 = row_[74]
+                        profile_form.datapoint_75 = row_[75]
+                        profile_form.datapoint_76 = row_[76]
+                        profile_form.datapoint_77 = row_[77]
+                        profile_form.datapoint_78 = row_[78]
+                        profile_form.datapoint_79 = row_[79]
+
+                        profile_form.datapoint_80 = row_[80]
+                        profile_form.datapoint_81 = row_[81]
+                        profile_form.datapoint_82 = row_[82]
+                        profile_form.datapoint_83 = row_[83]
+                        profile_form.datapoint_84 = row_[84]
+                        profile_form.datapoint_85 = row_[85]
+                        profile_form.datapoint_86 = row_[86]
+                        profile_form.datapoint_87 = row_[87]
+                        profile_form.datapoint_88 = row_[88]
+                        profile_form.datapoint_89 = row_[89]
+
+                        profile_form.datapoint_90 = row_[90]
+                        profile_form.datapoint_91 = row_[91]
+                        profile_form.datapoint_92 = row_[92]
+                        profile_form.datapoint_93 = row_[93]
+                        profile_form.datapoint_94 = row_[94]
+                        profile_form.datapoint_95 = row_[95]
+
+
+
+
+
+
+
 
         return render(request, 'desctop/succsespage/suucsespage.html')
 

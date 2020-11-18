@@ -32,8 +32,10 @@ def validate_date(date_text):
         ).split(" ")[0]
 
     except :
-
-        dtime = ""
+        try:
+            dtime = datetime.datetime.strptime(date_text, "%d/%m/%Y").strftime("%Y-%m-%d")
+        except:
+            dtime = ""
 
     return dtime
 

@@ -1,5 +1,6 @@
 import os
 import json
+import re
 import time
 
 import pandas as pd
@@ -64,7 +65,6 @@ class GoogleDrive:
     def data_from_jjson(self):
         self.table_ = self.json_data['changes']['firstchunk']
         for data in self.table_:
-            print('data', data)
             if 25813757 in data:
 
                 table_data = json.loads(data[1])
@@ -82,7 +82,6 @@ class GoogleDrive:
         data_list = []
         self.table_data = [["" for i in range(self.table_size[0])] for ii in range(self.table_size[1])]
 
-        print(self.table_data_list)
 
         for list_data in self.table_data_list:
             data = list_data[2][0]
@@ -167,4 +166,3 @@ class GoogleDrive:
 # gd.gog_drive_to_json()
 # gd.data_from_jjson()
 # gd.table_to_xls()
-

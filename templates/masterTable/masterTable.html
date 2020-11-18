@@ -1002,13 +1002,22 @@
                                      <button type="submit" class="btn btn-add btn-sm" disabled='true' id="buttonimportdata">Save</button>
                                  </form>
                                   <script>
+                                      function validGDurl(url_){
+                                          is_valid = url_.includes("https://docs.google.com/spreadsheets/d/");
+                                          return is_valid;
+                                      }
                                          function loadChecker(){
-                                             google_drive_url_file_DataForm = document.getElementById('google_drive_url_file_DataForm').value;
+                                             google_drive_url_DataForm = document.getElementById('google_drive_url_DataForm').value;
                                              google_drive_url_ProfileForm = document.getElementById('google_drive_url_ProfileForm').value;
                                              file_ProfileForm = document.getElementById('file_ProfileForm').value;
                                              file_DataForm = document.getElementById('file_DataForm').value;
 
-                                             if (google_drive_url_file_DataForm || google_drive_url_ProfileForm || file_ProfileForm || file_DataForm){
+                                             if (
+                                                 validGDurl(google_drive_url_DataForm)
+                                                 || validGDurl(google_drive_url_ProfileForm)
+                                                 || file_ProfileForm
+                                                 || file_DataForm
+                                             ){
                                                  document.getElementById('buttonimportdata').disabled = false;
 
                                              }else {
