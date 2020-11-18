@@ -1,3 +1,4 @@
+import datetime
 import os
 import json
 import re
@@ -9,7 +10,19 @@ from pprint import pprint
 import requests
 import bs4
 from requests.auth import HTTPBasicAuth
+def validate_date(date_text):
+    try:
+        dtime = str(datetime.datetime.strptime(
+            date_text, '%Y-%m-%d')
+        ).split(" ")[0]
 
+    except :
+        try:
+            dtime = datetime.datetime.strptime(date_text, "%d/%m/%Y").strftime("%Y-%m-%d")
+        except:
+            dtime = ""
+
+    return dtime
 
 
 class GoogleDrive:
@@ -166,3 +179,4 @@ class GoogleDrive:
 # gd.gog_drive_to_json()
 # gd.data_from_jjson()
 # gd.table_to_xls()
+
