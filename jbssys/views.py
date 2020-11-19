@@ -16,7 +16,13 @@ from .models import (
     Pacient,
     gen_aaaannnna,
     UserProfile,
-    User, ProfileFormTable, Drug, MedicalOperation,
+    User,
+    ProfileFormTable,
+    Drug,
+    MedicalOperation,
+    ChldPacientDurBreast,
+    RelationhipPacient,
+    Cancer, CancerHistory
 )
 import jbssys.validators as vaidator_data
 
@@ -911,26 +917,58 @@ def procces_pacient(record_list):
 
     return pacient_id
 
+def parse_datapoint_52(data):
+    return_data = []
+    datas = data.split('\n')
+    for n,data_ in enumerate(datas):
+        r = data_.split('[]:')[-1].split("months:")[-1].strip()
+        return_data.append([n+1,r])
+
+    return return_data
+
 def parse_operation(data):
     return_data = []
     datas = data.split('\n')
     for data_ in datas:
-        r = re.split(r"(\: \d\,)* unique\:\d\[\]\:", data_.replace('\n', ' '))
-        r = [r_i.replace(',','').replace(':','').strip()
-             for r_i in r
-             if type(r_i) == str and len(r_i
-                                         .replace(',','').replace(':','')
-                                         .strip()) >=3
-             ]
-        operation, date_ = r
-        date_ = vaidator_data.validate_date(date_)
+        r = data_.split(",")
+        r = [r_i.split(":")[-1].strip() for r_i in r]
 
-        return_data.append([operation,date_])
+
+        return_data.append(r)
 
 
 
 
     return return_data
+
+
+def parse_datapoint_62(data,size=0):
+    return_data = []
+    datas = data.split('\n')
+    print("datas", datas)
+
+    for data_ in datas:
+        r = data_.split(",")
+        r2 = [r_i.split(":")[-1].strip() for r_i in r]
+        if size != 0 and len(r2) > size:
+            try:
+                rl = []
+                for i in range(1, int(len(r2) / int(size) + 1)):
+                    print(i)
+                    r_l = r2[(i - 1) * size:i * size]
+                    print(r_l)
+                    return_data.append(r_l)
+            except:
+
+                r_l.append(len(size-r_l)*"")
+
+        else:
+            return_data.append(r2)
+
+    return return_data
+
+
+
 
 def parse_drugs(data):
     return_data = []
@@ -1048,7 +1086,30 @@ def master_table_view(request):
             for row_ in gg_drive_proccess1.table_data:
                 pacient_id = procces_pacient(row_[:8])
 
+
                 if pacient_id ==  None: continue
+
+
+                create_datetime = row_[0]
+
+                data_form, created = DataFormTable.objects.get_or_create(
+                    pacient=pacient_id,
+                    create_datetime=create_datetime
+                )
+                if created:
+
+                    data_form.datapoint_10 = row_[9]
+
+                    data_form.datapoint_11 = row_[10]
+                    data_form.datapoint_12 = row_[11]
+                    data_form.datapoint_13a = row_[12]
+                    data_form.datapoint_13b = row_[13]
+                    data_form.datapoint_14 = row_[14]
+                    data_form.datapoint_15 = row_[15]
+                    data_form.datapoint_16 = row_[16]
+                    data_form.datapoint_17 = row_[17]
+                    data_form.datapoint_18 = row_[18]
+                    data_form.datapoint_19 = row_[19]
 
 
 
@@ -1061,21 +1122,23 @@ def master_table_view(request):
             gg_drive_proccess2.request()
             gg_drive_proccess2.gog_drive_to_json()
             gg_drive_proccess2.data_from_jjson()
-            print('gg_drive_proccess2',gg_drive_proccess2.table_data)
+            # print('gg_drive_proccess2',gg_drive_proccess2.table_data)
 
             for row_ in gg_drive_proccess2.table_data:
                 pacient_id = procces_pacient(row_[:8])
-
+                print(row_)
                 if pacient_id == None: continue
                 else:
 
-                    create_datetime = row_[0]
+                    create_datetime = vaidator_data.validate_datetime(row_[0])
+
+
 
                     profile_form, created = ProfileFormTable.objects.get_or_create(
-                        pacient=pacient_id,
+                        pacient_id=pacient_id,
                         create_datetime=create_datetime
                     )
-                    if created:
+                    if profile_form:
                         profile_form.sex = row_[8]
                         profile_form.datapoint_10 = row_[9]
 
@@ -1089,7 +1152,7 @@ def master_table_view(request):
                         profile_form.datapoint_17 = row_[17]
                         profile_form.datapoint_18 = row_[18]
                         profile_form.datapoint_19 = row_[19]
-
+                        print(row_[19])
                         profile_form.datapoint_20 = row_[20]
                         profile_form.datapoint_21 = row_[21]
                         profile_form.datapoint_22 = row_[22]
@@ -1110,8 +1173,8 @@ def master_table_view(request):
                                     if created_dr1:
                                         drug.save()
                                     datapoint_29_list_id.append(drug)
-
-                            profile_form.datapoint_29.add(datapoint_29_list_id)
+                            print(datapoint_29_list_id)
+                            profile_form.datapoint_29.add(*datapoint_29_list_id)
 
                         datapoint_30 = row_[30]
                         if datapoint_30:
@@ -1119,34 +1182,39 @@ def master_table_view(request):
                             datapoint_30_list = parse_drugs(datapoint_30)
                             if datapoint_30_list:
                                 for datapoint_30_name in datapoint_30_list:
-                                    drug, created_dr2 = Drug.objects.get_or_create(name=datapoint_30_name)
+                                    drug1, created_dr2 = Drug.objects.get_or_create(name=datapoint_30_name)
                                     if created_dr2:
-                                        drug.save()
-                                    datapoint_30_list_id.append(drug)
+                                        drug1.save()
+                                    datapoint_30_list_id.append(drug1)
 
-                            profile_form.datapoint_30.add(datapoint_30_list_id)
+                            profile_form.datapoint_30.add(*datapoint_30_list_id)
 
                         datapoint_31 = row_[31]
 
                         if datapoint_31:
+                            print(datapoint_31)
                             datapoint_31_list_id = []
                             datapoint_31_list = parse_operation(datapoint_31)
                             if datapoint_31_list:
                                 for n,datapoint_31_vars in enumerate(datapoint_31_list):
+                                    print(datapoint_31_vars)
                                     operation, created_op = MedicalOperation.objects.get_or_create(
-                                        title=datapoint_31_vars[0],
-                                        date_operation=datapoint_31_vars[1],
-                                        num_operation=n
+                                        title=datapoint_31_vars[1],
+                                        date_operation=vaidator_data.validate_date(datapoint_31_vars[2]),
+                                        num_operation=datapoint_31_vars[0]
                                         )
                                     if created_op:
                                         operation.save()
                                     datapoint_31_list_id.append(operation)
 
-                            profile_form.datapoint_31.add(datapoint_31_list_id)
+                            profile_form.datapoint_31.add(*datapoint_31_list_id)
 
 
                         profile_form.datapoint_32 = row_[32]
-                        profile_form.datapoint_33 = row_[33]
+
+                        datapoint_33 = row_[33]
+                        datapoint_33 = vaidator_data.validate_date(datapoint_33) if vaidator_data.validate_date(datapoint_33) else None
+                        profile_form.datapoint_33 = datapoint_33
                         profile_form.datapoint_34 = row_[34]
                         profile_form.datapoint_35 = row_[35]
                         profile_form.datapoint_36 = row_[36]
@@ -1169,7 +1237,25 @@ def master_table_view(request):
                         profile_form.datapoint_51 = row_[51]
 
 
-                        profile_form.datapoint_52 = row_[52]
+                        datapoint_52 = row_[52]
+
+                        if datapoint_52:
+                            datapoint_52_list_id = []
+                            datapoint_52_list = parse_datapoint_52(datapoint_52)
+                            if datapoint_52_list:
+                                for n,datapoint_52_vars in enumerate(datapoint_52_list):
+                                    chldPacientDurBreast, created_chld = ChldPacientDurBreast.objects.get_or_create(
+                                        num_child=int(datapoint_52_vars[0]),
+                                        period_months=int(datapoint_52_vars[1]),
+                                        )
+                                    if created_chld:
+                                        chldPacientDurBreast.save()
+                                    datapoint_52_list_id.append(chldPacientDurBreast)
+
+                            profile_form.datapoint_52.add(*datapoint_52_list_id)
+
+
+
                         profile_form.datapoint_53 = row_[53]
                         profile_form.datapoint_54 = row_[54]
                         profile_form.datapoint_55 = row_[55]
@@ -1180,11 +1266,74 @@ def master_table_view(request):
 
                         profile_form.datapoint_60 = row_[60]
                         profile_form.datapoint_61 = row_[61]
-                        profile_form.datapoint_62 = row_[62]
+
+                        datapoint_62 = row_[62]
+                        if datapoint_62:
+                            datapoint_62_list_id = []
+                            datapoint_62_list = parse_datapoint_62(datapoint_62,4)
+                            if datapoint_62_list:
+                                for n,datapoint_62_vars in enumerate(datapoint_62_list):
+                                    print("datapoint_62_vars",datapoint_62_vars)
+                                    cancer_,cancer_new = Cancer.objects.get_or_create(title=datapoint_62_vars[1])
+                                    print(cancer_)
+                                    chldPacientDurBreast, created_chld = RelationhipPacient.objects.get_or_create(
+                                        type_cancer=cancer_,
+                                        relation=datapoint_62_vars[0],
+                                        age_diagnise=int(datapoint_62_vars[2]),
+                                        position_cancer=datapoint_62_vars[3]
+                                        )
+                                    if created_chld:
+                                        chldPacientDurBreast.save()
+                                    datapoint_62_list_id.append(chldPacientDurBreast)
+
+                            profile_form.datapoint_62.add(*datapoint_62_list_id)
+
+
+
                         profile_form.datapoint_63 = row_[63]
-                        profile_form.datapoint_64 = row_[64]
+
+                        datapoint_64 = row_[64]
+                        if datapoint_64:
+                            datapoint_64_list_id = []
+                            datapoint_64_list = parse_datapoint_62(datapoint_64,3)
+                            if datapoint_64_list:
+                                for n, datapoint_64_vars in enumerate(datapoint_64_list):
+
+                                    cancer,cr_cancer = Cancer.objects.get_or_create(title=datapoint_64_vars[1])
+                                    chldPacientDurBreast, created_chld = RelationhipPacient.objects.get_or_create(
+                                        type_cancer=cancer,
+                                        relation=datapoint_64_vars[0],
+                                        age_diagnise=int(datapoint_64_vars[2]),
+                                    )
+                                    if created_chld:
+                                        chldPacientDurBreast.save()
+                                    datapoint_64_list_id.append(chldPacientDurBreast)
+
+                            profile_form.datapoint_64.add(*datapoint_64_list_id)
+
+
                         profile_form.datapoint_65 = row_[65]
-                        profile_form.datapoint_66 = row_[66]
+
+                        datapoint_66 = row_[66]
+                        if datapoint_66:
+                            datapoint_66_list_id = []
+                            datapoint_66_list = parse_datapoint_62(datapoint_66)
+                            if datapoint_66_list:
+                                for n, datapoint_66_vars in enumerate(datapoint_66_list):
+
+                                    cancer,create_cancer = Cancer.objects.get_or_create(title=datapoint_66_vars[1])
+                                    cancer_h, create_cancer_h = CancerHistory.objects.get_or_create(
+                                        cancer=cancer,
+                                        date_detect=vaidator_data.validate_date(datapoint_66_vars[2])
+                                    )
+
+                                    if create_cancer_h:
+                                        cancer_h.save()
+                                    datapoint_66_list_id.append(cancer_h)
+
+                            profile_form.datapoint_66.add(*datapoint_66_list_id)
+
+
                         profile_form.datapoint_67 = row_[67]
                         profile_form.datapoint_68 = row_[68]
                         profile_form.datapoint_69 = row_[69]
@@ -1197,7 +1346,7 @@ def master_table_view(request):
                         profile_form.datapoint_75 = row_[75]
                         profile_form.datapoint_76 = row_[76]
                         profile_form.datapoint_77 = row_[77]
-                        profile_form.datapoint_78 = row_[78]
+                        profile_form.atapoint_78 = row_[78]
                         profile_form.datapoint_79 = row_[79]
 
                         profile_form.datapoint_80 = row_[80]
@@ -1218,7 +1367,13 @@ def master_table_view(request):
                         profile_form.datapoint_94 = row_[94]
                         profile_form.datapoint_95 = row_[95]
 
-
+                    profile_form.save()
+                    data_form, data_form_new = DataFormTable.objects.get_or_create(
+                        pacient_id=pacient_id,
+                        profile_data=profile_form,
+                        create_datetime=create_datetime
+                    )
+                    data_form.save()
 
 
 

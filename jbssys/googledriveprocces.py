@@ -153,7 +153,7 @@ class GoogleDrive:
             sub_data = []
             for sub_element in element:
                 try:
-                    sub_data.append(sub_element.get_text())
+                    sub_data.append(sub_element.get_text(separator="\n"))
                 except:
                     continue
             self.table_data.append(sub_data[1:])
@@ -180,3 +180,50 @@ class GoogleDrive:
 # gd.data_from_jjson()
 # gd.table_to_xls()
 
+# def parse_datapoint_62(data):
+#     return_data = []
+#     datas = data.split('\n')
+#     for n,data_ in enumerate(datas):
+#         r = data_.split(',')#.split('[]:')[-1].split("months:")[-1].strip()
+#         r = [s.split(": ")[-1] for s in r]
+#         print(r)
+#         return_data.append(r)
+#
+#     return return_data
+# data = """Sl No: 2, Dropdown: benign findings, Calendar: 01/01/1951"""
+#
+# print(parse_datapoint_62(data))
+
+# def parse_operation(data,size=0):
+#     return_data = []
+#     print("data",data)
+#     datas = data.split('\n')
+#     print("datas", datas)
+#
+#     for data_ in datas:
+#         print("data_",data_)
+#         r = data_.split(",")
+#         print("r",r)
+#         r2 = [r_i.split(":")[-1] for r_i in r]
+#         if size != 0 and len(r2)>size:
+#             try:
+#                 for i in range(1,int(len(r2)/int(size)+1)):
+#                     print(i)
+#                     r_l = r2[(i-1)*size:i*size]
+#                     print(r_l)
+#                     return_data.append(r_l)
+#             except:
+#                 break
+#
+#         else:
+#             return_data.append(r2)
+#
+#
+#
+#
+#     return return_data
+#
+# data = """Relationship: father, Type of cancer: breast cancer, Age at cancer diagnosis: 23, Was it on both sides?: one side
+# Relationship: mother, Type of cancer: ovarian cancer, Age at cancer diagnosis: 23, Was it on both sides?: both sides"""
+#
+# print(parse_operation(data,3))

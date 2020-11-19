@@ -135,9 +135,15 @@ class ChldPacientDurBreast(models.Model):
 
     num_child = models.IntegerField("numc child", validators=[
         MaxValueValidator(20),
-        MinValueValidator(1)
+        MinValueValidator(0)
     ],
-        default="1")
+        default="0")
+
+    period_months = models.IntegerField("period months", validators=[
+        MaxValueValidator(36),
+        MinValueValidator(0)
+    ],
+                                    default="0")
 
 
 class RelationhipPacient(models.Model):
@@ -174,8 +180,8 @@ class RelationhipPacient(models.Model):
 class Drug(models.Model):
     is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
 
-    title = models.CharField('Title', max_length=150, null=True, blank=True)
-    name = models.CharField('Name', max_length=150, null=True, blank=True)
+    title = models.CharField('Title', max_length=300, null=True, blank=True)
+    name = models.CharField('Name', max_length=300, null=True, blank=True)
     description = models.TextField(
         null=True, blank=True,
         max_length=2500,
@@ -209,7 +215,7 @@ class MedicalOperation(models.Model):
 
 class Pacient(models.Model):
     first_name = models.CharField('first name', max_length=30, blank=True)
-    last_name = models.CharField('last name', max_length=150, blank=True, default='')
+    last_name = models.CharField('last name', max_length=300, blank=True, default='')
 
     email = models.EmailField('email address', blank=True)
 
@@ -245,7 +251,7 @@ class Pacient(models.Model):
     
 
 class ProfileFormTable(models.Model):
-    create_datetime = models.DateTimeField("create datetime", auto_now_add=True)
+    create_datetime = models.DateTimeField("create datetime",default=None, blank=True, null=True)
     nsh_id_gdisk = models.CharField(
         'nsh id gdisk',
         max_length=25,
@@ -310,65 +316,65 @@ class ProfileFormTable(models.Model):
                                      default='')
     datapoint_16 = models.TextField(
                                     null=True, blank=True,
-                                   max_length=1500,
+                                   max_length=3000,
                                    default='')
     datapoint_17 = models.TextField(
                                     null=True, blank=True,
-                                   max_length=1500,
+                                   max_length=3000,
                                    default='')
 
     datapoint_18 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_19 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
     datapoint_20 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_21 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_22 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_23 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_24 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_25 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_26 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_27 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_28 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_29 = models.ManyToManyField(Drug,related_name="Drug1")
@@ -383,7 +389,7 @@ class ProfileFormTable(models.Model):
 
     datapoint_32 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_33 = models.DateField("Datapoin 33",default=None,blank=True,null=True)
@@ -449,7 +455,7 @@ class ProfileFormTable(models.Model):
 
     datapoint_40 = models.TextField(
         null=True, blank=True,
-        max_length=1500,
+        max_length=3000,
         default='')
 
     datapoint_41 = models.CharField(max_length=15,
@@ -547,7 +553,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_54 = models.CharField(
-        max_length=10,
+        max_length=50,
         choices=(
             ('Couple of days', 'Couple of days'),
             ('Couple of weeks', 'Couple of weeks'),
@@ -598,7 +604,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_59 = models.CharField(
-        max_length=10,
+        max_length=50,
         choices=(
             ('Couple of days', 'Couple of days'),
             ('Couple of weeks', 'Couple of weeks'),
@@ -739,7 +745,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_75 = models.CharField(
-        max_length=10,
+        max_length=50,
         choices=(
             ('Help Bathing', 'Help Bathing'),
             ('Help Dressing', 'Help Dressing'),
@@ -771,7 +777,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_77 = models.CharField(
-        max_length=10,
+        max_length=70,
         choices=(
             ('Yes, less than 3 days a week', 'Yes, less than 3 days a week'),
             ('Yes, at least 3 days a week', 'Yes, at least 3 days a week'),
@@ -873,7 +879,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_87 = models.CharField(
-        max_length=50,
+        max_length=70,
         choices=(
             ('Lost more than 10 lbs in last year', 'Lost more than 10 lbs in last year'),
             ('Cut down on Usual Activity (in last month)', 'Cut down on Usual Activity (in last month)'),
@@ -889,7 +895,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_88 = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=(
             ('Most times', 'Most times'),
             ('Sometimes', 'Sometimes'),
@@ -901,7 +907,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_89 = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=(
             ('Most times', 'Most times'),
             ('Sometimes', 'Sometimes'),
@@ -913,7 +919,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_90 = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=(
             ('Most times', 'Most times'),
             ('Sometimes', 'Sometimes'),
@@ -925,7 +931,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_91 = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=(
             ('Most times', 'Most times'),
             ('Sometimes', 'Sometimes'),
@@ -937,7 +943,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_92 = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=(
             ('Most times', 'Most times'),
             ('Sometimes', 'Sometimes'),
@@ -949,7 +955,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_93 = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=(
             ('Worse', 'Worse'),
             ('Same', 'Same'),
@@ -961,7 +967,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_94 = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=(
             ('Poor', 'Poor'),
             ('Fair', 'Fair'),
@@ -974,8 +980,8 @@ class ProfileFormTable(models.Model):
         default=''
     )
 
-    datapoint_95 = models.TextField("datapoint 94",
-                                   max_length=1500,
+    datapoint_95 = models.TextField("datapoint 95",
+                                   max_length=3000,
                                    default='')
 
 
@@ -983,7 +989,7 @@ class ProfileFormTable(models.Model):
 
 class DataFormTable(models.Model):
     "DEFAULT USE storename as username casser"
-    create_datetime = models.DateTimeField("create datetime", auto_now_add=True)
+    create_datetime = models.DateTimeField("create datetime", null=True,default=None,blank=True)
     is_hide = models.BooleanField("is hide",null=True,blank=True,default=False)
 
     pacient = models.ForeignKey(Pacient,related_name="PacientDataForm",on_delete=models.PROTECT)
@@ -991,7 +997,7 @@ class DataFormTable(models.Model):
     profile_data = models.ForeignKey(ProfileFormTable,related_name="PacientDataProfileForm",on_delete=models.PROTECT)
 
     datapoint_7 = models.TextField("Screener",
-                                max_length=1500,
+                                max_length=3000,
                               default='')
 
     datapoint_8 = models.CharField(
@@ -1003,80 +1009,80 @@ class DataFormTable(models.Model):
         ),
         default=''
     )
-    datapoint_9 = models.CharField(max_length=15,
-                                  choices=(('RL', 'Right & left'),
-                                           ('R', 'Right'),
-                                           ('L', 'Left'),
-                                           ('', 'Null'),
+    datapoint_9 = models.CharField(max_length=25,
+                                  choices=(('Right & left', 'Right & left'),
+                                           ('Right', 'Right'),
+                                           ('Left', 'Left'),
+                                           ('', ''),
                                            ),
                                   default='')
 
 
 
     datapoint_10 = models.CharField(max_length=45,
-                                  choices=(('UpOutPir', 'Upper - outer peripheral'),
-                                           ('UpInPir', 'Upper - inner peripheral'),
-                                           ('LowInPir', 'Lower - inner peripheral'),
-                                           ('LowOutPir', 'Lower - outer peripheral'),
-                                           ('UpOutCntr', 'Upper - outer central'),
-                                           ('UpInCntr', 'Upper - inner central'),
-                                           ('LowInCntr', 'Lower - inner central'),
-                                           ('LowOutCntr', 'Lower - outer central'),
-                                           ('LowOutCntr', 'Areola'),
-                                           ('LowOutCntr', 'Nipple'),
-                                           ('', 'Null'),
+                                  choices=(('Upper - outer peripheral', 'Upper - outer peripheral'),
+                                           ('Upper - inner peripheral', 'Upper - inner peripheral'),
+                                           ('Lower - inner peripheral', 'Lower - inner peripheral'),
+                                           ('Lower - outer peripheral', 'Lower - outer peripheral'),
+                                           ('Upper - outer central'   , 'Upper - outer central'   ),
+                                           ('Upper - inner central'   , 'Upper - inner central'   ),
+                                           ('Lower - inner central'   , 'Lower - inner central'   ),
+                                           ('Lower - outer central'   , 'Lower - outer central'   ),
+                                           ('Areola'                  , 'Areola'                  ),
+                                           ('Nipple'                  , 'Nipple'                  ),
+                                           ( ''                       ,  ''                       ),
                                            ),
                                   default='')
 
     datapoint_11 = models.CharField(max_length=45,
-                                  choices=(('UpOutPir', 'Upper - outer peripheral'),
-                                           ('UpInPir', 'Upper - inner peripheral'),
-                                           ('LowInPir', 'Lower - inner peripheral'),
-                                           ('LowOutPir', 'Lower - outer peripheral'),
-                                           ('UpOutCntr', 'Upper - outer central'),
-                                           ('UpInCntr', 'Upper - inner central'),
-                                           ('LowInCntr', 'Lower - inner central'),
-                                           ('LowOutCntr', 'Lower - outer central'),
-                                           ('LowOutCntr', 'Areola'),
-                                           ('LowOutCntr', 'Nipple'),
-                                           ('', 'Null'),
-                                           ),
+                                    choices=(('Upper - outer peripheral', 'Upper - outer peripheral'),
+                                             ('Upper - inner peripheral', 'Upper - inner peripheral'),
+                                             ('Lower - inner peripheral', 'Lower - inner peripheral'),
+                                             ('Lower - outer peripheral', 'Lower - outer peripheral'),
+                                             ('Upper - outer central', 'Upper - outer central'),
+                                             ('Upper - inner central', 'Upper - inner central'),
+                                             ('Lower - inner central', 'Lower - inner central'),
+                                             ('Lower - outer central', 'Lower - outer central'),
+                                             ('Areola', 'Areola'),
+                                             ('Nipple', 'Nipple'),
+                                             ('', ''),
+                                             ),
                                   default='')
 
     datapoint_12 = models.CharField(max_length=15,
-                              choices=(('pea', 'Pea'),
-                                       ('peanut', 'Peanut'),
-                                       ('grape', 'Grape'),
-                                       ('walnut', 'Walnut'),
-                                       ('lemon', 'Lemon'),
-                                       ('egg', 'Egg'),
-                                       ('peach', 'Peach'),
-                                       ('grapefruit', 'Grapefruit'),
-                                       ('','Null'),
+                              choices=(('Pea'       , 'Pea'       ),
+                                       ('Peanut'    , 'Peanut'    ),
+                                       ('Grape'     , 'Grape'     ),
+                                       ('Walnut'    , 'Walnut'    ),
+                                       ('Lemon'     , 'Lemon'     ),
+                                       ('Egg'       , 'Egg'       ),
+                                       ('Peach'     , 'Peach'     ),
+                                       ('Grapefruit', 'Grapefruit'),
+                                       (''          , ''          ),
                                        ),
                               default='')
 
 
 
-    datapoint_13 = models.CharField(max_length=15,
-                              choices=(('couplDay', 'Couple of days ago'),
-                                       ('couplWeeks', 'Couple of weeks ago'),
-                                       ('fevgWeeks', 'Few weeks ago'),
-                                       ('couplMont', 'Couple of months ago'),
-                                       ('fevMont', 'Few months ago'),
-                                       ('Year', 'A year ago'),
-                                       ('couplYear', 'Couple of years ago'),
-                                       ('manyYear', 'Many years ago'),
-                                       ('','Null'),
+    datapoint_13 = models.CharField(max_length=25,
+                              choices=(('Couple of days ago',    'Couple of days ago'),
+                                       ('Couple of weeks ago',   'Couple of weeks ago'),
+                                       ('Few weeks ago',         'Few weeks ago'),
+                                       ('Couple of months ago',  'Couple of months ago'),
+                                       ('Few months ago',        'Few months ago'),
+                                       ('A year ago',            'A year ago'),
+                                       ('Couple of years ago',   'Couple of years ago'),
+                                       ('Many years ago',        'Many years ago'),
+                                       ('',                      ''),
                                        ),
                               default='')
 
-    datapoint_14 = models.CharField(max_length=15,
-                              choices=(('slowGrow', 'slowing growing'),
-                                       ('slowGrow', 'rapidly growing'),
-                                       ('remainSize', 'remained same in size'),
-                                       ('decrSize', 'decreased in size'),
-                                       ('','Null'),
+    datapoint_14 = models.CharField(max_length=25,
+                              choices=(('slowing growing',        'slowing growing'),
+                                       ('rapidly growing',        'rapidly growing'),
+                                       ('remained same in size',  'remained same in size'),
+                                       ('decreased in size',      'decreased in size'),
+                                       ('',                       ''),
                                        ),
                               default='')
 
@@ -1104,8 +1110,8 @@ class DataFormTable(models.Model):
                               choices=(('1', '1'),
                                        ('2', '2'),
                                        ('3', '3'),
-                                       ('4', '4 or more'),
-                                       ('0','Null'),
+                                       ('4 or more', '4 or more'),
+                                       ('',''),
                                        ),
                               default='')
 
@@ -1113,17 +1119,17 @@ class DataFormTable(models.Model):
                                       choices=(('1', '1'),
                                                ('2', '2'),
                                                ('3', '3'),
-                                               ('4', '4 or more'),
-                                               ('0', 'Null'),
+                                               ('4 or more', '4 or more'),
+                                               ('', ''),
                                                ),
                                       default='')
 
 
-    datapoint_17 = models.CharField(max_length=15,
-                                      choices=(('S', 'Soft'),
-                                               ('F', 'Firm'),
-                                               ('H', 'Hard'),
-                                               ('N', 'Dont know'),
+    datapoint_17 = models.CharField(max_length=25,
+                                      choices=(('Soft', 'Soft'),
+                                               ('Firm', 'Firm'),
+                                               ('Hard', 'Hard'),
+                                               ('Dont know', 'Dont know'),
                                                ('', 'Dont know'),
                                                ),
                                       default='')
@@ -1158,19 +1164,19 @@ class DataFormTable(models.Model):
 
 
 
-    datapoint_21 = models.CharField(max_length=15,
-                                      choices=(('1m', 'less than one month'),
-                                               ('2-3m', '2 - 3 months'),
-                                               ('3-6m', '3-6 months'),
-                                               ('6-12m', '6-12 months'),
-                                               ('1y', 'more than 1 year'),
+    datapoint_21 = models.CharField(max_length=35,
+                                      choices=(('less than one month', 'less than one month'),
+                                               ('2 - 3 months', '2 - 3 months'),
+                                               ('3-6 months', '3-6 months'),
+                                               ('6-12 months', '6-12 months'),
+                                               ('more than 1 year', 'more than 1 year'),
                                                ('', ''),
                                                ),
                                       default='')
 
-    datapoint_22 = models.CharField(max_length=15,
-                                    choices=(('<5%', '<5% of weight'),
-                                             ('>5%', '>5% of weight'),
+    datapoint_22 = models.CharField(max_length=25,
+                                    choices=(('<5% of weight', '<5% of weight'),
+                                             ('>5% of weight', '>5% of weight'),
                                              ('', ''),
                                              ),
                                     default='')
@@ -1202,9 +1208,9 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_27 = models.CharField(max_length=35,
-                                    choices=(('RLarpit', 'Right & left armpit'),
-                                             ('Rarpit', 'Right armpit'),
-                                             ('Larpit', 'Left armpit'),
+                                    choices=(('Right & left armpit', 'Right & left armpit'),
+                                             ('Right armpit', 'Right armpit'),
+                                             ('Left armpit', 'Left armpit'),
                                              ('', ''),
                                              ),
                                     default='')
@@ -1226,24 +1232,24 @@ class DataFormTable(models.Model):
         ),
         default=''
     )
-    datapoint_31 = models.CharField(max_length=15,
-                              choices=(('pea', 'Pea'),
-                                       ('peanut', 'Peanut'),
-                                       ('grape', 'Grape'),
-                                       ('walnut', 'Walnut'),
-                                       ('lemon', 'Lemon'),
-                                       ('egg', 'Egg'),
-                                       ('peach', 'Peach'),
-                                       ('grapefruit', 'Grapefruit'),
-                                       ('','Null'),
-                                       ),
+    datapoint_31 = models.CharField(max_length=25,
+                                    choices=(('Pea', 'Pea'),
+                                             ('Peanut', 'Peanut'),
+                                             ('Grape', 'Grape'),
+                                             ('Walnut', 'Walnut'),
+                                             ('Lemon', 'Lemon'),
+                                             ('Egg', 'Egg'),
+                                             ('Peach', 'Peach'),
+                                             ('Grapefruit', 'Grapefruit'),
+                                             ('', ''),
+                                             ),
                               default='')
 
     datapoint_32 = models.CharField(max_length=15,
-                                    choices=(('S', 'Soft'),
-                                             ('F', 'Firm'),
-                                             ('H', 'Hard'),
-                                             ('N', 'Dont know'),
+                                    choices=(('Soft', 'Soft'),
+                                             ('Firm', 'Firm'),
+                                             ('Hard', 'Hard'),
+                                             ('Dont know', 'Dont know'),
                                              ('', 'Dont know'),
                                              ),
                                     default='')
@@ -1345,27 +1351,27 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_40 = models.CharField(max_length=15,
-                              choices=(('couplDay', 'Couple of days ago'),
-                                       ('couplWeeks', 'Couple of weeks ago'),
-                                       ('fevgWeeks', 'Few weeks ago'),
-                                       ('couplMont', 'Couple of months ago'),
-                                       ('fevMont', 'Few months ago'),
-                                       ('Year', 'A year ago'),
-                                       ('couplYear', 'Couple of years ago'),
-                                       ('manyYear', 'Many years ago'),
-                                       ('','Null'),
-                                       ),
+    datapoint_40 = models.CharField(max_length=45,
+                                    choices=(('Couple of days ago', 'Couple of days ago'),
+                                             ('Couple of weeks ago', 'Couple of weeks ago'),
+                                             ('Few weeks ago', 'Few weeks ago'),
+                                             ('Couple of months ago', 'Couple of months ago'),
+                                             ('Few months ago', 'Few months ago'),
+                                             ('A year ago', 'A year ago'),
+                                             ('Couple of years ago', 'Couple of years ago'),
+                                             ('Many years ago', 'Many years ago'),
+                                             ('', ''),
+                                             ),
                               default='')
 
 
-    datapoint_41 = models.CharField(max_length=15,
-                              choices=(('slowGrow', 'slowing growing'),
-                                       ('slowGrow', 'rapidly growing'),
-                                       ('remainSize', 'remained same in size'),
-                                       ('decrSize', 'decreased in size'),
-                                       ('','Null'),
-                                       ),
+    datapoint_41 = models.CharField(max_length=35,
+                                    choices=(('slowing growing', 'slowing growing'),
+                                             ('rapidly growing', 'rapidly growing'),
+                                             ('remained same in size', 'remained same in size'),
+                                             ('decreased in size', 'decreased in size'),
+                                             ('', ''),
+                                             ),
                               default='')
 
     datapoint_42 = models.CharField(
@@ -1434,44 +1440,44 @@ class DataFormTable(models.Model):
         ),
         default=''
     )
-    datapoint_51 = models.CharField(max_length=15,
-                                    choices=(('couplDay', 'Couple of days ago'),
-                                             ('couplWeeks', 'Couple of weeks ago'),
-                                             ('fevgWeeks', 'Few weeks ago'),
-                                             ('couplMont', 'Couple of months ago'),
-                                             ('fevMont', 'Few months ago'),
-                                             ('Year', 'A year ago'),
-                                             ('couplYear', 'Couple of years ago'),
-                                             ('manyYear', 'Many years ago'),
-                                             ('', 'Null'),
-                                             ),
-                                    default='')
-
-    datapoint_52 = models.CharField(max_length=15,
-                                    choices=(('green', 'Green'),
-                                             ('watery', 'Watery'),
-                                             ('white', 'White'),
-                                             ('bloodstained', 'Blood Stained'),
-                                             ('brownish', 'Brownish'),
-                                             ('serous', 'Serous'),
-                                             ('pus', 'Pus'),
-                                             ('yellow', 'Yellow'),
+    datapoint_51 = models.CharField(max_length=45,
+                                    choices=(('Couple of days ago', 'Couple of days ago'),
+                                             ('Couple of weeks ago', 'Couple of weeks ago'),
+                                             ('Few weeks ago', 'Few weeks ago'),
+                                             ('Couple of months ago', 'Couple of months ago'),
+                                             ('Few months ago', 'Few months ago'),
+                                             ('A year ago', 'A year ago'),
+                                             ('Couple of years ago', 'Couple of years ago'),
+                                             ('Many years ago', 'Many years ago'),
                                              ('', ''),
                                              ),
                                     default='')
 
-    datapoint_53 = models.CharField(max_length=15,
-                                  choices=(('RL', 'Right & left'),
-                                           ('R', 'Right'),
-                                           ('L', 'Left'),
-                                           ('', 'Null'),
+    datapoint_52 = models.CharField(max_length=25,
+                                    choices=(('Green', 'Green'),
+                                             ('Watery', 'Watery'),
+                                             ('White', 'White'),
+                                             ('Blood Stained', 'Blood Stained'),
+                                             ('Brownish', 'Brownish'),
+                                             ('Serous', 'Serous'),
+                                             ('Pus', 'Pus'),
+                                             ('Yellow', 'Yellow'),
+                                             ('', ''),
+                                             ),
+                                    default='')
+
+    datapoint_53 = models.CharField(max_length=25,
+                                  choices=(('Right & left', 'Right & left'),
+                                           ('Right', 'Right'),
+                                           ('Left', 'Left'),
+                                           ('', ''),
                                            ),
                                   default='')
 
-    datapoint_54 = models.CharField(max_length=15,
-                                    choices=(('onespot', 'One spot'),
-                                             ('manyspots', 'Many spots'),
-                                             ('', 'Null'),
+    datapoint_54 = models.CharField(max_length=25,
+                                    choices=(('One spot', 'One spot'),
+                                             ('Many spots', 'Many spots'),
+                                             ('', ''),
                                              ),
                                     default='')
 
@@ -1566,11 +1572,11 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_65 = models.CharField(max_length=15,
-                                    choices=(('RL', 'Right & left'),
-                                             ('R', 'Right'),
-                                             ('L', 'Left'),
-                                             ('', 'Null'),
+    datapoint_65 = models.CharField(max_length=25,
+                                    choices=(('Right & left', 'Right & left'),
+                                             ('Right', 'Right'),
+                                             ('Left', 'Left'),
+                                             ('', ''),
                                              ),
                                     default='')
 
@@ -1584,26 +1590,26 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_67 = models.CharField(max_length=15,
-                                    choices=(('1', 'Less than a quarter'),
-                                             ('2', 'More than a quarter but less than half'),
-                                             ('3', 'More than half of breast'),
-                                             ('4', 'Whole breast'),
-                                             ('', 'Null'),
+    datapoint_67 = models.CharField(max_length=35,
+                                    choices=(('Less than a quarter', 'Less than a quarter'),
+                                             ('More than a quarter but less than half', 'More than a quarter but less than half'),
+                                             ('More than half of breast', 'More than half of breast'),
+                                             ('Whole breast', 'Whole breast'),
+                                             ('', ''),
                                              ),
                                     default='')
 
-    datapoint_68 = models.CharField(max_length=15,
-                             choices=(('couplDay', 'Couple of days ago'),
-                                      ('couplWeeks', 'Couple of weeks ago'),
-                                      ('fevgWeeks', 'Few weeks ago'),
-                                      ('couplMont', 'Couple of months ago'),
-                                      ('fevMont', 'Few months ago'),
-                                      ('Year', 'A year ago'),
-                                      ('couplYear', 'Couple of years ago'),
-                                      ('manyYear', 'Many years ago'),
-                                      ('', 'Null'),
-                                      ),
+    datapoint_68 = models.CharField(max_length=35,
+                                    choices=(('Couple of days ago', 'Couple of days ago'),
+                                             ('Couple of weeks ago', 'Couple of weeks ago'),
+                                             ('Few weeks ago', 'Few weeks ago'),
+                                             ('Couple of months ago', 'Couple of months ago'),
+                                             ('Few months ago', 'Few months ago'),
+                                             ('A year ago', 'A year ago'),
+                                             ('Couple of years ago', 'Couple of years ago'),
+                                             ('Many years ago', 'Many years ago'),
+                                             ('', ''),
+                                             ),
                              default='')
 
     datapoint_69 = models.CharField(
@@ -1634,24 +1640,24 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_72 = models.CharField(max_length=15,
-                                    choices=(('RL', 'Right & left'),
-                                             ('R', 'Right'),
-                                             ('L', 'Left'),
-                                             ('', 'Null'),
+    datapoint_72 = models.CharField(max_length=25,
+                                    choices=(('Right & left', 'Right & left'),
+                                             ('Right', 'Right'),
+                                             ('Left', 'Left'),
+                                             ('', ''),
                                              ),
                                     default='')
 
-    datapoint_73 = models.CharField(max_length=15,
-                                    choices=(('couplDay', 'Couple of days ago'),
-                                             ('couplWeeks', 'Couple of weeks ago'),
-                                             ('fevgWeeks', 'Few weeks ago'),
-                                             ('couplMont', 'Couple of months ago'),
-                                             ('fevMont', 'Few months ago'),
-                                             ('Year', 'A year ago'),
-                                             ('couplYear', 'Couple of years ago'),
-                                             ('manyYear', 'Many years ago'),
-                                             ('', 'Null'),
+    datapoint_73 = models.CharField(max_length=35,
+                                    choices=(('Couple of days ago', 'Couple of days ago'),
+                                             ('Couple of weeks ago', 'Couple of weeks ago'),
+                                             ('Few weeks ago', 'Few weeks ago'),
+                                             ('Couple of months ago', 'Couple of months ago'),
+                                             ('Few months ago', 'Few months ago'),
+                                             ('A year ago', 'A year ago'),
+                                             ('Couple of years ago', 'Couple of years ago'),
+                                             ('Many years ago', 'Many years ago'),
+                                             ('', ''),
                                              ),
                                     default='')
 
@@ -1748,32 +1754,32 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_84 = models.CharField(max_length=15,
-                                    choices=(('RL', 'Right & left'),
-                                             ('R', 'Right'),
-                                             ('L', 'Left'),
-                                             ('', 'Null'),
+    datapoint_84 = models.CharField(max_length=25,
+                                    choices=(('Right & left', 'Right & left'),
+                                             ('Right', 'Right'),
+                                             ('Left', 'Left'),
+                                             ('', ''),
                                              ),
                                     default='')
 
-    datapoint_85 = models.CharField(max_length=15,
-                                    choices=(('couplDay', 'Couple of days ago'),
-                                             ('couplWeeks', 'Couple of weeks ago'),
-                                             ('fevgWeeks', 'Few weeks ago'),
-                                             ('couplMont', 'Couple of months ago'),
-                                             ('fevMont', 'Few months ago'),
-                                             ('Year', 'A year ago'),
-                                             ('couplYear', 'Couple of years ago'),
-                                             ('manyYear', 'Many years ago'),
-                                             ('', 'Null'),
+    datapoint_85 = models.CharField(max_length=25,
+                                    choices=(('Couple of days ago', 'Couple of days ago'),
+                                             ('Couple of weeks ago', 'Couple of weeks ago'),
+                                             ('Few weeks ago', 'Few weeks ago'),
+                                             ('Couple of months ago', 'Couple of months ago'),
+                                             ('Few months ago', 'Few months ago'),
+                                             ('A year ago', 'A year ago'),
+                                             ('Couple of years ago', 'Couple of years ago'),
+                                             ('Many years ago', 'Many years ago'),
+                                             ('', ''),
                                              ),
                                     default='')
 
-    datapoint_86 = models.CharField(max_length=15,
-                                    choices=(('1', 'Rapidly progressing'),
-                                             ('2', 'Slowly progressing'),
-                                             ('3', 'No change'),
-                                             ('4', 'Getting better'),
+    datapoint_86 = models.CharField(max_length=25,
+                                    choices=(('Rapidly progressing', 'Rapidly progressing'),
+                                             ('Slowly progressing', 'Slowly progressing'),
+                                             ('No change', 'No change'),
+                                             ('Getting better', 'Getting better'),
                                              ('', ''),
                                              ),
                                     default='')
@@ -1822,33 +1828,33 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_92 = models.CharField(max_length=15,
-                                    choices=(('couplDay', 'Couple of days ago'),
-                                             ('couplWeeks', 'Couple of weeks ago'),
-                                             ('fevgWeeks', 'Few weeks ago'),
-                                             ('couplMont', 'Couple of months ago'),
-                                             ('fevMont', 'Few months ago'),
-                                             ('Year', 'A year ago'),
-                                             ('couplYear', 'Couple of years ago'),
-                                             ('manyYear', 'Many years ago'),
-                                             ('', 'Null'),
+    datapoint_92 = models.CharField(max_length=25,
+                                    choices=(('Couple of days ago', 'Couple of days ago'),
+                                             ('Couple of weeks ago', 'Couple of weeks ago'),
+                                             ('Few weeks ago', 'Few weeks ago'),
+                                             ('Couple of months ago', 'Couple of months ago'),
+                                             ('Few months ago', 'Few months ago'),
+                                             ('A year ago', 'A year ago'),
+                                             ('Couple of years ago', 'Couple of years ago'),
+                                             ('Many years ago', 'Many years ago'),
+                                             ('', ''),
                                              ),
                                     default='')
 
-    datapoint_93 = models.CharField(max_length=15,
-                                    choices=(('1', 'Rapidly progressing'),
-                                             ('2', 'Slowly progressing'),
-                                             ('3', 'No change'),
-                                             ('4', 'Getting better'),
+    datapoint_93 = models.CharField(max_length=25,
+                                    choices=(('Rapidly progressing', 'Rapidly progressing'),
+                                             ('Slowly progressing', 'Slowly progressing'),
+                                             ('No change', 'No change'),
+                                             ('Getting better', 'Getting better'),
                                              ('', ''),
                                              ),
                                     default='')
 
     datapoint_94 = models.CharField(max_length=15,
-                                    choices=(('RL', 'Right & left'),
-                                             ('R', 'Right'),
-                                             ('L', 'Left'),
-                                             ('', 'Null'),
+                                    choices=(('Right & left', 'Right & left'),
+                                             ('Right', 'Right'),
+                                             ('Left', 'Left'),
+                                             ('', ''),
                                              ),
                                     default='')
 
@@ -1887,54 +1893,54 @@ class DataFormTable(models.Model):
     )
 
     datapoint_99 = models.CharField(max_length=15,
-                                    choices=(('RL', 'Right & left'),
-                                             ('R', 'Right'),
-                                             ('L', 'Left'),
-                                             ('', 'Null'),
+                                    choices=(('Right & left', 'Right & left'),
+                                             ('Right', 'Right'),
+                                             ('Left', 'Left'),
+                                             ('', ''),
                                              ),
                                     default='')
 
     datapoint_100 = models.CharField(max_length=45,
-                                  choices=(('UpOutPir', 'Upper - outer peripheral'),
-                                           ('UpInPir', 'Upper - inner peripheral'),
-                                           ('LowInPir', 'Lower - inner peripheral'),
-                                           ('LowOutPir', 'Lower - outer peripheral'),
-                                           ('UpOutCntr', 'Upper - outer central'),
-                                           ('UpInCntr', 'Upper - inner central'),
-                                           ('LowInCntr', 'Lower - inner central'),
-                                           ('LowOutCntr', 'Lower - outer central'),
-                                           ('LowOutCntr', 'Areola'),
-                                           ('LowOutCntr', 'Nipple'),
-                                           ('', 'Null'),
-                                           ),
+                                     choices=(('Upper - outer peripheral', 'Upper - outer peripheral'),
+                                              ('Upper - inner peripheral', 'Upper - inner peripheral'),
+                                              ('Lower - inner peripheral', 'Lower - inner peripheral'),
+                                              ('Lower - outer peripheral', 'Lower - outer peripheral'),
+                                              ('Upper - outer central', 'Upper - outer central'),
+                                              ('Upper - inner central', 'Upper - inner central'),
+                                              ('Lower - inner central', 'Lower - inner central'),
+                                              ('Lower - outer central', 'Lower - outer central'),
+                                              ('Areola', 'Areola'),
+                                              ('Nipple', 'Nipple'),
+                                              ('', ''),
+                                              ),
                                   default='')
 
     datapoint_101 = models.CharField(max_length=45,
-                                     choices=(('UpOutPir', 'Upper - outer peripheral'),
-                                              ('UpInPir', 'Upper - inner peripheral'),
-                                              ('LowInPir', 'Lower - inner peripheral'),
-                                              ('LowOutPir', 'Lower - outer peripheral'),
-                                              ('UpOutCntr', 'Upper - outer central'),
-                                              ('UpInCntr', 'Upper - inner central'),
-                                              ('LowInCntr', 'Lower - inner central'),
-                                              ('LowOutCntr', 'Lower - outer central'),
-                                              ('LowOutCntr', 'Areola'),
-                                              ('LowOutCntr', 'Nipple'),
-                                              ('', 'Null'),
+                                     choices=(('Upper - outer peripheral', 'Upper - outer peripheral'),
+                                              ('Upper - inner peripheral', 'Upper - inner peripheral'),
+                                              ('Lower - inner peripheral', 'Lower - inner peripheral'),
+                                              ('Lower - outer peripheral', 'Lower - outer peripheral'),
+                                              ('Upper - outer central', 'Upper - outer central'),
+                                              ('Upper - inner central', 'Upper - inner central'),
+                                              ('Lower - inner central', 'Lower - inner central'),
+                                              ('Lower - outer central', 'Lower - outer central'),
+                                              ('Areola', 'Areola'),
+                                              ('Nipple', 'Nipple'),
+                                              ('', ''),
                                               ),
                                      default='')
 
     datapoint_102 = models.CharField(max_length=15,
-                                    choices=(('couplDay', 'Couple of days ago'),
-                                             ('couplWeeks', 'Couple of weeks ago'),
-                                             ('fevgWeeks', 'Few weeks ago'),
-                                             ('couplMont', 'Couple of months ago'),
-                                             ('fevMont', 'Few months ago'),
-                                             ('Year', 'A year ago'),
-                                             ('couplYear', 'Couple of years ago'),
-                                             ('manyYear', 'Many years ago'),
-                                             ('', 'Null'),
-                                             ),
+                                     choices=(('Couple of days ago', 'Couple of days ago'),
+                                              ('Couple of weeks ago', 'Couple of weeks ago'),
+                                              ('Few weeks ago', 'Few weeks ago'),
+                                              ('Couple of months ago', 'Couple of months ago'),
+                                              ('Few months ago', 'Few months ago'),
+                                              ('A year ago', 'A year ago'),
+                                              ('Couple of years ago', 'Couple of years ago'),
+                                              ('Many years ago', 'Many years ago'),
+                                              ('', ''),
+                                              ),
                                     default='')
 
     datapoint_103 = models.TextField("Datapint103",
