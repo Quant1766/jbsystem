@@ -1122,11 +1122,9 @@ def master_table_view(request):
             gg_drive_proccess2.request()
             gg_drive_proccess2.gog_drive_to_json()
             gg_drive_proccess2.data_from_jjson()
-            # print('gg_drive_proccess2',gg_drive_proccess2.table_data)
 
             for row_ in gg_drive_proccess2.table_data:
                 pacient_id = procces_pacient(row_[:8])
-                print(row_)
                 if pacient_id == None: continue
                 else:
 
@@ -1152,7 +1150,6 @@ def master_table_view(request):
                         profile_form.datapoint_17 = row_[17]
                         profile_form.datapoint_18 = row_[18]
                         profile_form.datapoint_19 = row_[19]
-                        print(row_[19])
                         profile_form.datapoint_20 = row_[20]
                         profile_form.datapoint_21 = row_[21]
                         profile_form.datapoint_22 = row_[22]
