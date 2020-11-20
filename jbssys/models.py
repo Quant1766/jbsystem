@@ -1050,14 +1050,14 @@ class DataFormTable(models.Model):
                                   default='')
 
     datapoint_12 = models.CharField(max_length=15,
-                              choices=(('Pea'       , 'Pea'       ),
-                                       ('Peanut'    , 'Peanut'    ),
-                                       ('Grape'     , 'Grape'     ),
-                                       ('Walnut'    , 'Walnut'    ),
-                                       ('Lemon'     , 'Lemon'     ),
-                                       ('Egg'       , 'Egg'       ),
-                                       ('Peach'     , 'Peach'     ),
-                                       ('Grapefruit', 'Grapefruit'),
+                              choices=(('pea'       , 'pea'       ),
+                                       ('peanut'    , 'peanut'    ),
+                                       ('grape'     , 'grape'     ),
+                                       ('walnut'    , 'walnut'    ),
+                                       ('lemon'     , 'lemon'     ),
+                                       ('egg'       , 'egg'       ),
+                                       ('peach'     , 'peach'     ),
+                                       ('grapefruit', 'grapefruit'),
                                        (''          , ''          ),
                                        ),
                               default='')
@@ -1078,10 +1078,10 @@ class DataFormTable(models.Model):
                               default='')
 
     datapoint_14 = models.CharField(max_length=25,
-                              choices=(('slowing growing',        'slowing growing'),
-                                       ('rapidly growing',        'rapidly growing'),
-                                       ('remained same in size',  'remained same in size'),
-                                       ('decreased in size',      'decreased in size'),
+                              choices=(('Slowing  growing',        'Slowing  growing'),
+                                       ('Rapidly  Growing',        'Rapidly  Growing'),
+                                       ('Remained same in size',  'Remained same in size'),
+                                       ('Decreased  In Size',      'Decreased  In Size'),
                                        ('',                       ''),
                                        ),
                               default='')
@@ -1191,11 +1191,11 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_24 = models.TextField("Datapoint 24",
-                                  max_length=2000,
+                                  max_length=3000,
                                   default='')
 
     datapoint_25 = models.TextField("Datapoint 25",
-                                    max_length=2000,
+                                    max_length=3000,
                                     default='')
 
     datapoint_26 = models.CharField(
@@ -1207,21 +1207,14 @@ class DataFormTable(models.Model):
         ),
         default=''
     )
-    datapoint_27 = models.CharField(max_length=35,
-                                    choices=(('Right & left armpit', 'Right & left armpit'),
-                                             ('Right armpit', 'Right armpit'),
-                                             ('Left armpit', 'Left armpit'),
-                                             ('', ''),
-                                             ),
+    datapoint_27 =  models.TextField("Datapoint 27",
+                                    max_length=3000,
                                     default='')
 
     datapoint_28 = models.TextField("neck groin pos",
                                 max_length=2000,
                                 default='')
 
-    datapoint_29 = models.TextField("Datapoint 29",
-                                max_length=3500,
-                                default='')
 
     datapoint_30 = models.CharField(
         max_length=100,
@@ -1232,15 +1225,16 @@ class DataFormTable(models.Model):
         ),
         default=''
     )
+
     datapoint_31 = models.CharField(max_length=25,
-                                    choices=(('Pea', 'Pea'),
-                                             ('Peanut', 'Peanut'),
-                                             ('Grape', 'Grape'),
-                                             ('Walnut', 'Walnut'),
-                                             ('Lemon', 'Lemon'),
-                                             ('Egg', 'Egg'),
-                                             ('Peach', 'Peach'),
-                                             ('Grapefruit', 'Grapefruit'),
+                                    choices=(('pea', 'pea'),
+                                             ('peanut', 'peanut'),
+                                             ('grape', 'grape'),
+                                             ('walnut', 'walnut'),
+                                             ('lemon', 'lemon'),
+                                             ('egg', 'egg'),
+                                             ('peach', 'peach'),
+                                             ('grapefruit', 'grapefruit'),
                                              ('', ''),
                                              ),
                               default='')
@@ -1268,7 +1262,6 @@ class DataFormTable(models.Model):
                                              ('', ''),
                                              ),
                                     default='')
-
     datapoint_34 = models.CharField(max_length=3,
                                     choices=(('1', '1'),
                                              ('2', '2'),
@@ -1283,6 +1276,7 @@ class DataFormTable(models.Model):
                                              ('', ''),
                                              ),
                                     default='')
+
 
     datapoint_35 = models.CharField(max_length=3,
                                     choices=(('1', '1'),
@@ -1366,10 +1360,10 @@ class DataFormTable(models.Model):
 
 
     datapoint_41 = models.CharField(max_length=35,
-                                    choices=(('slowing growing', 'slowing growing'),
-                                             ('rapidly growing', 'rapidly growing'),
+                                    choices=(('Slowing  growing', 'Slowing  growing'),
+                                             ('Rapidly  Growing', 'Rapidly  Growing'),
                                              ('remained same in size', 'remained same in size'),
-                                             ('decreased in size', 'decreased in size'),
+                                             ('Decreased  In Size', 'Decreased  In Size'),
                                              ('', ''),
                                              ),
                               default='')

@@ -264,8 +264,6 @@
                                         <th>Datapoint 14</th>
                                         <th>Datapoint 15</th>
                                         <th>Datapoint 16</th>
-                                        <th>Datapoint 16A</th>
-                                        <th>Datapoint 16B</th>
                                         <th>Datapoint 17</th>
                                         <th>Datapoint 18</th>
                                         <th>Datapoint 19</th>
@@ -477,9 +475,9 @@
                                   <tbody>
                                   {% for recor in master_table %}
                                       <tr>
-                                          <td class="sticky-col first-col" style="max-width: 120px; width: 120px;"><p style="max-width: 120px; width: 120px;overflow: hidden;">{{ recor.pacient.last_name }} {{ recor.pacient.first_name }}<br/>{{ recor.create_datetime.date }}</p></td>
+                                          <td class="sticky-col first-col" style="max-width: 120px; width: 120px;"><p style="max-width: 120px; width: 120px;overflow: hidden;">{{ recor.pacient.last_name }} {{ recor.pacient.first_name }}<br/>{{ recor.create_datetime.date }}<br/>{{ recor.create_datetime.time }}</p></td>
 
-                                          <td><p style="width: 100px;">{% if recor.pacient.date_of_birth %}{{ recor.pacient.date_of_birth }}{% endif %}</p></td>
+                                          <td><p style="width: 100px;">{% if recor.pacient.date_of_birth != None %}{{ recor.pacient.date_of_birth }}{% endif %}</p></td>
                                           <td><p style="width: 100px;">{{ recor.pacient.phone }}</p></td>
                                           <td> <p style="width: 70px;">{{ recor.pacient.nsh_id }}</p></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_7 }}</textarea></td>
@@ -494,8 +492,7 @@
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_15_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_16_display }}</p></td>
 
-                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_16_a_display }}</p></td>
-                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_16_b_display }}</p></td>
+
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_17_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_18_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_19_display }}</p></td>
@@ -615,7 +612,7 @@
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_117_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_118_display }}</p></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_119_display }}</p></td>
-                                          <td> <p style="width: 30px;">{{ recor.datapoint_120 }}</p></td>
+                                          <td><span class="label-custom label label-default">{{ recor.datapoint_120 }}</span></td>
 
                                           <td> <p style="width: 180px;">{{ recor.pacient.email }}</p></td>
 

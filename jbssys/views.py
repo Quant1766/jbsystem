@@ -1049,7 +1049,7 @@ def master_table_view(request):
             search_param['pacient__home_addres'] = home_addres
 
 
-        master_table = DataFormTable.objects.filter(**search_param).order_by('id')[(page-1)*50:50*page]
+        master_table = DataFormTable.objects.filter(**search_param).order_by('create_datetime')[(page-1)*50:50*page]
         return render(request,'masterTable/masterTable.html',{
             'master_table':master_table,'user':request.user,
         })
@@ -1096,7 +1096,7 @@ def master_table_view(request):
                 try:
                     profile_form = ProfileFormTable.objects.filter(
                         pacient_id=pacient_id,
-                    ).order_by("-id")[0]
+                    ).order_by("-create_datetime")[0]
                 except:
                     profile_form = ProfileFormTable.objects.create(pacient_id=pacient_id)
                     profile_form.save()
@@ -1122,6 +1122,7 @@ def master_table_view(request):
                     data_form.datapoint_8 = row_[7]
                     data_form.datapoint_9 = row_[8]
                     data_form.datapoint_10 = row_[9]
+                    data_form.save()
 
                     datapoint_11 = row_[10]
                     data_form.datapoint_11 = datapoint_11
@@ -1130,12 +1131,14 @@ def master_table_view(request):
                     data_form.datapoint_14 = row_[13]
                     data_form.datapoint_15 = row_[14]
                     data_form.datapoint_16 = row_[15]
+                    data_form.save()
                     data_form.datapoint_16a = row_[16]
                     data_form.datapoint_16b = row_[17]
+                    print("15-16",row_[16],row_[17])
                     data_form.datapoint_17 = row_[18]
                     data_form.datapoint_18 = row_[19]
                     data_form.datapoint_19 = row_[20]
-
+                    data_form.save()
                     data_form.datapoint_20 = row_[21]
                     data_form.datapoint_21 = row_[22]
                     data_form.datapoint_22 = row_[23]
@@ -1145,107 +1148,117 @@ def master_table_view(request):
                     data_form.datapoint_26 = row_[27]
                     data_form.datapoint_27 = row_[28]
                     data_form.datapoint_28 = row_[29]
-                    data_form.datapoint_29 = row_[30]
+                    data_form.save()
 
-                    data_form.datapoint_30 = row_[31]
-                    data_form.datapoint_31 = row_[32]
-                    data_form.datapoint_32 = row_[33]
-                    data_form.datapoint_33 = row_[34]
-                    data_form.datapoint_34 = row_[35]
-                    data_form.datapoint_35 = row_[36]
-                    data_form.datapoint_36 = row_[37]
-                    data_form.datapoint_37 = row_[38]
-                    data_form.datapoint_38 = row_[39]
-                    data_form.datapoint_39 = row_[40]
+                    data_form.datapoint_30 = row_[30]
+                    data_form.datapoint_31 = row_[31]
+                    data_form.datapoint_32 = row_[32]
+                    data_form.datapoint_33 = row_[33]
+                    data_form.datapoint_34 = row_[34]
+                    data_form.datapoint_35 = row_[35]
+                    data_form.datapoint_36 = row_[36]
+                    data_form.datapoint_37 = row_[37]
+                    data_form.datapoint_38 = row_[38]
+                    data_form.datapoint_39 = row_[39]
+                    data_form.save()
 
-                    data_form.datapoint_40 = row_[41]
-                    data_form.datapoint_41 = row_[42]
-                    data_form.datapoint_42 = row_[43]
-                    data_form.datapoint_43 = row_[44]
-                    data_form.datapoint_44 = row_[45]
-                    data_form.datapoint_45 = row_[46]
-                    data_form.datapoint_46 = row_[47]
-                    data_form.datapoint_47 = row_[48]
-                    data_form.datapoint_48 = row_[49]
-                    data_form.datapoint_49 = row_[50]
+                    data_form.datapoint_40 = row_[40]
+                    data_form.datapoint_41 = row_[41]
+                    data_form.datapoint_42 = row_[42]
+                    data_form.datapoint_43 = row_[43]
+                    data_form.datapoint_44 = row_[44]
+                    data_form.datapoint_45 = row_[45]
+                    data_form.datapoint_46 = row_[46]
+                    data_form.datapoint_47 = row_[47]
+                    data_form.datapoint_48 = row_[48]
+                    data_form.datapoint_49 = row_[49]
+                    data_form.save()
 
-                    data_form.datapoint_50 = row_[51]
-                    data_form.datapoint_51 = row_[52]
-                    data_form.datapoint_52 = row_[53]
-                    data_form.datapoint_53 = row_[54]
-                    data_form.datapoint_54 = row_[55]
-                    data_form.datapoint_55 = row_[56]
-                    data_form.datapoint_56 = row_[57]
-                    data_form.datapoint_57 = row_[58]
-                    data_form.datapoint_58 = row_[59]
-                    data_form.datapoint_59 = row_[60]
+                    data_form.datapoint_50 = row_[50]
+                    data_form.datapoint_51 = row_[51]
+                    data_form.datapoint_52 = row_[52]
+                    data_form.datapoint_53 = row_[53]
+                    data_form.datapoint_54 = row_[54]
+                    data_form.datapoint_55 = row_[55]
+                    data_form.datapoint_56 = row_[56]
+                    data_form.datapoint_57 = row_[57]
+                    data_form.datapoint_58 = row_[58]
+                    data_form.datapoint_59 = row_[59]
+                    data_form.save()
 
-                    data_form.datapoint_60 = row_[61]
-                    data_form.datapoint_61 = row_[62]
-                    data_form.datapoint_62 = row_[63]
-                    data_form.datapoint_63 = row_[64]
-                    data_form.datapoint_64 = row_[65]
-                    data_form.datapoint_65 = row_[66]
-                    data_form.datapoint_66 = row_[67]
-                    data_form.datapoint_67 = row_[68]
-                    data_form.datapoint_68 = row_[69]
-                    data_form.datapoint_69 = row_[70]
+                    data_form.datapoint_60 = row_[60]
+                    data_form.datapoint_61 = row_[61]
+                    data_form.datapoint_62 = row_[62]
+                    data_form.datapoint_63 = row_[63]
+                    data_form.datapoint_64 = row_[64]
+                    data_form.datapoint_65 = row_[65]
+                    data_form.datapoint_66 = row_[66]
+                    data_form.datapoint_67 = row_[67]
+                    data_form.datapoint_68 = row_[68]
+                    data_form.datapoint_69 = row_[69]
+                    data_form.save()
 
-                    data_form.datapoint_70 = row_[71]
-                    data_form.datapoint_71 = row_[72]
-                    data_form.datapoint_72 = row_[73]
-                    data_form.datapoint_73 = row_[74]
-                    data_form.datapoint_74 = row_[75]
-                    data_form.datapoint_75 = row_[76]
-                    data_form.datapoint_76 = row_[77]
-                    data_form.datapoint_77 = row_[78]
-                    data_form.datapoint_78 = row_[79]
-                    data_form.datapoint_79 = row_[80]
+                    data_form.datapoint_70 = row_[70]
+                    data_form.datapoint_71 = row_[71]
+                    data_form.datapoint_72 = row_[72]
+                    data_form.datapoint_73 = row_[73]
+                    data_form.datapoint_74 = row_[74]
+                    data_form.datapoint_75 = row_[75]
+                    data_form.datapoint_76 = row_[76]
+                    data_form.datapoint_77 = row_[77]
+                    data_form.datapoint_78 = row_[78]
+                    data_form.datapoint_79 = row_[79]
+                    data_form.save()
 
-                    data_form.datapoint_80 = row_[81]
-                    data_form.datapoint_81 = row_[82]
-                    data_form.datapoint_82 = row_[83]
-                    data_form.datapoint_83 = row_[84]
-                    data_form.datapoint_84 = row_[85]
-                    data_form.datapoint_85 = row_[86]
-                    data_form.datapoint_86 = row_[87]
-                    data_form.datapoint_87 = row_[88]
-                    data_form.datapoint_88 = row_[89]
-                    data_form.datapoint_89 = row_[91]
+                    data_form.datapoint_80 = row_[80]
+                    data_form.datapoint_81 = row_[81]
+                    data_form.datapoint_82 = row_[82]
+                    data_form.datapoint_83 = row_[83]
+                    data_form.datapoint_84 = row_[84]
+                    data_form.datapoint_85 = row_[85]
+                    data_form.datapoint_86 = row_[86]
+                    data_form.datapoint_87 = row_[87]
+                    data_form.datapoint_88 = row_[88]
+                    data_form.datapoint_89 = row_[89]
+                    data_form.save()
 
-                    data_form.datapoint_90 = row_[91]
-                    data_form.datapoint_91 = row_[92]
-                    data_form.datapoint_92 = row_[93]
-                    data_form.datapoint_93 = row_[94]
-                    data_form.datapoint_94 = row_[95]
-                    data_form.datapoint_95 = row_[96]
-                    data_form.datapoint_96 = row_[97]
-                    data_form.datapoint_97 = row_[98]
-                    data_form.datapoint_98 = row_[99]
-                    data_form.datapoint_99 = row_[100]
+                    data_form.datapoint_90 = row_[90]
+                    data_form.datapoint_91 = row_[91]
+                    data_form.datapoint_92 = row_[92]
+                    data_form.datapoint_93 = row_[93]
+                    data_form.datapoint_94 = row_[94]
+                    data_form.datapoint_95 = row_[95]
+                    data_form.datapoint_96 = row_[96]
+                    data_form.datapoint_97 = row_[97]
+                    data_form.datapoint_98 = row_[98]
+                    data_form.datapoint_99 = row_[99]
+                    data_form.save()
 
-                    data_form.datapoint_100 = row_[101]
-                    data_form.datapoint_101 = row_[102]
-                    data_form.datapoint_102 = row_[103]
-                    data_form.datapoint_103 = row_[104]
-                    data_form.datapoint_104 = row_[105]
-                    data_form.datapoint_105 = row_[106]
-                    data_form.datapoint_106 = row_[107]
-                    data_form.datapoint_107 = row_[108]
-                    data_form.datapoint_108 = row_[109]
-                    data_form.datapoint_109 = row_[110]
+                    data_form.datapoint_100 = row_[100]
+                    data_form.datapoint_101 = row_[101]
+                    data_form.datapoint_102 = row_[102]
+                    data_form.datapoint_103 = row_[103]
+                    data_form.datapoint_104 = row_[104]
+                    data_form.datapoint_105 = row_[105]
+                    data_form.datapoint_106 = row_[106]
+                    data_form.datapoint_107 = row_[107]
+                    data_form.datapoint_108 = row_[108]
+                    data_form.datapoint_109 = row_[109]
+                    data_form.save()
 
-                    data_form.datapoint_110 = row_[111]
-                    data_form.datapoint_111 = row_[112]
-                    data_form.datapoint_112 = row_[113]
-                    data_form.datapoint_113 = row_[114]
-                    data_form.datapoint_114 = row_[115]
-                    data_form.datapoint_115 = row_[116]
-                    data_form.datapoint_116 = row_[117]
-                    data_form.datapoint_117 = row_[118]
-                    data_form.datapoint_118 = row_[119]
-                    print(row_[117:])
-                    data_form.datapoint_119 = row_[120]
+                    data_form.datapoint_110 = row_[110]
+                    data_form.datapoint_111 = row_[111]
+                    data_form.datapoint_112 = row_[112]
+                    data_form.datapoint_113 = row_[113]
+                    data_form.datapoint_114 = row_[114]
+                    data_form.datapoint_115 = row_[115]
+                    data_form.datapoint_116 = row_[116]
+                    data_form.datapoint_117 = row_[117]
+                    data_form.datapoint_118 = row_[118]
+                    data_form.datapoint_119 = row_[119]
+
+                    data_form.save()
+                    data_form.datapoint_120 = row_[120]
 
 
 
@@ -1510,11 +1523,17 @@ def master_table_view(request):
                         except:
                             print("err", row_[93:])
                     profile_form.save()
-                    data_form, data_form_new = DataFormTable.objects.get_or_create(
-                        pacient_id=pacient_id,
-                        profile_data=profile_form,
-                        create_datetime=create_datetime
-                    )
+                    try:
+                        data_form = DataFormTable.objects.filter(
+                            pacient_id=pacient_id,
+                            profile_data=profile_form,
+                        ).order_by('-create_datetime')[0]
+                    except:
+                        data_form = DataFormTable.objects.create(
+                            pacient_id=pacient_id,
+                            profile_data=profile_form,
+                            create_datetime=create_datetime
+                        )
                     data_form.save()
 
 
