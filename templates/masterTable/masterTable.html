@@ -479,15 +479,15 @@
                                       <tr>
                                           <td class="sticky-col first-col" style="max-width: 120px; width: 120px;"><p style="max-width: 120px; width: 120px;overflow: hidden;">{{ recor.pacient.last_name }} {{ recor.pacient.first_name }}<br/>{{ recor.create_datetime.date }}</p></td>
 
-                                          <td><p style="width: 100px;">{{ recor.pacient.date_of_birth }}</p></td>
+                                          <td><p style="width: 100px;">{% if recor.pacient.date_of_birth %}{{ recor.pacient.date_of_birth }}{% endif %}</p></td>
                                           <td><p style="width: 100px;">{{ recor.pacient.phone }}</p></td>
                                           <td> <p style="width: 70px;">{{ recor.pacient.nsh_id }}</p></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_7 }}</textarea></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_8_display }}</p></td>
                                           <td> <p style="width: 70px;">{{ recor.get_datapoint_9_display }}</p></td>
-                                          <td> <p style="width: 100px;">{{ recor.get_datapoint_10_display }}</p></td>
+                                          <td> <p style="width: 200px;">{{ recor.get_datapoint_10_display }}</p></td>
 
-                                          <td> <p style="width: 100px;">{{ recor.get_datapoint_11_display }}</p></td>
+                                          <td> <p style="width: 200px;">{{ recor.get_datapoint_11_display }}</p></td>
                                           <td> <p style="width: 100px;">{{ recor.get_datapoint_12_display }}</p></td>
                                           <td> <p style="width: 100px;">{{ recor.get_datapoint_13_display }}</p></td>
                                           <td> <p style="width: 100px;">{{ recor.get_datapoint_14_display }}</p></td>
@@ -510,7 +510,7 @@
                                          <td> <p style="width: 30px;">{{ recor.get_datapoint_26_display }}</p></td>
 
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_27_display }}</p></td>
-                                          <td><textarea readonly style="width: 250px;">{{ recor.datapoint_28 }}</textarea></td>
+                                          <td><textarea readonly style="width: 250px;">{{ recor.get_datapoint_28_display }}</textarea></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_29 }}</textarea></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_30_display }}</p></td>
 

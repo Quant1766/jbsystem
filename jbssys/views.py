@@ -1244,6 +1244,7 @@ def master_table_view(request):
                     data_form.datapoint_116 = row_[117]
                     data_form.datapoint_117 = row_[118]
                     data_form.datapoint_118 = row_[119]
+                    print(row_[117:])
                     data_form.datapoint_119 = row_[120]
 
 

@@ -150,7 +150,7 @@ class RelationhipPacient(models.Model):
 
     is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
 
-    relation = models.CharField(max_length=40,
+    relation = models.CharField(max_length=100,
                                   choices=(('father', 'father'),
                                            ('mother', 'mother'),
                                            ('grandmother','grandmother'),
@@ -170,7 +170,7 @@ class RelationhipPacient(models.Model):
 
     type_cancer = models.ForeignKey(Cancer,on_delete=models.PROTECT, related_name='rel_tcanc')
 
-    position_cancer = models.CharField(max_length=40,
+    position_cancer = models.CharField(max_length=100,
                                   choices=(('one side', 'one side'),
                                            ('both sides', 'both sides'),
                                            ('', ''),
@@ -187,7 +187,7 @@ class Drug(models.Model):
         max_length=2500,
         default='')
 
-    routing = models.CharField(max_length=40,
+    routing = models.CharField(max_length=100,
                                   choices=(('Convenience', 'Convenience'),
                                            ('Desired target effect', 'Desired target effect'),
                                                ('Oral','Oral'),
@@ -274,7 +274,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_10 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('White', 'White'),
             ('Mixed / Multiple ethnic groups', 'Mixed / Multiple ethnic groups'),
@@ -398,7 +398,7 @@ class ProfileFormTable(models.Model):
 
 
     datapoint_34 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('Never', 'Never'),
             ('1-2 days/week', '1-2 days/week'),
@@ -420,7 +420,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_36 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('1-6 units', '1-6 units'),
             ('7-14 units', '7-14 units'),
@@ -435,7 +435,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_37 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -468,7 +468,7 @@ class ProfileFormTable(models.Model):
 
 
     datapoint_43 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -482,7 +482,7 @@ class ProfileFormTable(models.Model):
                                     default='')
 
     datapoint_45 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -492,7 +492,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_46 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -502,7 +502,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_47 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -512,7 +512,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_48 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -522,7 +522,7 @@ class ProfileFormTable(models.Model):
     )
 
     datapoint_49 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1001,7 +1001,7 @@ class DataFormTable(models.Model):
                               default='')
 
     datapoint_8 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1087,7 +1087,7 @@ class DataFormTable(models.Model):
                               default='')
 
     datapoint_15 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1097,7 +1097,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_16 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1135,7 +1135,7 @@ class DataFormTable(models.Model):
                                       default='')
 
     datapoint_18 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1144,7 +1144,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_19 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1153,7 +1153,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_20 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1182,7 +1182,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_23 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1199,7 +1199,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_26 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1224,7 +1224,7 @@ class DataFormTable(models.Model):
                                 default='')
 
     datapoint_30 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1342,7 +1342,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_39 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1375,7 +1375,7 @@ class DataFormTable(models.Model):
                               default='')
 
     datapoint_42 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1396,7 +1396,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_46 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1405,7 +1405,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_47 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1414,7 +1414,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_48 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1423,7 +1423,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_49 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1432,7 +1432,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_50 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1482,7 +1482,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_55 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1491,7 +1491,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_56 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1500,7 +1500,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_57 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1509,7 +1509,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_58 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1518,7 +1518,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_59 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1528,7 +1528,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_60 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1538,7 +1538,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_61 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1553,7 +1553,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_63 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1563,7 +1563,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_64 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1581,7 +1581,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_66 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1613,7 +1613,7 @@ class DataFormTable(models.Model):
                              default='')
 
     datapoint_69 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1622,7 +1622,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_70 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1631,7 +1631,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_71 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1662,7 +1662,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_74 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1671,7 +1671,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_75 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1680,7 +1680,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_76 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1690,7 +1690,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_77 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1699,7 +1699,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_78 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1708,7 +1708,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_79 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1718,7 +1718,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_80 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1727,7 +1727,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_81 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1736,7 +1736,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_82 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1745,7 +1745,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_83 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1785,7 +1785,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_87 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1799,7 +1799,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_89 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1809,7 +1809,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_90 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1819,7 +1819,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_91 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1859,7 +1859,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_95 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1873,7 +1873,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_97 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1883,7 +1883,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_98 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1948,7 +1948,7 @@ class DataFormTable(models.Model):
                                     default='')
 
     datapoint_104 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1958,7 +1958,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_105 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1968,7 +1968,7 @@ class DataFormTable(models.Model):
     )
 
     datapoint_106 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1977,7 +1977,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_107 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1986,7 +1986,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_108 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -1995,7 +1995,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_109 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -2004,7 +2004,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_110 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -2013,7 +2013,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_111 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -2022,7 +2022,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_112 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -2031,7 +2031,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_113 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -2040,7 +2040,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_114 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -2049,7 +2049,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_115 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -2058,7 +2058,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_116 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -2067,7 +2067,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_117 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -2076,7 +2076,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_118 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
@@ -2085,7 +2085,7 @@ class DataFormTable(models.Model):
         default=''
     )
     datapoint_119 = models.CharField(
-        max_length=40,
+        max_length=100,
         choices=(
             ('YES', 'YES'),
             ('NO', 'NO'),
