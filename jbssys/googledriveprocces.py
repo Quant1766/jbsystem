@@ -52,6 +52,7 @@ class GoogleDrive:
         if json_:
             self.json_data = json.loads(json_)
 
+
         else:
             print("Not connect to file: ", self.request_count)
 
@@ -81,12 +82,12 @@ class GoogleDrive:
             if 25813757 in data:
 
                 table_data = json.loads(data[1])
-
         self.table_size = (table_data[0][4],table_data[0][2])
 
-        try:
 
-            self.table_data_list = table_data[3]
+
+        try:
+            self.table_data_list = table_data[2]
             self.table_gd_list_to_list()
         except:
             self.get_table_max100()
@@ -94,7 +95,6 @@ class GoogleDrive:
     def table_gd_list_to_list(self):
         data_list = []
         self.table_data = [["" for i in range(self.table_size[0])] for ii in range(self.table_size[1])]
-
 
         for list_data in self.table_data_list:
             data = list_data[2][0]
@@ -145,7 +145,7 @@ class GoogleDrive:
                 self.list_header.append(items.get_text())
             except:
                 continue
-
+        self.list_header.append('gd_id')
         # for getting the data
         HTML_data = table.find_all("tr")[1:]
 
@@ -153,6 +153,7 @@ class GoogleDrive:
             sub_data = []
             for sub_element in element:
                 try:
+                    # print(sub_element)
                     sub_data.append(sub_element.get_text(separator="\n"))
                 except:
                     continue
@@ -168,62 +169,14 @@ class GoogleDrive:
 
     def table_to_xls(self):
         dataFrame = pd.DataFrame(data=self.table_data)
-        dataFrame.to_excel('Geeks11.xls',index=False,header=False)
+        dataFrame.to_excel('Geeks1.xls',index=False,header=False)
 
 
 
 
-# url = 'https://docs.google.com/spreadsheets/d/1-1EzamJKHG4CGoqnkPt4CeTrWMKBk2BkPLdWcb8ZByQ/edit#gid=218707951'
+# url = 'https://docs.google.com/spreadsheets/d/1Y5DAslZU8ha3fHVIOkVRl1R8o1UwYeXCFVHDMZLz-cU/edit#gid=120922622'
 # gd = GoogleDrive(url)
 # gd.request()
 # gd.gog_drive_to_json()
 # gd.data_from_jjson()
 # gd.table_to_xls()
-
-# def parse_datapoint_62(data):
-#     return_data = []
-#     datas = data.split('\n')
-#     for n,data_ in enumerate(datas):
-#         r = data_.split(',')#.split('[]:')[-1].split("months:")[-1].strip()
-#         r = [s.split(": ")[-1] for s in r]
-#         print(r)
-#         return_data.append(r)
-#
-#     return return_data
-# data = """Sl No: 2, Dropdown: benign findings, Calendar: 01/01/1951"""
-#
-# print(parse_datapoint_62(data))
-
-# def parse_operation(data,size=0):
-#     return_data = []
-#     print("data",data)
-#     datas = data.split('\n')
-#     print("datas", datas)
-#
-#     for data_ in datas:
-#         print("data_",data_)
-#         r = data_.split(",")
-#         print("r",r)
-#         r2 = [r_i.split(":")[-1] for r_i in r]
-#         if size != 0 and len(r2)>size:
-#             try:
-#                 for i in range(1,int(len(r2)/int(size)+1)):
-#                     print(i)
-#                     r_l = r2[(i-1)*size:i*size]
-#                     print(r_l)
-#                     return_data.append(r_l)
-#             except:
-#                 break
-#
-#         else:
-#             return_data.append(r2)
-#
-#
-#
-#
-#     return return_data
-#
-# data = """Relationship: father, Type of cancer: breast cancer, Age at cancer diagnosis: 23, Was it on both sides?: one side
-# Relationship: mother, Type of cancer: ovarian cancer, Age at cancer diagnosis: 23, Was it on both sides?: both sides"""
-#
-# print(parse_operation(data,3))
