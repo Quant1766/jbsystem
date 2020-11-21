@@ -989,7 +989,7 @@ class ProfileFormTable(models.Model):
 
 class DataFormTable(models.Model):
     "DEFAULT USE storename as username casser"
-    create_datetime = models.DateTimeField("create datetime", null=True,default=None,blank=True)
+    create_datetime = models.DateTimeField("create datetime", null=True,blank=True)
     is_hide = models.BooleanField("is hide",null=True,blank=True,default=False)
 
     pacient = models.ForeignKey(Pacient,related_name="PacientDataForm",on_delete=models.PROTECT)
@@ -1009,13 +1009,9 @@ class DataFormTable(models.Model):
         ),
         default=''
     )
-    datapoint_9 = models.CharField(max_length=25,
-                                  choices=(('Right & left', 'Right & left'),
-                                           ('Right', 'Right'),
-                                           ('Left', 'Left'),
-                                           ('', ''),
-                                           ),
-                                  default='')
+    datapoint_9 = models.TextField("Datapint99",
+                                    max_length=2000,
+                                    default='')
 
 
 
@@ -1460,13 +1456,9 @@ class DataFormTable(models.Model):
                                              ),
                                     default='')
 
-    datapoint_53 = models.CharField(max_length=25,
-                                  choices=(('Right & left', 'Right & left'),
-                                           ('Right', 'Right'),
-                                           ('Left', 'Left'),
-                                           ('', ''),
-                                           ),
-                                  default='')
+    datapoint_53 = models.TextField("Datapint99",
+                                    max_length=2000,
+                                    default='')
 
     datapoint_54 = models.CharField(max_length=25,
                                     choices=(('One spot', 'One spot'),
@@ -1566,12 +1558,8 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_65 = models.CharField(max_length=25,
-                                    choices=(('Right & left', 'Right & left'),
-                                             ('Right', 'Right'),
-                                             ('Left', 'Left'),
-                                             ('', ''),
-                                             ),
+    datapoint_65 = models.TextField("Datapint65",
+                                    max_length=2000,
                                     default='')
 
     datapoint_66 = models.CharField(
@@ -1584,7 +1572,7 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_67 = models.CharField(max_length=35,
+    datapoint_67 = models.CharField(max_length=55,
                                     choices=(('Less than a quarter', 'Less than a quarter'),
                                              ('More than a quarter but less than half', 'More than a quarter but less than half'),
                                              ('More than half of breast', 'More than half of breast'),
@@ -1634,12 +1622,8 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_72 = models.CharField(max_length=25,
-                                    choices=(('Right & left', 'Right & left'),
-                                             ('Right', 'Right'),
-                                             ('Left', 'Left'),
-                                             ('', ''),
-                                             ),
+    datapoint_72 = models.TextField("Datapint99",
+                                    max_length=2000,
                                     default='')
 
     datapoint_73 = models.CharField(max_length=35,
@@ -1748,12 +1732,8 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_84 = models.CharField(max_length=25,
-                                    choices=(('Right & left', 'Right & left'),
-                                             ('Right', 'Right'),
-                                             ('Left', 'Left'),
-                                             ('', ''),
-                                             ),
+    datapoint_84 = models.TextField("Datapint99",
+                                    max_length=2000,
                                     default='')
 
     datapoint_85 = models.CharField(max_length=25,
@@ -1822,7 +1802,7 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_92 = models.CharField(max_length=25,
+    datapoint_92 = models.CharField(max_length=35,
                                     choices=(('Couple of days ago', 'Couple of days ago'),
                                              ('Couple of weeks ago', 'Couple of weeks ago'),
                                              ('Few weeks ago', 'Few weeks ago'),
@@ -1835,7 +1815,7 @@ class DataFormTable(models.Model):
                                              ),
                                     default='')
 
-    datapoint_93 = models.CharField(max_length=25,
+    datapoint_93 = models.CharField(max_length=35,
                                     choices=(('Rapidly progressing', 'Rapidly progressing'),
                                              ('Slowly progressing', 'Slowly progressing'),
                                              ('No change', 'No change'),
@@ -1844,12 +1824,8 @@ class DataFormTable(models.Model):
                                              ),
                                     default='')
 
-    datapoint_94 = models.CharField(max_length=15,
-                                    choices=(('Right & left', 'Right & left'),
-                                             ('Right', 'Right'),
-                                             ('Left', 'Left'),
-                                             ('', ''),
-                                             ),
+    datapoint_94 = models.TextField("Datapint99",
+                                    max_length=2000,
                                     default='')
 
     datapoint_95 = models.CharField(
@@ -1886,12 +1862,8 @@ class DataFormTable(models.Model):
         default=''
     )
 
-    datapoint_99 = models.CharField(max_length=15,
-                                    choices=(('Right & left', 'Right & left'),
-                                             ('Right', 'Right'),
-                                             ('Left', 'Left'),
-                                             ('', ''),
-                                             ),
+    datapoint_99 = models.TextField("Datapint99",
+                                    max_length=2000,
                                     default='')
 
     datapoint_100 = models.CharField(max_length=45,
@@ -1924,7 +1896,7 @@ class DataFormTable(models.Model):
                                               ),
                                      default='')
 
-    datapoint_102 = models.CharField(max_length=15,
+    datapoint_102 = models.CharField(max_length=55,
                                      choices=(('Couple of days ago', 'Couple of days ago'),
                                               ('Couple of weeks ago', 'Couple of weeks ago'),
                                               ('Few weeks ago', 'Few weeks ago'),

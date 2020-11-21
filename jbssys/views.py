@@ -1090,7 +1090,6 @@ def master_table_view(request):
 
                 if pacient_id ==  None: continue
 
-
                 create_datetime = vaidator_data.validate_datetime(row_[0])
 
                 try:
@@ -1103,7 +1102,6 @@ def master_table_view(request):
 
                 try:
                     nsh_id_gdisk = row_[120]
-                    print("nsh_id_gdisk",nsh_id_gdisk)
 
                     data_form, created = DataFormTable.objects.get_or_create(
                         nsh_id_gdisk=nsh_id_gdisk
@@ -1122,7 +1120,7 @@ def master_table_view(request):
                     data_form.datapoint_8 = row_[7]
                     data_form.datapoint_9 = row_[8]
                     data_form.datapoint_10 = row_[9]
-                    data_form.save()
+
 
                     datapoint_11 = row_[10]
                     data_form.datapoint_11 = datapoint_11
@@ -1131,14 +1129,13 @@ def master_table_view(request):
                     data_form.datapoint_14 = row_[13]
                     data_form.datapoint_15 = row_[14]
                     data_form.datapoint_16 = row_[15]
-                    data_form.save()
+
                     data_form.datapoint_16a = row_[16]
                     data_form.datapoint_16b = row_[17]
-                    print("15-16",row_[16],row_[17])
                     data_form.datapoint_17 = row_[18]
                     data_form.datapoint_18 = row_[19]
                     data_form.datapoint_19 = row_[20]
-                    data_form.save()
+
                     data_form.datapoint_20 = row_[21]
                     data_form.datapoint_21 = row_[22]
                     data_form.datapoint_22 = row_[23]
@@ -1148,7 +1145,7 @@ def master_table_view(request):
                     data_form.datapoint_26 = row_[27]
                     data_form.datapoint_27 = row_[28]
                     data_form.datapoint_28 = row_[29]
-                    data_form.save()
+
 
                     data_form.datapoint_30 = row_[30]
                     data_form.datapoint_31 = row_[31]
@@ -1160,7 +1157,7 @@ def master_table_view(request):
                     data_form.datapoint_37 = row_[37]
                     data_form.datapoint_38 = row_[38]
                     data_form.datapoint_39 = row_[39]
-                    data_form.save()
+
 
                     data_form.datapoint_40 = row_[40]
                     data_form.datapoint_41 = row_[41]
@@ -1172,7 +1169,7 @@ def master_table_view(request):
                     data_form.datapoint_47 = row_[47]
                     data_form.datapoint_48 = row_[48]
                     data_form.datapoint_49 = row_[49]
-                    data_form.save()
+
 
                     data_form.datapoint_50 = row_[50]
                     data_form.datapoint_51 = row_[51]
@@ -1184,7 +1181,7 @@ def master_table_view(request):
                     data_form.datapoint_57 = row_[57]
                     data_form.datapoint_58 = row_[58]
                     data_form.datapoint_59 = row_[59]
-                    data_form.save()
+
 
                     data_form.datapoint_60 = row_[60]
                     data_form.datapoint_61 = row_[61]
@@ -1196,7 +1193,7 @@ def master_table_view(request):
                     data_form.datapoint_67 = row_[67]
                     data_form.datapoint_68 = row_[68]
                     data_form.datapoint_69 = row_[69]
-                    data_form.save()
+
 
                     data_form.datapoint_70 = row_[70]
                     data_form.datapoint_71 = row_[71]
@@ -1208,7 +1205,7 @@ def master_table_view(request):
                     data_form.datapoint_77 = row_[77]
                     data_form.datapoint_78 = row_[78]
                     data_form.datapoint_79 = row_[79]
-                    data_form.save()
+
 
                     data_form.datapoint_80 = row_[80]
                     data_form.datapoint_81 = row_[81]
@@ -1220,7 +1217,7 @@ def master_table_view(request):
                     data_form.datapoint_87 = row_[87]
                     data_form.datapoint_88 = row_[88]
                     data_form.datapoint_89 = row_[89]
-                    data_form.save()
+
 
                     data_form.datapoint_90 = row_[90]
                     data_form.datapoint_91 = row_[91]
@@ -1232,7 +1229,7 @@ def master_table_view(request):
                     data_form.datapoint_97 = row_[97]
                     data_form.datapoint_98 = row_[98]
                     data_form.datapoint_99 = row_[99]
-                    data_form.save()
+
 
                     data_form.datapoint_100 = row_[100]
                     data_form.datapoint_101 = row_[101]
@@ -1244,7 +1241,7 @@ def master_table_view(request):
                     data_form.datapoint_107 = row_[107]
                     data_form.datapoint_108 = row_[108]
                     data_form.datapoint_109 = row_[109]
-                    data_form.save()
+
 
                     data_form.datapoint_110 = row_[110]
                     data_form.datapoint_111 = row_[111]
@@ -1257,7 +1254,7 @@ def master_table_view(request):
                     data_form.datapoint_118 = row_[118]
                     data_form.datapoint_119 = row_[119]
 
-                    data_form.save()
+
                     data_form.datapoint_120 = row_[120]
 
 

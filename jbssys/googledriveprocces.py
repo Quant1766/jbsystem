@@ -107,10 +107,13 @@ class GoogleDrive:
                 if type(data_ ) == int and data_== 2:
                     val_ = data["3"][1]
                     data_list.append(val_)
+
+                    val_ = val_
                     self.table_data[indexes[0]][indexes[1]] = val_
 
                 elif type(data_ ) == dict and "3" in data_.keys():
                     val_ = str(int(data_["3"]))
+
                     data_list.append(val_)
 
 
@@ -153,7 +156,6 @@ class GoogleDrive:
             sub_data = []
             for sub_element in element:
                 try:
-                    # print(sub_element)
                     sub_data.append(sub_element.get_text(separator="\n"))
                 except:
                     continue
@@ -173,7 +175,7 @@ class GoogleDrive:
 
 
 
-
+#
 # url = 'https://docs.google.com/spreadsheets/d/1Y5DAslZU8ha3fHVIOkVRl1R8o1UwYeXCFVHDMZLz-cU/edit#gid=120922622'
 # gd = GoogleDrive(url)
 # gd.request()

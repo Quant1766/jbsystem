@@ -43,16 +43,25 @@ def validate_date(date_text):
     return dtime
 
 def validate_datetime(date_text):
+    date_text = str(date_text).strip()
+    print("dtime0",date_text)
     try:
         dtime = str(datetime.datetime.strptime(
-            date_text, '%Y-%m-%d')
-        ).split(" ")[0]
+            date_text, '%Y-%m-%d %H:%M:%S')
+        )
+        print("dtime",dtime)
 
     except :
         try:
             dtime = datetime.datetime.strptime(date_text, "%d-%m-%Y %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+            print("dtime2", dtime)
+
         except:
-            dtime = ""
+            try:
+                dtime = datetime.datetime.strptime(date_text, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+                print("dtime3", dtime)
+            except:
+                dtime = ""
 
     return dtime
 
