@@ -87,7 +87,6 @@ class GoogleDrive:
 
                 table_data = json.loads(data[1])
         self.table_size = (table_data[0][4],table_data[0][2])
-        print("self.table_size",self.table_size)
 
 
         # try:
@@ -102,10 +101,8 @@ class GoogleDrive:
 
         for list_data in self.table_data_list:
             data = list_data[2][0]
-            # print("list_data",list_data)
 
             indexes = [list_data[0],list_data[1]]
-            # print('data_list', data_list)
             if "3" in data.keys():
                 data_ = data["3"][0]
 
@@ -122,14 +119,10 @@ class GoogleDrive:
 
 
                 elif type(data_ ) == dict and "3" in data_.keys():
-                    print("data_",data_)
                     if len(str(data_["3"])) > 7:
-                        print('data_["3"]',str(data_["3"]))
 
                         val_ = float(data_["3"])
                         val_ = format(convert_date(val_), '%Y-%m-%d %H:%M:%S')
-                        print('val_1', val_)
-                        print('val_2', val_)
 
                         data_list.append(str(val_))
 

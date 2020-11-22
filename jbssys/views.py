@@ -966,8 +966,16 @@ def parse_datapoint_62(data,size=0):
 
     return return_data
 
+def data_dictionatyDelete(request,req_id):
+    if request.method == "POST":
+        ddict = DataDictionary.objects.get(id=req_id)
+        ddict.is_hide = True
+        ddict.save()
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 def data_dictionaty(request):
-    search_param = {}
+    search_param = {'is_hide':False}
     page = 1
     data_dictionary = DataDictionary.objects.filter(**search_param).order_by('id')[(page - 1) * 50:50 * page]
     return render(request,'ddactionary/ddactionary.html',{"data_dictionary":data_dictionary})

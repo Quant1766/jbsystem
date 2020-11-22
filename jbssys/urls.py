@@ -8,6 +8,8 @@ urlpatterns = [
 
     path('master/',views.master_table_view, name="master_table_view"),
     path('pacients/', views.pacientsView, name="pacientsView"),
+
+    path('datadictionary/del/<str:req_id>/', views.data_dictionatyDelete, name='data_dictionatyDelete'),
     path('datadictionary/', views.data_dictionaty, name="data_dictionaty"),
 
 

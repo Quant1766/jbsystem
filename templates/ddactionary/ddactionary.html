@@ -157,10 +157,9 @@
                            <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
                            <div class="btn-group">
                               <div class="buttonexport">
-                                 <a href="#" class="btn btn-add" data-toggle="modal" data-target="#add_pacient"><i class="fa fa-plus"></i> Add Pacient</a>
+                                 <a href="#" class="btn btn-add" data-toggle="modal" data-target="#add_ddictionary"><i class="fa fa-plus"></i> Add DataDictionary</a>
                               </div>
-                               <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Table Data</button>
-                               <a class="btn btn-add" data-toggle="modal" data-target="#load_pacient" style="margin-left: 21px;"><i class="fa fa-bars"></i> Import Data</a>
+
                               <ul class="dropdown-menu exp-drop" role="menu">
 
                                  <li class="divider"></li>
@@ -201,6 +200,7 @@
                                   <tbody>
                                   {% for data_ in data_dictionary %}
                                       <tr>
+
                                           <td><p style="width: 20px;">{{ data_.id }}</p></td>
                                           <td><p style="width: 20px;">{{ data_.f_code }}</p></td>
                                           <td><p style="width: 20px;">{{ data_.f_score }}</p></td>
@@ -218,8 +218,9 @@
                                           </td>
                                           <td>
                                               <select class="form-control" style="background-color: #3c990b;width: 100px;color: white;">
-                                                <option style="background-color: #3c990b;color: white;">Yes</option>
-                                                <option style="background-color: #E5343D;color: white">No</option>
+                                                <option style="background-color: #3c990b;color: white;">Green</option>
+                                                <option style="background-color: white;color: black">White</option>
+                                                  <option style="background-color: #E5343D;color: white">Red</option>
                                              </select>
                                           </td>
 
@@ -231,15 +232,10 @@
                                               <span class="sr-only">info</span>
                                               </button>
                                               <ul role="menu" class="dropdown-menu">
-                                                 <li><a href="#">Edit</a>
+
+                                                  <li><button type="button" class="btn btn-danger btn-xs" onclick="modelDeleteSetID('{{ data_.id }}')" data-toggle="modal" data-target="#delt">Delete</button>
                                                  </li>
-                                                 <li><a href="#">Delete</a>
-                                                 </li>
-                                                 <li><a href="#">Something else here</a>
-                                                 </li>
-                                                 <li class="divider"></li>
-                                                 <li><a href="#">Separated link</a>
-                                                 </li>
+
                                               </ul>
                                            </div>
                                           </td>
@@ -253,6 +249,40 @@
                      </div>
                   </div>
                </div>
+                        <div class="modal fade" id="delt" tabindex="-1" role="dialog">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-user m-r-5"></i> Delete Notice</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal" id="deleteactionfrom" method="post" >
+                                    {% csrf_token %}
+                                     <fieldset>
+                                       <div class="col-md-12 form-group user-form-group">
+                                          <label class="control-label">Delete Notice</label>
+                                          <div class="pull-right">
+                                             <button type="button" class="btn btn-danger btn-sm">NO</button>
+                                             <button type="submit" class="btn btn-add btn-sm">YES</button>
+                                          </div>
+                                       </div>
+                                    </fieldset>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+
 
                 <div class="modal fade" id="searchmodal" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog">
@@ -382,12 +412,12 @@
                   <!-- /.modal-dialog -->
                </div>
 
-                <div class="modal fade" id="add_pacient" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade" id="add_ddictionary" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog">
                      <div class="modal-content">
                         <div class="modal-header modal-header-primary">
                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                           <h3><i class="fa fa-plus m-r-5"></i>Add Pacient</h3>
+                           <h3><i class="fa fa-plus m-r-5"></i>Add DataDictionary</h3>
                         </div>
                         <div class="modal-body">
                            <div class="row">
@@ -397,41 +427,45 @@
                                      <fieldset>
                                        <!-- Text input-->
                                        <div class="col-md-4 form-group">
-                                          <label class="control-label">First Name</label>
-                                          <input type="text" id="first_name" name="first_name" placeholder="First Name" class="form-control">
+                                          <label class="control-label">F-code</label>
+                                          <input type="text" id="f_code" name="f_code" placeholder="F10" class="form-control" required>
                                        </div>
                                        <!-- Text input-->
                                        <div class="col-md-4 form-group">
-                                          <label class="control-label">Last Name</label>
-                                          <input type="text" id="last_name" name="last_name" placeholder="Surname" class="form-control">
+                                          <label class="control-label">F Score</label>
+                                          <input type="text" id="f_score" name="f_score" placeholder="0.01" class="form-control" required>
                                        </div>
 
                                         <div class="col-md-4 form-group">
-                                          <label class="control-label">Date of birth</label>
-                                            <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" name="trip-start" min="1900-01-01" max="2025-12-31">
-
+                                          <label class="control-label">Data Points</label>
+                                          <input type="text" id="data_points" name="data_points" placeholder="ULR" class="form-control">
                                        </div>
 
 
                                         <div class="col-md-4 form-group">
-                                          <label class="control-label">Phone</label>
-                                        <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                          <label class="control-label">Data Dictionary</label>
+                                          <input type="text" id="data_dictionary" name="data_dictionary" placeholder="value: Upper-inner peripheral" class="form-control" required>
                                        </div>
 
                                         <div class="col-md-4 form-group">
-                                            <label class="control-label">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email">
+                                            <label class="control-label">Display Destination</label>
+                                          <input type="text" id="display_destination" name="display_destination" placeholder="Box" class="form-control" required>
                                         </div>
 
                                          <div class="col-md-4 form-group">
-                                          <label class="control-label">City</label>
-                                          <input type="text" id="city" name="city" placeholder="city" class="form-control">
+                                          <label class="control-label">u-score</label>
+                                          <input type="text" id="u_score" name="u_score" placeholder="Response" class="form-control" required>
                                        </div>
 
                                          <div class="col-md-4 form-group">
-                                          <label class="control-label">Addres</label>
+                                          <label class="control-label">Link Logic</label>
+                                          <input tabindex="14" type="checkbox" id="link_logic" name="link_logic" checked="" style="position: absolute; opacity: 0;">
+                                       </div>
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">Color Spect</label>
                                           <input type="text" id="addres" name="addres" placeholder="addres" class="form-control">
                                        </div>
+
 
                                         <div class="col-md-12 form-group user-form-group">
                                           <div class="pull-right">
@@ -454,52 +488,6 @@
                </div>
 
 
-               <!-- items Modal1 -->
-               <div class="modal fade" id="load_pacient" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog">
-                     <div class="modal-content">
-                        <div class="modal-header modal-header-primary">
-                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                           <h3><i class="fa fa-plus m-r-5"></i>Add Pacient From file</h3>
-                        </div>
-                        <div class="modal-body">
-                           <div class="row">
-                              <div class="col-md-12">
-                                 <form class="form-horizontal" method="post" id="add_pacient_form" action="">
-                                    {% csrf_token %}
-                                     <fieldset>
-                                       <!-- Text input-->
-                                       <div class="col-md-4 form-group">
-                                          <label class="control-label">File</label>
-                                          <input type="file" id="file_pacients" name="file_pacients" accept="text/xml; text/csv" class="form-control">
-                                       </div>
-                                       <div class="col-md-4 form-group">
-                                          <label class="control-label">Url google drive</label>
-                                          <input type="text" id="google_drive_url" name="google_drive_url" placeholder="First Name" class="form-control">
-                                       </div>
-                                       <div class="col-md-4 form-group">
-                                          <label class="control-label">Google drive user</label>
-                                          <input type="text" id="google_drive_usermane" name="google_drive_usermane" placeholder="First Name" class="form-control">
-                                       </div>
-                                         <div class="col-md-4 form-group">
-                                          <label class="control-label">Google drive pass</label>
-                                          <input type="text" id="google_drive_pass" name="google_drive_pass" placeholder="First Name" class="form-control">
-                                       </div>
-
-                                    </fieldset>
-                                 </form>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-                        </div>
-                     </div>
-                     <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-               </div>
-               <!-- /.modal -->
                <!-- Modal -->
             </section>
             <!-- /.content -->
@@ -518,6 +506,16 @@
       <!-- jquery-ui -->
       <script src="/static/crm/assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
       <!-- Bootstrap -->
+      <script>
+          function modelDeleteSetID(id_){
+              document.getElementById('deleteactionfrom').action = '/datadictionary/del/'+id_+"/"
+          }
+
+          function modelUpdateSetID(id_){
+              document.getElementById('editactionfrom').action = '/datadictionary/edit/'+id_+"/"
+          }
+
+      </script>
       <script src="/static/crm/assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
       <!-- lobipanel -->
       <script src="/static/crm/assets/plugins/lobipanel/lobipanel.min.js" type="text/javascript"></script>
