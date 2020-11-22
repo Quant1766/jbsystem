@@ -111,27 +111,28 @@
                      </a>
                   </li>
                   <li class="treeview">
-                     <a href="/master/">
+                     <a href="{% url 'master_table_view' %}">
                      <span>Master Table</span>
                      <span class="pull-right-container">
                      </span>
                      </a>
                   </li>
                    <li class="treeview">
-                     <a href="/pacients/">
+                     <a href="{% url 'pacientsView' %}">
                      <i class="fa fa-users"></i><span>Pacients Table</span>
+
+                     </a>
+                  </li>
+
+                   <li class="treeview">
+                     <a href="{% url 'data_dictionaty' %}">
+                     <i class="fa fa-users"></i><span>Data Dictionary</span>
                      <span class="pull-right-container">
                      <i class="fa fa-angle-left pull-right"></i>
                      </span>
                      </a>
                   </li>
-                  <li>
-                     <a href="items.html">
-                     <i class="fa fa-file-o"></i><span>Items</span>
-                     <span class="pull-right-container">
-                     </span>
-                     </a>
-                  </li>
+
                </ul>
             </div>
             <!-- /.sidebar -->

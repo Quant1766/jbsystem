@@ -8,7 +8,7 @@ urlpatterns = [
 
     path('master/',views.master_table_view, name="master_table_view"),
     path('pacients/', views.pacientsView, name="pacientsView"),
-    path('datadictionary/', views.datadictionary_view, name="datadictionary_view"),
+    path('datadictionary/', views.data_dictionaty, name="data_dictionaty"),
 
 
     path('pacient/del/<str:req_id>/', views.pacientDelete, name='pacientDelete'),

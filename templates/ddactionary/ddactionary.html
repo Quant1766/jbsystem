@@ -111,33 +111,28 @@
                      </a>
                   </li>
                   <li class="treeview">
-                     <a href="/master/">
+                     <a href="{% url 'master_table_view' %}">
                      <span>Master Table</span>
                      <span class="pull-right-container">
                      </span>
                      </a>
                   </li>
                    <li class="treeview">
-                     <a href="/pacients/">
+                     <a href="{% url 'pacientsView' %}">
                      <i class="fa fa-users"></i><span>Pacients Table</span>
 
                      </a>
                   </li>
+
                    <li class="treeview">
-                     <a href="/pacients/">
+                     <a href="{% url 'data_dictionaty' %}">
                      <i class="fa fa-users"></i><span>Data Dictionary</span>
                      <span class="pull-right-container">
                      <i class="fa fa-angle-left pull-right"></i>
                      </span>
                      </a>
                   </li>
-                  <li>
-                     <a href="items.html">
-                     <i class="fa fa-file-o"></i><span>Items</span>
-                     <span class="pull-right-container">
-                     </span>
-                     </a>
-                  </li>
+
                </ul>
             </div>
             <!-- /.sidebar -->
@@ -191,15 +186,17 @@
                               <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
                                  <thead>
                                     <tr class="info">
-                                       <th>ID</th>
-                                        <th>NSH ID</th>
-                                       <th>First Name</th>
-                                       <th>Last Name</th>
-                                       <th>Date of birth</th>
-                                       <th>Pacient phone</th>
-                                       <th>Email</th>
-                                        <th>City</th>
-                                        <th>Address</th>
+                                        <th>SI No</th>
+                                        <th></th>
+                                        <th>F Code</th>
+                                        <th>F Score</th>
+                                        <th>Data Points</th>
+                                        <th>Data Dictionary</th>
+                                        <th>Display Destination</th>
+                                        <th>u-score</th>
+                                        <th>Link Logic</th>
+                                        <th>Color Spect</th>
+                                        <th>Action</th>
                                     </tr>
                                  </thead>
                                   <tbody>
@@ -207,15 +204,31 @@
                                       <tr>
                                           <td><p style="width: 20px;">{{ pacient.id }}</p></td>
                                           <td><p style="width: 80px;">{{ pacient.nsh_id }}</p></td>
-                                          <td><p style="width: 150px;">{{ pacient.first_name }}</p></td>
+                                          <td><p style="width: 150px;">0.19</p></td>
 
-                                          <td><p style="width: 150px;">{{ pacient.last_name }}</p></td>
-                                          <td><p style="width: 150px;">{{ pacient.date_of_birth }}</p></td>
-                                          <td><p style="width: 150px;">{{ pacient.phone }}</p></td>
+                                          <td><p style="width: 150px;">RUQ</p></td>
+                                          <td><p style="width: 150px;">Right upper part of body</p></td>
+                                          <td><p style="width: 150px;">Box</p></td>
 
-                                          <td><p style="width: 150px;">{{ pacient.email }}</p></td>
-                                          <td><p style="width: 250px;">{{ pacient.default_city }}</p></td>
-                                          <td> <p style="width: 250px;">{{ pacient.home_addres }}</p></td>
+                                          <td><p style="width: 150px;">1</p></td>
+                                          <td>
+                                              <select class="form-control"  style="background-color: #3c990b; width: 100px;color: white;">
+                                                <option style="background-color: #3c990b;color: white">Yes</option>
+                                                <option style="background-color: #E5343D;color: white">No</option>
+                                             </select>
+                                          </td>
+                                          <td>
+                                              <select class="form-control" style="background-color: #3c990b;width: 100px;color: white;">
+                                                <option style="background-color: #3c990b;color: white;">Yes</option>
+                                                <option style="background-color: #E5343D;color: white">No</option>
+                                             </select>
+                                          </td>
+                                          <td>
+                                              <select class="form-control" style="background-color: #3c990b;width: 100px;color: white;">
+                                                <option style="background-color: #3c990b;color: white;">Green</option>
+                                                <option style="background-color: #E5343D;color: white">Red</option>
+                                             </select>
+                                          </td>
                                       </tr>
                                   {% endfor %}
 
