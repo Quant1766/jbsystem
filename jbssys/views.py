@@ -22,7 +22,7 @@ from .models import (
     MedicalOperation,
     ChldPacientDurBreast,
     RelationhipPacient,
-    Cancer, CancerHistory
+    Cancer, CancerHistory, DataDictionary
 )
 
 import jbssys.validators as vaidator_data
@@ -969,8 +969,8 @@ def parse_datapoint_62(data,size=0):
 def data_dictionaty(request):
     search_param = {}
     page = 1
-    master_table = DataFormTable.objects.filter(**search_param).order_by('create_datetime')[(page - 1) * 50:50 * page]
-    return render(request,'ddactionary/ddactionary.html',{"pacients":master_table})
+    data_dictionary = DataDictionary.objects.filter(**search_param).order_by('id')[(page - 1) * 50:50 * page]
+    return render(request,'ddactionary/ddactionary.html',{"data_dictionary":data_dictionary})
 
 def parse_drugs(data):
     return_data = []

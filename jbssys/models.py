@@ -2059,7 +2059,6 @@ class DataDictionary(models.Model):
 
     is_hide = models.BooleanField("is hide", null=True, blank=True, default=False, )
 
-    key = models.CharField('Data point', max_length=20, null=True, blank=True,default="")
     value = models.TextField(
         null=True, blank=True,
         max_length=2500,

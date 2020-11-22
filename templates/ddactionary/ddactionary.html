@@ -187,7 +187,6 @@
                                  <thead>
                                     <tr class="info">
                                         <th>SI No</th>
-                                        <th></th>
                                         <th>F Code</th>
                                         <th>F Score</th>
                                         <th>Data Points</th>
@@ -200,17 +199,17 @@
                                     </tr>
                                  </thead>
                                   <tbody>
-                                  {% for pacient in pacients %}
+                                  {% for data_ in data_dictionary %}
                                       <tr>
-                                          <td><p style="width: 20px;">{{ pacient.id }}</p></td>
-                                          <td><p style="width: 80px;">{{ pacient.nsh_id }}</p></td>
-                                          <td><p style="width: 150px;">0.19</p></td>
+                                          <td><p style="width: 20px;">{{ data_.id }}</p></td>
+                                          <td><p style="width: 20px;">{{ data_.f_code }}</p></td>
+                                          <td><p style="width: 20px;">{{ data_.f_score }}</p></td>
 
-                                          <td><p style="width: 150px;">RUQ</p></td>
-                                          <td><p style="width: 150px;">Right upper part of body</p></td>
-                                          <td><p style="width: 150px;">Box</p></td>
+                                          <td><p style="width: 20px;">RUQ</p></td>
+                                          <td><p style="width: 150px;">{{ data_.value }}</p></td>
+                                          <td><p style="width: 40px;">{{ data_.display_distenation }}</p></td>
 
-                                          <td><p style="width: 150px;">1</p></td>
+                                          <td><p style="width: 20px;">{{ data_.u_score }}</p></td>
                                           <td>
                                               <select class="form-control"  style="background-color: #3c990b; width: 100px;color: white;">
                                                 <option style="background-color: #3c990b;color: white">Yes</option>
@@ -223,11 +222,26 @@
                                                 <option style="background-color: #E5343D;color: white">No</option>
                                              </select>
                                           </td>
-                                          <td>
-                                              <select class="form-control" style="background-color: #3c990b;width: 100px;color: white;">
-                                                <option style="background-color: #3c990b;color: white;">Green</option>
-                                                <option style="background-color: #E5343D;color: white">Red</option>
-                                             </select>
+
+                                      <td>
+                                             <div class="btn-group  m-b-5">
+                                              <button type="button" class="btn btn-info">Action</button>
+                                              <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-info" aria-expanded="false">
+                                              <span class="caret"></span>
+                                              <span class="sr-only">info</span>
+                                              </button>
+                                              <ul role="menu" class="dropdown-menu">
+                                                 <li><a href="#">Edit</a>
+                                                 </li>
+                                                 <li><a href="#">Delete</a>
+                                                 </li>
+                                                 <li><a href="#">Something else here</a>
+                                                 </li>
+                                                 <li class="divider"></li>
+                                                 <li><a href="#">Separated link</a>
+                                                 </li>
+                                              </ul>
+                                           </div>
                                           </td>
                                       </tr>
                                   {% endfor %}
