@@ -188,6 +188,8 @@
                                         <th>SI No</th>
                                         <th>F Code</th>
                                         <th>F Score</th>
+                                        <th>F Score A</th>
+                                        <th>F Score B</th>
                                         <th>Data Points</th>
                                         <th>Data Dictionary</th>
                                         <th>Display Destination</th>
@@ -204,8 +206,9 @@
                                           <td><p style="width: 20px;">{{ data_.id }}</p></td>
                                           <td><p style="width: 20px;">{{ data_.f_code }}</p></td>
                                           <td><p style="width: 20px;">{{ data_.f_score }}</p></td>
-
-                                          <td><p style="width: 20px;">RUQ</p></td>
+                                          <td><p style="width: 20px;">{{ data_.f_score_a }}</p></td>
+                                          <td><p style="width: 20px;">{{ data_.f_score_b }}</p></td>
+                                          <td><p style="width: 20px;">{{ data_.data_point }}</p></td>
                                           <td><p style="width: 150px;">{{ data_.value }}</p></td>
                                           <td><p style="width: 40px;">{{ data_.display_distenation }}</p></td>
 
@@ -225,7 +228,7 @@
                                           </td>
 
                                       <td>
-                                             <div class="btn-group  m-b-5">
+                                             <div class="btn-group  m-b-5" style="width: 120px">
                                               <button type="button" class="btn btn-info">Action</button>
                                               <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-info" aria-expanded="false">
                                               <span class="caret"></span>
@@ -422,7 +425,7 @@
                         <div class="modal-body">
                            <div class="row">
                               <div class="col-md-12">
-                                 <form class="form-horizontal" method="post" id="add_pacient_form" action="">
+                                 <form class="form-horizontal" method="post" id="add_data_dictionary_form" action="">
                                     {% csrf_token %}
                                      <fieldset>
                                        <!-- Text input-->
@@ -433,7 +436,17 @@
                                        <!-- Text input-->
                                        <div class="col-md-4 form-group">
                                           <label class="control-label">F Score</label>
-                                          <input type="text" id="f_score" name="f_score" placeholder="0.01" class="form-control" required>
+                                          <input type="number" step="0.01" id="f_score" name="f_score" placeholder="0.01" class="form-control" required>
+                                       </div>
+
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">F Score A</label>
+                                          <input type="number" step="0.01" id="f_score_a" name="f_score_a" placeholder="0.01" class="form-control" required>
+                                       </div>
+
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">F Score B</label>
+                                          <input type="number" step="0.01" id="f_score_b" name="f_score_b" placeholder="0.01" class="form-control" required>
                                        </div>
 
                                         <div class="col-md-4 form-group">
@@ -454,16 +467,27 @@
 
                                          <div class="col-md-4 form-group">
                                           <label class="control-label">u-score</label>
-                                          <input type="text" id="u_score" name="u_score" placeholder="Response" class="form-control" required>
-                                       </div>
+                                         <select class="form-control" id="u_score" name="u_score" style="background-color: #3c990b;width: 100px;color: white;">
+                                                <option style="background-color: #3c990b;color: white;">1</option>
+                                                <option style="background-color: white;color: black">0</option>
+                                             </select>
+                                         </div>
 
                                          <div class="col-md-4 form-group">
-                                          <label class="control-label">Link Logic</label>
-                                          <input tabindex="14" type="checkbox" id="link_logic" name="link_logic" checked="" style="position: absolute; opacity: 0;">
+                                           <label class="control-label">Link Logic</label>
+
+                                          <select class="form-control" id="link_logic" name="link_logic" style="background-color: #3c990b;width: 100px;color: white;">
+                                                <option style="background-color: #3c990b;color: white;">Yes</option>
+                                                <option style="background-color: white;color: black">No</option>
+                                             </select>
                                        </div>
                                          <div class="col-md-4 form-group">
                                           <label class="control-label">Color Spect</label>
-                                          <input type="text" id="addres" name="addres" placeholder="addres" class="form-control">
+                                          <select class="form-control" id="color_spect" name="color_spect" style="background-color: #3c990b;width: 100px;color: white;">
+                                                <option style="background-color: #3c990b;color: white;">Green</option>
+                                                <option style="background-color: white;color: black">White</option>
+                                                  <option style="background-color: #E5343D;color: white">Red</option>
+                                             </select>
                                        </div>
 
 

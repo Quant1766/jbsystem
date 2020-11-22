@@ -2056,6 +2056,9 @@ class DataDictionary(models.Model):
     model_name = models.CharField("Model Name", max_length=50, default='')
     f_code = models.CharField("F Code", max_length=3, default='')
     f_score = models.CharField("F Score", max_length=5, default='',)
+    f_score_a = models.CharField("F Score a", max_length=5, default='',)
+    f_score_b = models.CharField("F Score b", max_length=5, default='',)
+    data_point = models.CharField("data point", max_length=20, default='',)
 
     is_hide = models.BooleanField("is hide", null=True, blank=True, default=False, )
 

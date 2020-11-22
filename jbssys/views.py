@@ -975,11 +975,55 @@ def data_dictionatyDelete(request,req_id):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def data_dictionaty(request):
-    search_param = {'is_hide':False}
-    page = 1
-    data_dictionary = DataDictionary.objects.filter(**search_param).order_by('id')[(page - 1) * 50:50 * page]
-    return render(request,'ddactionary/ddactionary.html',{"data_dictionary":data_dictionary})
+    if request.method == "GET":
+        search_param = {'is_hide':False}
+        page = 1
+        data_dictionary = DataDictionary.objects.filter(**search_param).order_by('id')[(page - 1) * 50:50 * page]
+        return render(request,'ddactionary/ddactionary.html',{"data_dictionary":data_dictionary})
 
+    elif request.method=="POST":
+        print(request.POST)
+
+        f_code = request.POST.get('f_code')
+        f_score = request.POST.get('f_score')
+
+        f_score_a = request.POST.get('f_score_a')
+
+        f_score_b = request.POST.get('f_score_b')
+
+        data_points = request.POST.get('data_points')
+
+        value = request.POST.get('data_dictionary')
+
+        display_destination = request.POST.get('display_destination')
+
+        u_score = request.POST.get('u_score')
+
+        link_logic = request.POST.get('link_logic')
+        if link_logic == "Yes":
+            link_logic = True
+        else:
+            link_logic = False
+
+        color_spect = request.POST.get('color_spect')
+
+
+        data_dictionary_= DataDictionary.objects.create(
+                        color=color_spect,
+                        link_logic=link_logic,
+                        u_score=u_score,
+                        display_distenation=display_destination,
+                        data_point=data_points,
+                        value=value,
+                        f_score_b=f_score_b,
+                        f_score_a=f_score_a,
+                        f_score=f_score,f_code=f_code
+                    )
+
+        data_dictionary_.save()
+
+
+        return redirect('/datadictionary/')
 def parse_drugs(data):
     return_data = []
     l = re.split(r"(\: \d\,)* unique\:\d\[\]\:", data.replace('\n', ' '))
