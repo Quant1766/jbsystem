@@ -10,6 +10,10 @@ from pprint import pprint
 import requests
 import bs4
 from requests.auth import HTTPBasicAuth
+from pyxlsb import convert_date
+
+
+
 def validate_date(date_text):
     try:
         dtime = str(datetime.datetime.strptime(
@@ -98,24 +102,48 @@ class GoogleDrive:
 
         for list_data in self.table_data_list:
             data = list_data[2][0]
+            print("list_data",list_data)
+
             indexes = [list_data[0],list_data[1]]
             if "3" in data.keys():
                 data_ = data["3"][0]
-
 
 
                 if type(data_ ) == int and data_== 2:
                     val_ = data["3"][1]
                     data_list.append(val_)
 
-                    val_ = val_
+                    try:
+                        val_ = float(val_)
+
+                    except:
+                        val_ = val_
+
                     self.table_data[indexes[0]][indexes[1]] = val_
 
                 elif type(data_ ) == dict and "3" in data_.keys():
-                    val_ = str(int(data_["3"]))
+                    print("data_",data_)
+                    if len(str(data_["3"])) > 7:
+                        print('data_["3"]',str(data_["3"]))
 
-                    data_list.append(val_)
+                        val_ = float(data_["3"])
+                        val_ = format(convert_date(val_), '%Y-%m-%d %H:%M:%S')
+                        print('val_1', val_)
+                        print('val_2', val_)
 
+                        data_list.append(str(val_))
+
+                    elif len(str(data_["3"])) > 5:
+                        val_ = float(data_["3"])
+                        val_ = format(convert_date(val_), '%Y-%m-%d')
+                        data_list.append(str(val_))
+
+                    else:
+                        val_ = str(int(data_["3"]))
+
+                        data_list.append(val_)
+
+                    self.table_data[indexes[0]][indexes[1]] = val_
 
             elif "25" in data.keys():
                 val_ = data_list[data["25"]]
@@ -182,3 +210,11 @@ class GoogleDrive:
 # gd.gog_drive_to_json()
 # gd.data_from_jjson()
 # gd.table_to_xls()
+# a= 3930.62168981481
+# a1= 43930.66738425926
+# a2= 43930.667604166665
+# a3= 44115.49199074074
+# a4= 25569.0
+# from pyxlsb import convert_date
+# print(format(convert_date(44115.49199074074), '%Y-%m-%d %H:%M:%S')
+#       )
