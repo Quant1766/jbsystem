@@ -106,17 +106,6 @@ def gen_aaaannnna(old_id="AAA0000A"):
 
     return new_id
 
-class DataDictionary(models.Model):
-    is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
-
-    key = models.CharField('key', max_length=20, null=True, blank=True)
-    value = models.TextField(
-        null=True, blank=True,
-        max_length=2500,
-        default='')
-    color = models.CharField('Color', max_length=30, null=True, blank=True)
-    model_name = models.CharField('model Name', max_length=50, null=True, blank=True)
-    model_id = models.CharField('model id', max_length=10, null=True, blank=True)
 
 
 
@@ -2063,3 +2052,21 @@ class DataFormTable(models.Model):
     datapoint_120 = models.CharField("Id in disk", max_length=30, default='')
 
 
+class DataDictionary(models.Model):
+    model_name = models.CharField("Model Name", max_length=50, default='')
+    f_code = models.CharField("F Code", max_length=3, default='')
+    f_score = models.CharField("F Score", max_length=5, default='',)
+
+    is_hide = models.BooleanField("is hide", null=True, blank=True, default=False, )
+
+    key = models.CharField('Data point', max_length=20, null=True, blank=True,default="")
+    value = models.TextField(
+        null=True, blank=True,
+        max_length=2500,
+        default='')
+    color = models.CharField('Color', max_length=30, null=True, blank=True,default="")
+    model_id = models.CharField('model id', max_length=10, null=True, blank=True,default="")
+
+    link_logic = models.BooleanField("Is logLink",default=False)
+    u_score = models.CharField('u score', max_length=3, null=True, blank=True,default="")
+    display_distenation =  models.CharField('display distenation', max_length=50, null=True, blank=True,default="")

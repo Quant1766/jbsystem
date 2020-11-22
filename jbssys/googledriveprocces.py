@@ -87,14 +87,14 @@ class GoogleDrive:
 
                 table_data = json.loads(data[1])
         self.table_size = (table_data[0][4],table_data[0][2])
+        print("self.table_size",self.table_size)
 
 
-
-        try:
-            self.table_data_list = table_data[2]
-            self.table_gd_list_to_list()
-        except:
-            self.get_table_max100()
+        # try:
+        self.table_data_list = table_data[2]
+        self.table_gd_list_to_list()
+        # except:
+        #     self.get_table_max100()
 
     def table_gd_list_to_list(self):
         data_list = []
@@ -102,9 +102,10 @@ class GoogleDrive:
 
         for list_data in self.table_data_list:
             data = list_data[2][0]
-            print("list_data",list_data)
+            # print("list_data",list_data)
 
             indexes = [list_data[0],list_data[1]]
+            # print('data_list', data_list)
             if "3" in data.keys():
                 data_ = data["3"][0]
 
@@ -119,7 +120,6 @@ class GoogleDrive:
                     except:
                         val_ = val_
 
-                    self.table_data[indexes[0]][indexes[1]] = val_
 
                 elif type(data_ ) == dict and "3" in data_.keys():
                     print("data_",data_)
@@ -143,17 +143,17 @@ class GoogleDrive:
 
                         data_list.append(val_)
 
-                    self.table_data[indexes[0]][indexes[1]] = val_
 
             elif "25" in data.keys():
+
                 val_ = data_list[data["25"]]
                 data_list.append(val_)
-                self.table_data[indexes[0]][indexes[1]] = val_
 
             elif "7" in data.keys():
                 val_ = data["7"][1]
                 data_list.append(val_)
-                self.table_data[indexes[0]][indexes[1]] = val_
+
+            self.table_data[indexes[0]][indexes[1]] = val_
 
         self.table_data = self.table_data[1:]
 
@@ -204,7 +204,7 @@ class GoogleDrive:
 
 
 #
-# url = 'https://docs.google.com/spreadsheets/d/1Y5DAslZU8ha3fHVIOkVRl1R8o1UwYeXCFVHDMZLz-cU/edit#gid=120922622'
+# url = 'https://docs.google.com/spreadsheets/d/1Y5DAslZU8ha3fHVIOkVRl1R8o1UwYeXCFVHDMZLz-cU/edit#gid=1574661862'
 # gd = GoogleDrive(url)
 # gd.request()
 # gd.gog_drive_to_json()
