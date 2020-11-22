@@ -50,3 +50,5 @@ lxml
 googledrivedownloader
 gsheets
 google_auth_oauthlib
+pyexcel-xls
+pyexcel-xlsx

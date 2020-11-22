@@ -1,7 +1,7 @@
 import csv
 import re
 import threading
-
+import pandas as pd
 import xlwt
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
@@ -24,6 +24,7 @@ from .models import (
     RelationhipPacient,
     Cancer, CancerHistory
 )
+
 import jbssys.validators as vaidator_data
 
 
@@ -1065,7 +1066,26 @@ def master_table_view(request):
         try:
 
             file_DataForm = request.FILES['file_DataForm']
+            print(file_DataForm)
             file_DataForm = file_DataForm if file_DataForm else None
+            print(file_DataForm)
+
+            dfs = pd.read_excel(file_DataForm)
+            print(dfs)
+            # from pyexcel_xls import get_data as xls_get
+            # from pyexcel_xlsx import get_data as xlsx_get
+
+            # file_DataForm = request.FILES['file_DataForm']
+            # pd.read_excel(file_DataForm, )
+            # print("file_DataForm",file_DataForm)
+            # if (str(file_DataForm).split('.')[-1] == 'xls'):
+            #     data = xls_get(file_DataForm, column_limit=120)
+            #     print("data", data)
+            # elif (str(file_DataForm).split('.')[-1] == 'xlsx'):
+            #     data = xlsx_get(file_DataForm, column_limit=120)
+            #     print("data", data)
+            for i in dfs:
+                print(i)
         except:
             file_DataForm = None
 
@@ -1076,16 +1096,13 @@ def master_table_view(request):
         google_drive_url_DataForm = google_drive_url_DataForm if google_drive_url_DataForm else None
 
         if google_drive_url_DataForm:
-            print('google_drive_url_DataForm')
 
             gg_drive_proccess1 = GoogleDrive(google_drive_url_DataForm)
             gg_drive_proccess1.request()
             gg_drive_proccess1.gog_drive_to_json()
             gg_drive_proccess1.data_from_jjson()
             for row_ in gg_drive_proccess1.table_data:
-                print(row_)
                 pacient_id = procces_pacient(row_[:8])
-                print(pacient_id)
 
 
                 if pacient_id ==  None: continue
