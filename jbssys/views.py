@@ -998,7 +998,6 @@ def data_dictionatyEdit(request,req_id):
         else:
             link_logic = False
 
-        print("link_logic",link_logic)
 
 
         color_spect = request.POST.get('edit_color_spect')
