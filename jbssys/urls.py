@@ -12,6 +12,8 @@ urlpatterns = [
     path('datadictionary/del/<str:req_id>/', views.data_dictionatyDelete, name='data_dictionatyDelete'),
     path('datadictionary/', views.data_dictionaty, name="data_dictionaty"),
     path('datadictionary/edit/<str:req_id>/', views.data_dictionatyEdit, name='data_dictionatyEdit'),
+    path('datadictionaty/load/',views.data_dictionaty_load,name='data_dictionaty_load'),
+
 
     path('pacient/del/<str:req_id>/', views.pacientDelete, name='pacientDelete'),
     path('pacients/download/',views.pacientDownloadFile,name='pacientDownloadFile'),

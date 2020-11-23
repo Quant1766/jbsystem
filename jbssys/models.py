@@ -2054,11 +2054,15 @@ class DataFormTable(models.Model):
 
 class DataDictionary(models.Model):
     model_name = models.CharField("Model Name", max_length=50, default='Data Form')
-    f_code = models.CharField("F Code", max_length=3, default='')
-    f_score = models.CharField("F Score", max_length=5, default='',)
+    f_code = models.CharField("F Code", max_length=3, null=False)
+    f_score = models.CharField("F Score", max_length=5,null=False)
     f_score_a = models.CharField("F Score a", max_length=5, default='',)
     f_score_b = models.CharField("F Score b", max_length=5, default='',)
-    data_point = models.CharField("data point", max_length=20, default='',)
+
+    data_point_a = models.CharField("Data Point a", max_length=150, default='', )
+    data_point_b = models.CharField("Data Point b", max_length=150, default='', )
+
+    data_point = models.CharField("data point", max_length=150,null=False)
 
     is_hide = models.BooleanField("is hide", null=True, blank=True, default=False, )
 
@@ -2066,11 +2070,11 @@ class DataDictionary(models.Model):
         null=True, blank=True,
         max_length=2500,
         default='')
-    color = models.CharField('Color', max_length=30, null=True, blank=True,default="")
+    color = models.CharField('Color', max_length=30, null=False, blank=True)
     model_id = models.CharField('model id', max_length=10, null=True, blank=True,default="")
 
     link_logic = models.BooleanField("Is logLink",default=False)
-    u_score = models.CharField('u score', max_length=3,  null=True, blank=True,default="")
+    u_score = models.CharField('u score', max_length=3,  null=False, blank=True)
 
     display_distenation =  models.CharField(
         'display distenation', choices=(
@@ -2086,7 +2090,6 @@ class DataDictionary(models.Model):
             ('SOC Box', 'SOC Box'),
             ('', ''),
         ),
-        max_length=50,
-        null=True,
+        max_length=50,null=False,
         blank=True,
         default="")

@@ -1,6 +1,8 @@
 import csv
 import re
 import threading
+from io import BytesIO
+
 import pandas as pd
 import xlwt
 from django.contrib.auth import authenticate, login
@@ -8,6 +10,7 @@ from django.shortcuts import render, redirect
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.encoding import smart_str
+from openpyxl import load_workbook
 from requests import Response
 from rest_framework.decorators import api_view
 from .googledriveprocces import GoogleDrive
@@ -1018,6 +1021,84 @@ def data_dictionatyEdit(request,req_id):
 
         data_dictionaty_.save()
 
+        return redirect('/datadictionary/')
+
+def data_dictionaty_load(request):
+    if 'POST' == request.method:
+        file_in_memory = request.FILES['file']
+        df = pd.read_excel(file_in_memory)
+        print(df.keys())
+
+        for index, row in df.iterrows():
+
+            f_code = f'F{str(row["F-code"]).split(" ")[1]}'.strip()
+            f_code = f_code if f_code != "" and f_code !="nan" else ""
+
+            f_score = str(row["F-score"]).strip()
+            f_score = f_score if f_score != "" and f_score != "nan" else ""
+
+
+            f_score_a = str(row["F-score A"]).strip()
+            f_score_a = f_score_a if f_score_a != "" and f_score_a != "nan" else ""
+
+            f_score_b = str(row["F-score B"]).strip()
+            f_score_b = f_score_b if f_score_b != "" and f_score_b != "nan" else ""
+
+
+            data_point = str(row["Data Point"]).strip()
+            data_point = data_point if data_point != "" and data_point != "nan" else ""
+
+
+            u_score = str(row['U-Score']).strip()
+            u_score = u_score if u_score != "" and u_score != "nan" else ""
+
+
+            link_logic = str(row['Link Logic']).strip()
+            link_logic = True if link_logic == "Yes" else False
+
+            data_point_a = str(row['Data point A']).strip()
+            data_point_a = data_point_a if data_point_a != "" and data_point_a != "nan" else ""
+
+
+            data_point_b = str(row['Data point B']).strip()
+            data_point_b = data_point_b if data_point_b != "" and data_point_b != "nan" else ""
+
+
+            data_dictionary_ = str(row['Data Dictionary']).strip()
+            data_dictionary_ = data_dictionary_ if data_dictionary_ != "" and data_dictionary_ != "nan" else ""
+
+
+            display_distenation = str(row['Display Destination']).strip()
+            display_distenation = display_distenation if display_distenation != "" and display_distenation != "nan" else ""
+
+
+            color = str(row['Colour Specs']).split("#")[0].strip()
+            color = color if color != "" and color != "nan" else ""
+
+
+
+
+            data_dictionary_form, created = DataDictionary.objects.get_or_create(
+                    f_code=f_code,
+                    value=data_dictionary_
+            )
+
+            if data_dictionary_form:
+                data_dictionary_form.f_score = f_score
+
+                data_dictionary_form.f_score_a = f_score_a
+                data_dictionary_form.f_score_b = f_score_b
+                data_dictionary_form.u_score = u_score
+                data_dictionary_form.link_logic = link_logic
+                data_dictionary_form.data_point = data_point
+
+                data_dictionary_form.data_point_a = data_point_a
+                data_dictionary_form.data_point_b = data_point_b
+                data_dictionary_form.display_distenation = display_distenation
+                data_dictionary_form.color = color
+
+
+            data_dictionary_form.save()
         return redirect('/datadictionary/')
 
 def data_dictionaty(request):

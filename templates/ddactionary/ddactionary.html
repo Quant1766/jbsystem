@@ -104,13 +104,13 @@
             <div class="sidebar" style="height: auto;">
                <!-- sidebar menu -->
                <ul class="sidebar-menu">
-                  <li class="active">
+                   <li class="active">
                      <a href="#"><i class="fa fa-tachometer"></i><span>Dashboard</span>
                      <span class="pull-right-container">
                      </span>
                      </a>
                   </li>
-                  <li class="treeview">
+                   <li class="treeview">
                      <a href="{% url 'master_table_view' %}">
                      <span>Master Table</span>
                      <span class="pull-right-container">
@@ -123,7 +123,6 @@
 
                      </a>
                   </li>
-
                    <li class="treeview">
                      <a href="{% url 'data_dictionaty' %}">
                      <i class="fa fa-users"></i><span>Data Dictionary</span>
@@ -156,8 +155,12 @@
                         <div class="panel-body">
                            <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
                            <div class="btn-group">
+
                               <div class="buttonexport">
                                  <a href="#" class="btn btn-add" data-toggle="modal" data-target="#add_ddictionary"><i class="fa fa-plus"></i> Add DataDictionary</a>
+                              </div>
+                               <div class="buttonexport">
+                                 <a href="#" class="btn btn-add" data-toggle="modal" data-target="#load_ddictionary"><i class="hvr-buzz-out fa fa-upload"></i> Load DataDictionary</a>
                               </div>
 
                               <ul class="dropdown-menu exp-drop" role="menu">
@@ -247,7 +250,7 @@
                      </div>
                   </div>
                </div>
-                        <div class="modal fade" id="delt" tabindex="-1" role="dialog">
+                <div class="modal fade" id="delt" tabindex="-1" role="dialog">
                   <div class="modal-dialog">
                      <div class="modal-content">
                         <div class="modal-header modal-header-primary">
@@ -863,6 +866,56 @@
                                        </div>
                                     </fieldset>
                                  </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+                <div class="modal fade" id="load_ddictionary" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-plus m-r-5"></i>Add DataDictionary From file</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal" method="post" id="add_ddictionary" action="/datadictionaty/load/" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                     <fieldset>
+                                       <!-- Text input-->
+                                          <label class="control-label">File</label>
+                                          <input type="file" id="file" name="file"  onblur="loadChecker()" accept="text/xml;" class="form-control" required>
+
+
+
+                                    </fieldset>
+
+                                     <button type="submit" class="btn btn-add btn-sm" disabled='true' id="buttonimportdata">Save</button>
+                                 </form>
+                                  <script>
+                                      function validGDurl(url_){
+                                          is_valid = url_.includes("https://docs.google.com/spreadsheets/d/");
+                                          return is_valid;
+                                      }
+                                         function loadChecker(){
+                                             file = document.getElementById('file').value;
+
+                                             if (file){
+                                                 document.getElementById('buttonimportdata').disabled = false;
+
+                                             }else {
+                                                 document.getElementById('buttonimportdata').disabled = true;
+                                             }
+                                         }
+                                     </script>
                               </div>
                            </div>
                         </div>
