@@ -2053,7 +2053,7 @@ class DataFormTable(models.Model):
 
 
 class DataDictionary(models.Model):
-    model_name = models.CharField("Model Name", max_length=50, default='')
+    model_name = models.CharField("Model Name", max_length=50, default='Data Form')
     f_code = models.CharField("F Code", max_length=3, default='')
     f_score = models.CharField("F Score", max_length=5, default='',)
     f_score_a = models.CharField("F Score a", max_length=5, default='',)
@@ -2070,5 +2070,23 @@ class DataDictionary(models.Model):
     model_id = models.CharField('model id', max_length=10, null=True, blank=True,default="")
 
     link_logic = models.BooleanField("Is logLink",default=False)
-    u_score = models.CharField('u score', max_length=3, null=True, blank=True,default="")
-    display_distenation =  models.CharField('display distenation', max_length=50, null=True, blank=True,default="")
+    u_score = models.CharField('u score', max_length=3,  null=True, blank=True,default="")
+
+    display_distenation =  models.CharField(
+        'display distenation', choices=(
+            ("First Line","First Line"),
+            ('Subject Line', 'Subject Line'),
+            ('Box', 'Box'),
+            ('Noho Box', 'Noho Box'),
+            ('FAH Box', 'FAH Box'),
+            ('DH Box', 'DH Box'),
+            ('PMH Box', 'PMH Box'),
+            ('REP Box', 'REP Box'),
+            ('BPMH Box', 'BPMH Box'),
+            ('SOC Box', 'SOC Box'),
+            ('', ''),
+        ),
+        max_length=50,
+        null=True,
+        blank=True,
+        default="")

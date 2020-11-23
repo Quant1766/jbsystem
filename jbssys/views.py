@@ -974,6 +974,53 @@ def data_dictionatyDelete(request,req_id):
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+def data_dictionatyEdit(request,req_id):
+    if request.method == "POST":
+
+        f_code = request.POST.get('edit_f_code')
+        f_score = request.POST.get('edit_f_score')
+
+        f_score_a = request.POST.get('edit_f_score_a')
+
+        f_score_b = request.POST.get('edit_f_score_b')
+
+        data_points = request.POST.get('edit_data_points')
+
+        value = request.POST.get('edit_data_dictionary')
+
+        display_destination = request.POST.get('edit_display_destination')
+
+        u_score = request.POST.get('edit_u_score')
+
+        link_logic = request.POST.get('edit_link_logic')
+        if link_logic == "Yes":
+            link_logic = True
+        else:
+            link_logic = False
+
+        print("link_logic",link_logic)
+
+
+        color_spect = request.POST.get('edit_color_spect')
+        data_dictionaty_ = DataDictionary.objects.get(id=req_id)
+
+
+        data_dictionaty_.color=color_spect
+        data_dictionaty_.link_logic=link_logic
+        data_dictionaty_.u_score=u_score
+        data_dictionaty_.display_distenation=display_destination
+        data_dictionaty_.data_point=data_points
+        data_dictionaty_.value=value
+        data_dictionaty_.f_score_b=f_score_b
+        data_dictionaty_.f_score_a=f_score_a
+        data_dictionaty_.f_score=f_score
+        data_dictionaty_.f_code=f_code
+
+
+        data_dictionaty_.save()
+
+        return redirect('/datadictionary/')
+
 def data_dictionaty(request):
     if request.method == "GET":
         search_param = {'is_hide':False}
@@ -982,7 +1029,6 @@ def data_dictionaty(request):
         return render(request,'ddactionary/ddactionary.html',{"data_dictionary":data_dictionary})
 
     elif request.method=="POST":
-        print(request.POST)
 
         f_code = request.POST.get('f_code')
         f_score = request.POST.get('f_score')
