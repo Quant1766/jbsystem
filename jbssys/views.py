@@ -5,7 +5,8 @@ from io import BytesIO
 
 import pandas as pd
 import xlwt
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from django.http import HttpResponse, HttpResponseRedirect
@@ -13,6 +14,8 @@ from django.utils.encoding import smart_str
 from openpyxl import load_workbook
 from requests import Response
 from rest_framework.decorators import api_view
+
+from .decorators import user_is_role_adm
 from .googledriveprocces import GoogleDrive
 from .models import (
     DataFormTable,
@@ -25,7 +28,9 @@ from .models import (
     MedicalOperation,
     ChldPacientDurBreast,
     RelationhipPacient,
-    Cancer, CancerHistory, DataDictionary
+    Cancer,
+    CancerHistory,
+    DataDictionary,
 )
 
 import jbssys.validators as vaidator_data
@@ -621,6 +626,13 @@ def master_tableDownloadFile(request):
                 ])
 
             return response
+
+def log_out(request):
+    logout(request)
+    return redirect('/login/')
+
+
+
 def login_view(request):
     if request.method == "POST":
         try:
@@ -636,10 +648,10 @@ def login_view(request):
 
     else:
         return render(request, 'auth/login.html')
-
 def datadictionary_view(request):
     if request.method == "GET":
         return render(request,'ddactionary/ddactionary.html')
+
 def loadbusinessbuysale(data_):
     if data_:
         parse_id = str(uuid4())
@@ -969,14 +981,17 @@ def parse_datapoint_62(data,size=0):
 
     return return_data
 
+@user_is_role_adm
 def data_dictionatyDelete(request,req_id):
     if request.method == "POST":
-        ddict = DataDictionary.objects.get(id=req_id)
-        ddict.is_hide = True
-        ddict.save()
+        # ddict = DataDictionary.objects.get(id=req_id)
+        # ddict.is_hide = True
+        # ddict.save()
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
+@user_is_role_adm
 def data_dictionatyEdit(request,req_id):
     if request.method == "POST":
 
@@ -1101,6 +1116,70 @@ def data_dictionaty_load(request):
             data_dictionary_form.save()
         return redirect('/datadictionary/')
 
+@login_required(login_url='/login/')
+def logic_link(request):
+    if request.method == "GET":
+        search_param = {'is_hide':False}
+        page = 1
+        data_dictionary = DataDictionary.objects.filter(**search_param).order_by('id')[(page - 1) * 50:50 * page]
+        return render(request,'logic_tablwe/logic_table.html',{"data_dictionary":data_dictionary})
+
+@user_is_role_adm
+def logic_linkDelete(request,req_id):
+    if request.method == "POST":
+        pacient = Pacient.objects.get(id=req_id)
+        pacient.is_hide = True
+        pacient.save()
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def logic_linkEdit(request,req_id):
+    if request.method == "POST":
+
+        f_code = request.POST.get('edit_f_code')
+        f_score = request.POST.get('edit_f_score')
+
+        f_score_a = request.POST.get('edit_f_score_a')
+
+        f_score_b = request.POST.get('edit_f_score_b')
+
+        data_points = request.POST.get('edit_data_points')
+
+        value = request.POST.get('edit_data_dictionary')
+
+        display_destination = request.POST.get('edit_display_destination')
+
+        u_score = request.POST.get('edit_u_score')
+
+        link_logic = request.POST.get('edit_link_logic')
+        if link_logic == "Yes":
+            link_logic = True
+        else:
+            link_logic = False
+
+
+
+        color_spect = request.POST.get('edit_color_spect')
+        data_dictionaty_ = DataDictionary.objects.get(id=req_id)
+
+
+        data_dictionaty_.color=color_spect
+        data_dictionaty_.link_logic=link_logic
+        data_dictionaty_.u_score=u_score
+        data_dictionaty_.display_distenation=display_destination
+        data_dictionaty_.data_point=data_points
+        data_dictionaty_.value=value
+        data_dictionaty_.f_score_b=f_score_b
+        data_dictionaty_.f_score_a=f_score_a
+        data_dictionaty_.f_score=f_score
+        data_dictionaty_.f_code=f_code
+
+
+        data_dictionaty_.save()
+
+        return redirect('/datadictionary/')
+
+@login_required(login_url='/login/') #redirect when user is not logged in
 def data_dictionaty(request):
     if request.method == "GET":
         search_param = {'is_hide':False}
@@ -1171,6 +1250,7 @@ def parse_drugs(data):
 
     return return_data
 
+@login_required(login_url='/login/')
 def master_table_view(request):
     if request.method == "GET":
 
@@ -1948,7 +2028,7 @@ def pacientLoad(request):
         gd.data_from_jjson()
 
 
-
+@login_required(login_url='/login/')
 def pacientsView(request):
     if request.method=="POST":
 

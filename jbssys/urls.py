@@ -5,9 +5,15 @@ urlpatterns = [
 
     path('login/',views.login_view,name='login_view'),
     path('sign_up/',views.register_view,name='register_view'),
+    path('log_out/',views.log_out,name="log_out"),
 
     path('master/',views.master_table_view, name="master_table_view"),
     path('pacients/', views.pacientsView, name="pacientsView"),
+
+    path('loglink/',views.logic_link,name="logic_link"),
+    path('loglink/del/<str:req_id>/',views.logic_linkDelete,name="logic_linkDelete"),
+    path('loglink/edit/<str:req_id>/',views.logic_linkEdit,name="logic_linkEdit"),
+
 
     path('datadictionary/del/<str:req_id>/', views.data_dictionatyDelete, name='data_dictionatyDelete'),
     path('datadictionary/', views.data_dictionaty, name="data_dictionaty"),

@@ -53,3 +53,4 @@ google_auth_oauthlib
 pyexcel-xls
 pyexcel-xlsx
 pyxlsb
+django-countries

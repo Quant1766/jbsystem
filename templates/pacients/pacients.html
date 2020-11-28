@@ -88,7 +88,7 @@
                         <ul class="dropdown-menu">
 
                            <li><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
-                           <li><a href="/login/">
+                           <li><a href="{% url 'log_out' %}">
                               <i class="fa fa-sign-out"></i> Signout</a>
                            </li>
                         </ul>
@@ -129,6 +129,13 @@
                      <i class="fa fa-users"></i><span>Data Dictionary</span>
                      <span class="pull-right-container">
                      <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                     </a>
+                  </li>
+                   <li class="treeview">
+                     <a href="{% url 'logic_link' %}">
+                     <span>Logic Link</span>
+                     <span class="pull-right-container">
                      </span>
                      </a>
                   </li>

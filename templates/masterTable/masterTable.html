@@ -135,7 +135,7 @@
                         <img src="{{ user.profile.user_avatar }}" class="img-circle" width="45" height="45" alt="user"></a>
                         <ul class="dropdown-menu">
 
-                           <li><a href="/login/">
+                           <li><a href="{% url 'log_out' %}">
                               <i class="fa fa-sign-out"></i> Signout</a>
                            </li>
                         </ul>
@@ -178,6 +178,13 @@
                      <a href="{% url 'data_dictionaty' %}">
                      <i class="fa fa-users"></i><span>Data Dictionary</span>
 
+                     </a>
+                  </li>
+                   <li class="treeview">
+                     <a href="{% url 'logic_link' %}">
+                     <span>Logic Link</span>
+                     <span class="pull-right-container">
+                     </span>
                      </a>
                   </li>
 

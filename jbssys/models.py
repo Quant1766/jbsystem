@@ -2,6 +2,11 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from django.contrib.auth.models import User
+from django_countries.fields import CountryField
+
+class TypesDoctors(models.Model):
+    type_doctor = models.CharField("Type doctor",max_length=300,default="")
+
 
 class UserProfile(models.Model):
     "DEFAULT USE storename as username casser"
@@ -18,6 +23,8 @@ class UserProfile(models.Model):
         max_length=30,
         null=False,
         default='doctor')
+
+    specialisys = models.ManyToManyField(TypesDoctors)
 
     phone = models.CharField(
         "phone",
@@ -39,6 +46,8 @@ class UserProfile(models.Model):
         blank=True,
         null=True,
         default='')
+
+
 
     home_addres = models.CharField(
         "home",
@@ -179,7 +188,7 @@ class Drug(models.Model):
     routing = models.CharField(max_length=100,
                                   choices=(('Convenience', 'Convenience'),
                                            ('Desired target effect', 'Desired target effect'),
-                                               ('Oral','Oral'),
+                                           ('Oral','Oral'),
                                            ('Local', 'Local'),
 
                                            ('Mouth inhalation', 'Mouth inhalation'),
@@ -203,10 +212,121 @@ class MedicalOperation(models.Model):
 
 
 class Pacient(models.Model):
-    first_name = models.CharField('first name', max_length=30, blank=True)
+    first_name = models.CharField('first name', max_length=30, blank=True,default="")
     last_name = models.CharField('last name', max_length=300, blank=True, default='')
 
-    email = models.EmailField('email address', blank=True)
+    email = models.EmailField('email address', blank=True,default="")
+
+    age = models.CharField("age", max_length=3,null=True, blank=True,default="")
+
+    country = CountryField(blank_label='(GB)',default="GB")
+    post_code = models.CharField('post code', max_length=20, blank=True, default='')
+
+    # post_code = models.CharField('post code', max_length=20, blank=True, default='')
+
+    sex = models.CharField(
+        max_length=20,
+        choices=(
+            ('Male', 'Male'),
+            ('Female', 'Female'),
+            ('', ''),
+        ),
+        default=''
+    )
+
+    gmc_reg_num = models.CharField('gmc reg num', max_length=20, blank=True, default='')
+
+    is_spec_GP_reg = models.CharField(
+        max_length=100,
+        choices=(
+            ('YES', 'YES'),
+            ('NO', 'NO'),
+            ('', ''),
+        ),
+        default=''
+    )
+
+    is_GP_for_reg = models.CharField(
+        max_length=100,
+        choices=(
+            ('YES', 'YES'),
+            ('NO', 'NO'),
+            ('', ''),
+        ),
+        default=''
+    )
+
+    long_practice_doctor = models.CharField(max_length=35,
+                              choices=(('Couple of days ago',    'Couple of days ago'),
+                                       ('Couple of weeks ago',   'Couple of weeks ago'),
+                                       ('Few weeks ago',         'Few weeks ago'),
+                                       ('Couple of months ago',  'Couple of months ago'),
+                                       ('Few months ago',        'Few months ago'),
+                                       ('A year ago',            'A year ago'),
+                                       ('Couple of years ago',   'Couple of years ago'),
+                                       ('Many years ago',        'Many years ago'),
+                                       ('1 year',        '1 year'       ),
+                                       ('2 years',       '2 years'      ),
+                                       ('3 years',       '3 years'      ),
+                                       ('4 years',       '4 years'      ),
+                                       ('5 years',       '5 years'      ),
+                                       ('10 years',      '10 years'     ),
+                                       ('15 years',      '15 years'     ),
+                                       ('20 years',      '20 years'     ),
+                                       ('25 years',      '25 years'     ),
+                                       ('more 25 years', 'more 25 years'),
+
+                                       ('',                      ''),
+                                       ),
+                              default='')
+
+    long_practice_consultant = models.CharField(max_length=35,
+                                            choices=(('Couple of days ago', 'Couple of days ago'),
+                                                     ('Couple of weeks ago', 'Couple of weeks ago'),
+                                                     ('Few weeks ago', 'Few weeks ago'),
+                                                     ('Couple of months ago', 'Couple of months ago'),
+                                                     ('Few months ago', 'Few months ago'),
+                                                     ('A year ago', 'A year ago'),
+                                                     ('Couple of years ago', 'Couple of years ago'),
+                                                     ('Many years ago', 'Many years ago'),
+                                                     ('1 year', '1 year'),
+                                                     ('2 years', '2 years'),
+                                                     ('3 years', '3 years'),
+                                                     ('4 years', '4 years'),
+                                                     ('5 years', '5 years'),
+                                                     ('10 years', '10 years'),
+                                                     ('15 years', '15 years'),
+                                                     ('20 years', '20 years'),
+                                                     ('25 years', '25 years'),
+                                                     ('more 25 years', 'more 25 years'),
+
+                                                     ('', ''),
+                                                     ),
+                                            default='')
+
+    long_practice_gp = models.CharField(max_length=35,
+                                            choices=(('Couple of days ago', 'Couple of days ago'),
+                                                     ('Couple of weeks ago', 'Couple of weeks ago'),
+                                                     ('Few weeks ago', 'Few weeks ago'),
+                                                     ('Couple of months ago', 'Couple of months ago'),
+                                                     ('Few months ago', 'Few months ago'),
+                                                     ('A year ago', 'A year ago'),
+                                                     ('Couple of years ago', 'Couple of years ago'),
+                                                     ('Many years ago', 'Many years ago'),
+                                                     ('1 year', '1 year'),
+                                                     ('2 years', '2 years'),
+                                                     ('3 years', '3 years'),
+                                                     ('4 years', '4 years'),
+                                                     ('5 years', '5 years'),
+                                                     ('10 years', '10 years'),
+                                                     ('15 years', '15 years'),
+                                                     ('20 years', '20 years'),
+                                                     ('25 years', '25 years'),
+                                                     ('more 25 years', 'more 25 years'),
+
+                                                     ('', ''),
+                                                     ),
+                                            default='')
 
     is_hide = models.BooleanField("is hide", null=True, blank=True, default=False, )
 
@@ -228,7 +348,14 @@ class Pacient(models.Model):
 
     home_addres = models.CharField(
         "home",
-        max_length=100,
+        max_length=200,
+        blank=True,
+        null=True,
+        default='')
+
+    work_addres = models.CharField(
+        "Work",
+        max_length=200,
         blank=True,
         null=True,
         default='')
@@ -236,7 +363,8 @@ class Pacient(models.Model):
     nsh_id = models.CharField('nsh id', max_length=9, blank=True,
                               null=True,
                               default='')
-
+    registration_datetime = models.DateTimeField("Registry DTime", auto_now_add=True,null=True)
+    updated_datetime = models.DateTimeField("Update DTime", auto_now=True,null=True)
     
 
 class ProfileFormTable(models.Model):
@@ -2051,18 +2179,21 @@ class DataFormTable(models.Model):
 
     datapoint_120 = models.CharField("Id in disk", max_length=30, default='')
 
+    u_score = models.CharField('u score', max_length=3,  null=False, blank=True,default="")
+
+
 
 class DataDictionary(models.Model):
     model_name = models.CharField("Model Name", max_length=50, default='Data Form')
-    f_code = models.CharField("F Code", max_length=3, null=False)
-    f_score = models.CharField("F Score", max_length=5,null=False)
+    f_code = models.CharField("F Code", max_length=3, null=False,default="")
+    f_score = models.CharField("F Score", max_length=5,null=False,default="")
     f_score_a = models.CharField("F Score a", max_length=5, default='',)
     f_score_b = models.CharField("F Score b", max_length=5, default='',)
 
     data_point_a = models.CharField("Data Point a", max_length=150, default='', )
     data_point_b = models.CharField("Data Point b", max_length=150, default='', )
 
-    data_point = models.CharField("data point", max_length=150,null=False)
+    data_point = models.CharField("data point", max_length=150,null=False,default="")
 
     is_hide = models.BooleanField("is hide", null=True, blank=True, default=False, )
 
@@ -2070,11 +2201,11 @@ class DataDictionary(models.Model):
         null=True, blank=True,
         max_length=2500,
         default='')
-    color = models.CharField('Color', max_length=30, null=False, blank=True)
+    color = models.CharField('Color', max_length=30, null=False, blank=True,default="")
     model_id = models.CharField('model id', max_length=10, null=True, blank=True,default="")
 
     link_logic = models.BooleanField("Is logLink",default=False)
-    u_score = models.CharField('u score', max_length=3,  null=False, blank=True)
+    u_score = models.CharField('u score', max_length=3,  null=False, blank=True,default="")
 
     display_distenation =  models.CharField(
         'display distenation', choices=(
