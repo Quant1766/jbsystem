@@ -1101,6 +1101,8 @@ class ProfileFormTable(models.Model):
                                    max_length=3000,
                                    default='')
 
+    u_score_p = models.CharField('u score', max_length=3,  null=False, blank=True,default="")
+
 
 
 
@@ -2179,6 +2181,9 @@ class DataFormTable(models.Model):
 
     datapoint_120 = models.CharField("Id in disk", max_length=30, default='')
 
+    u_score_b = models.CharField('u score', max_length=3,  null=False, blank=True,default="")
+
+
     u_score = models.CharField('u score', max_length=3,  null=False, blank=True,default="")
 
 
@@ -2224,3 +2229,8 @@ class DataDictionary(models.Model):
         max_length=50,null=False,
         blank=True,
         default="")
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['model_name', 'f_code', 'value'], name='model f_code value')
+        ]

@@ -1114,6 +1114,7 @@ def data_dictionaty_load(request):
 
 
             data_dictionary_form.save()
+            #todo function reloading weig
         return redirect('/datadictionary/')
 
 @login_required(login_url='/login/')
@@ -1250,10 +1251,22 @@ def parse_drugs(data):
 
     return return_data
 
+def get_data_score(data,f_code,model_name="Data Form"):
+    try:
+        data_dict = DataDictionary.objects.get(f_code=f_code,value=data,model_name=model_name)
+        value = float(data_dict.f_score)
+        if type(value) != float:
+            return value
+    except:
+        return 0.0
+
+
 @login_required(login_url='/login/')
 def master_table_view(request):
     if request.method == "GET":
+        for field in DataFormTable._meta.get_fields():
 
+            print(field)
 
         search_param = {}
 
@@ -1393,11 +1406,16 @@ def master_table_view(request):
 
                     )
                 if data_form:
+                    f_score = 0
 
                     data_form.datapoint_7 = row_[6]
                     data_form.datapoint_8 = row_[7]
                     data_form.datapoint_9 = row_[8]
                     data_form.datapoint_10 = row_[9]
+                    f_score += get_data_score(row_[6], 'F7')
+                    f_score += get_data_score(row_[7], 'F8')
+                    f_score += get_data_score(row_[8], 'F9')
+                    f_score += get_data_score(row_[9], 'F10')
 
 
                     datapoint_11 = row_[10]
@@ -1413,6 +1431,17 @@ def master_table_view(request):
                     data_form.datapoint_17 = row_[18]
                     data_form.datapoint_18 = row_[19]
                     data_form.datapoint_19 = row_[20]
+                    f_score += get_data_score(row_[10], 'F11')
+                    f_score += get_data_score(row_[11], 'F12')
+                    f_score += get_data_score(row_[12], 'F13')
+                    f_score += get_data_score(row_[13], 'F14')
+                    f_score += get_data_score(row_[14], 'F15')
+                    f_score += get_data_score(row_[15], 'F16')
+                    f_score += get_data_score(row_[16], 'F17')
+                    f_score += get_data_score(row_[17], 'F18')
+                    f_score += get_data_score(row_[18], 'F19')
+                    f_score += get_data_score(row_[19], 'F20')
+
 
                     data_form.datapoint_20 = row_[21]
                     data_form.datapoint_21 = row_[22]
@@ -1423,6 +1452,16 @@ def master_table_view(request):
                     data_form.datapoint_26 = row_[27]
                     data_form.datapoint_27 = row_[28]
                     data_form.datapoint_28 = row_[29]
+                    f_score += get_data_score(row_[20], 'F21')
+                    f_score += get_data_score(row_[21], 'F22')
+                    f_score += get_data_score(row_[22], 'F23')
+                    f_score += get_data_score(row_[23], 'F24')
+                    f_score += get_data_score(row_[24], 'F25')
+                    f_score += get_data_score(row_[25], 'F26')
+                    f_score += get_data_score(row_[26], 'F27')
+                    f_score += get_data_score(row_[27], 'F28')
+                    f_score += get_data_score(row_[28], 'F29')
+                    f_score += get_data_score(row_[29], 'F30')
 
 
                     data_form.datapoint_30 = row_[30]
@@ -1435,6 +1474,16 @@ def master_table_view(request):
                     data_form.datapoint_37 = row_[37]
                     data_form.datapoint_38 = row_[38]
                     data_form.datapoint_39 = row_[39]
+                    f_score += get_data_score(row_[30], 'F31')
+                    f_score += get_data_score(row_[31], 'F32')
+                    f_score += get_data_score(row_[32], 'F33')
+                    f_score += get_data_score(row_[33], 'F34')
+                    f_score += get_data_score(row_[34], 'F35')
+                    f_score += get_data_score(row_[35], 'F36')
+                    f_score += get_data_score(row_[36], 'F37')
+                    f_score += get_data_score(row_[37], 'F38')
+                    f_score += get_data_score(row_[38], 'F39')
+                    f_score += get_data_score(row_[39], 'F40')
 
 
                     data_form.datapoint_40 = row_[40]
@@ -1447,6 +1496,16 @@ def master_table_view(request):
                     data_form.datapoint_47 = row_[47]
                     data_form.datapoint_48 = row_[48]
                     data_form.datapoint_49 = row_[49]
+                    f_score += get_data_score(row_[40], 'F41')
+                    f_score += get_data_score(row_[41], 'F42')
+                    f_score += get_data_score(row_[42], 'F43')
+                    f_score += get_data_score(row_[43], 'F44')
+                    f_score += get_data_score(row_[44], 'F45')
+                    f_score += get_data_score(row_[45], 'F46')
+                    f_score += get_data_score(row_[46], 'F47')
+                    f_score += get_data_score(row_[47], 'F48')
+                    f_score += get_data_score(row_[48], 'F49')
+                    f_score += get_data_score(row_[49], 'F50')
 
 
                     data_form.datapoint_50 = row_[50]
@@ -1459,6 +1518,16 @@ def master_table_view(request):
                     data_form.datapoint_57 = row_[57]
                     data_form.datapoint_58 = row_[58]
                     data_form.datapoint_59 = row_[59]
+                    f_score += get_data_score(row_[50], 'F51')
+                    f_score += get_data_score(row_[51], 'F52')
+                    f_score += get_data_score(row_[52], 'F53')
+                    f_score += get_data_score(row_[53], 'F54')
+                    f_score += get_data_score(row_[54], 'F55')
+                    f_score += get_data_score(row_[55], 'F56')
+                    f_score += get_data_score(row_[56], 'F57')
+                    f_score += get_data_score(row_[57], 'F58')
+                    f_score += get_data_score(row_[58], 'F59')
+                    f_score += get_data_score(row_[59], 'F60')
 
 
                     data_form.datapoint_60 = row_[60]
@@ -1471,6 +1540,16 @@ def master_table_view(request):
                     data_form.datapoint_67 = row_[67]
                     data_form.datapoint_68 = row_[68]
                     data_form.datapoint_69 = row_[69]
+                    f_score += get_data_score(row_[60], 'F61')
+                    f_score += get_data_score(row_[61], 'F62')
+                    f_score += get_data_score(row_[62], 'F63')
+                    f_score += get_data_score(row_[63], 'F64')
+                    f_score += get_data_score(row_[64], 'F65')
+                    f_score += get_data_score(row_[65], 'F66')
+                    f_score += get_data_score(row_[66], 'F67')
+                    f_score += get_data_score(row_[67], 'F68')
+                    f_score += get_data_score(row_[68], 'F69')
+                    f_score += get_data_score(row_[69], 'F70')
 
 
                     data_form.datapoint_70 = row_[70]
@@ -1483,6 +1562,16 @@ def master_table_view(request):
                     data_form.datapoint_77 = row_[77]
                     data_form.datapoint_78 = row_[78]
                     data_form.datapoint_79 = row_[79]
+                    f_score += get_data_score(row_[70], 'F71')
+                    f_score += get_data_score(row_[71], 'F72')
+                    f_score += get_data_score(row_[72], 'F73')
+                    f_score += get_data_score(row_[73], 'F74')
+                    f_score += get_data_score(row_[74], 'F75')
+                    f_score += get_data_score(row_[75], 'F76')
+                    f_score += get_data_score(row_[76], 'F77')
+                    f_score += get_data_score(row_[77], 'F78')
+                    f_score += get_data_score(row_[78], 'F79')
+                    f_score += get_data_score(row_[79], 'F80')
 
 
                     data_form.datapoint_80 = row_[80]
@@ -1495,6 +1584,16 @@ def master_table_view(request):
                     data_form.datapoint_87 = row_[87]
                     data_form.datapoint_88 = row_[88]
                     data_form.datapoint_89 = row_[89]
+                    f_score += get_data_score(row_[80], 'F81')
+                    f_score += get_data_score(row_[81], 'F82')
+                    f_score += get_data_score(row_[82], 'F83')
+                    f_score += get_data_score(row_[83], 'F84')
+                    f_score += get_data_score(row_[84], 'F85')
+                    f_score += get_data_score(row_[85], 'F86')
+                    f_score += get_data_score(row_[86], 'F87')
+                    f_score += get_data_score(row_[87], 'F88')
+                    f_score += get_data_score(row_[88], 'F89')
+                    f_score += get_data_score(row_[89], 'F90')
 
 
                     data_form.datapoint_90 = row_[90]
@@ -1507,6 +1606,16 @@ def master_table_view(request):
                     data_form.datapoint_97 = row_[97]
                     data_form.datapoint_98 = row_[98]
                     data_form.datapoint_99 = row_[99]
+                    f_score += get_data_score(row_[90], 'F91')
+                    f_score += get_data_score(row_[91], 'F92')
+                    f_score += get_data_score(row_[92], 'F93')
+                    f_score += get_data_score(row_[93], 'F94')
+                    f_score += get_data_score(row_[94], 'F95')
+                    f_score += get_data_score(row_[95], 'F96')
+                    f_score += get_data_score(row_[96], 'F97')
+                    f_score += get_data_score(row_[97], 'F98')
+                    f_score += get_data_score(row_[98], 'F99')
+                    f_score += get_data_score(row_[99], 'F100')
 
 
                     data_form.datapoint_100 = row_[100]
@@ -1519,6 +1628,16 @@ def master_table_view(request):
                     data_form.datapoint_107 = row_[107]
                     data_form.datapoint_108 = row_[108]
                     data_form.datapoint_109 = row_[109]
+                    f_score += get_data_score(row_[100], 'F101')
+                    f_score += get_data_score(row_[101], 'F102')
+                    f_score += get_data_score(row_[102], 'F103')
+                    f_score += get_data_score(row_[103], 'F104')
+                    f_score += get_data_score(row_[104], 'F105')
+                    f_score += get_data_score(row_[105], 'F106')
+                    f_score += get_data_score(row_[106], 'F107')
+                    f_score += get_data_score(row_[107], 'F108')
+                    f_score += get_data_score(row_[108], 'F109')
+                    f_score += get_data_score(row_[109], 'F110')
 
 
                     data_form.datapoint_110 = row_[110]
@@ -1531,9 +1650,24 @@ def master_table_view(request):
                     data_form.datapoint_117 = row_[117]
                     data_form.datapoint_118 = row_[118]
                     data_form.datapoint_119 = row_[119]
+                    f_score += get_data_score(row_[110], 'F111')
+                    f_score += get_data_score(row_[111], 'F112')
+                    f_score += get_data_score(row_[112], 'F113')
+                    f_score += get_data_score(row_[113], 'F114')
+                    f_score += get_data_score(row_[114], 'F115')
+                    f_score += get_data_score(row_[115], 'F116')
+                    f_score += get_data_score(row_[116], 'F117')
+                    f_score += get_data_score(row_[117], 'F118')
+                    f_score += get_data_score(row_[118], 'F119')
+                    f_score += get_data_score(row_[119], 'F120')
 
 
                     data_form.datapoint_120 = row_[120]
+                    f_score += get_data_score(row_[120], 'F121')
+
+                    data_form.u_score_b = f_score
+
+                    data_form.u_score = profile_form.u_score_p + data_form.u_score_b
 
 
 
@@ -1570,6 +1704,8 @@ def master_table_view(request):
 
 
                     if profile_form:
+                        f_score = 0
+
                         profile_form.sex = row_[8]
                         profile_form.datapoint_10 = row_[9]
 
@@ -1585,6 +1721,16 @@ def master_table_view(request):
                         profile_form.datapoint_17 = row_[17]
                         profile_form.datapoint_18 = row_[18]
                         profile_form.datapoint_19 = row_[19]
+                        f_score += get_data_score(row_[11], 'P12', "Profile Data")
+                        f_score += get_data_score(row_[12], 'P13', "Profile Data")
+                        f_score += get_data_score(row_[13], 'P14', "Profile Data")
+                        f_score += get_data_score(row_[14], 'P15', "Profile Data")
+                        f_score += get_data_score(row_[15], 'P16', "Profile Data")
+                        f_score += get_data_score(row_[16], 'P17', "Profile Data")
+                        f_score += get_data_score(row_[17], 'P18', "Profile Data")
+                        f_score += get_data_score(row_[18], 'P19', "Profile Data")
+                        f_score += get_data_score(row_[19], 'P20', "Profile Data")
+
                         profile_form.datapoint_20 = row_[20]
                         profile_form.datapoint_21 = row_[21]
                         profile_form.datapoint_22 = row_[22]
@@ -1606,6 +1752,18 @@ def master_table_view(request):
                                         drug.save()
                                     datapoint_29_list_id.append(drug)
                             profile_form.datapoint_29.add(*datapoint_29_list_id)
+
+                        f_score += get_data_score(row_[20], 'P20', "Profile Data")
+                        f_score += get_data_score(row_[21], 'P21', "Profile Data")
+                        f_score += get_data_score(row_[22], 'P22', "Profile Data")
+                        f_score += get_data_score(row_[23], 'P23', "Profile Data")
+                        f_score += get_data_score(row_[24], 'P24', "Profile Data")
+                        f_score += get_data_score(row_[25], 'P25', "Profile Data")
+                        f_score += get_data_score(row_[26], 'P26', "Profile Data")
+                        f_score += get_data_score(row_[27], 'P27', "Profile Data")
+                        f_score += get_data_score(row_[28], 'P28', "Profile Data")
+                        f_score += get_data_score(row_[29], 'P29', "Profile Data")
+
 
                         datapoint_30 = row_[30]
                         if datapoint_30:
@@ -1651,6 +1809,18 @@ def master_table_view(request):
                         profile_form.datapoint_38 = row_[38]
                         profile_form.datapoint_39 = row_[39]
 
+                        f_score += get_data_score(row_[30], 'P30', "Profile Data")
+                        f_score += get_data_score(row_[31], 'P31', "Profile Data")
+                        f_score += get_data_score(row_[32], 'P32', "Profile Data")
+                        f_score += get_data_score(row_[33], 'P33', "Profile Data")
+                        f_score += get_data_score(row_[34], 'P34', "Profile Data")
+                        f_score += get_data_score(row_[35], 'P35', "Profile Data")
+                        f_score += get_data_score(row_[36], 'P36', "Profile Data")
+                        f_score += get_data_score(row_[37], 'P37', "Profile Data")
+                        f_score += get_data_score(row_[38], 'P38', "Profile Data")
+                        f_score += get_data_score(row_[39], 'P39', "Profile Data")
+
+
                         profile_form.datapoint_40 = row_[40]
                         profile_form.datapoint_41 = row_[41]
                         profile_form.datapoint_42 = row_[42]
@@ -1661,6 +1831,18 @@ def master_table_view(request):
                         profile_form.datapoint_47 = row_[47]
                         profile_form.datapoint_48 = row_[48]
                         profile_form.datapoint_49 = row_[49]
+
+                        f_score += get_data_score(row_[40], 'P40', "Profile Data")
+                        f_score += get_data_score(row_[41], 'P41', "Profile Data")
+                        f_score += get_data_score(row_[42], 'P42', "Profile Data")
+                        f_score += get_data_score(row_[43], 'P43', "Profile Data")
+                        f_score += get_data_score(row_[44], 'P44', "Profile Data")
+                        f_score += get_data_score(row_[45], 'P45', "Profile Data")
+                        f_score += get_data_score(row_[46], 'P46', "Profile Data")
+                        f_score += get_data_score(row_[47], 'P47', "Profile Data")
+                        f_score += get_data_score(row_[48], 'P48', "Profile Data")
+                        f_score += get_data_score(row_[49], 'P49', "Profile Data")
+
 
                         profile_form.datapoint_50 = row_[50]
                         profile_form.datapoint_51 = row_[51]
@@ -1692,6 +1874,17 @@ def master_table_view(request):
                         profile_form.datapoint_57 = row_[57]
                         profile_form.datapoint_58 = row_[58]
                         profile_form.datapoint_59 = row_[59]
+
+                        f_score += get_data_score(row_[50], 'P50', "Profile Data")
+                        f_score += get_data_score(row_[51], 'P51', "Profile Data")
+                        f_score += get_data_score(row_[52], 'P52', "Profile Data")
+                        f_score += get_data_score(row_[53], 'P53', "Profile Data")
+                        f_score += get_data_score(row_[54], 'P54', "Profile Data")
+                        f_score += get_data_score(row_[55], 'P55', "Profile Data")
+                        f_score += get_data_score(row_[56], 'P56', "Profile Data")
+                        f_score += get_data_score(row_[57], 'P57', "Profile Data")
+                        f_score += get_data_score(row_[58], 'P58', "Profile Data")
+                        f_score += get_data_score(row_[59], 'P59', "Profile Data")
 
                         profile_form.datapoint_60 = row_[60]
                         profile_form.datapoint_61 = row_[61]
@@ -1765,6 +1958,18 @@ def master_table_view(request):
                         profile_form.datapoint_68 = row_[68]
                         profile_form.datapoint_69 = row_[69]
 
+                        f_score += get_data_score(row_[60], 'P60', "Profile Data")
+                        f_score += get_data_score(row_[61], 'P61', "Profile Data")
+                        f_score += get_data_score(row_[62], 'P62', "Profile Data")
+                        f_score += get_data_score(row_[63], 'P63', "Profile Data")
+                        f_score += get_data_score(row_[64], 'P64', "Profile Data")
+                        f_score += get_data_score(row_[65], 'P65', "Profile Data")
+                        f_score += get_data_score(row_[66], 'P66', "Profile Data")
+                        f_score += get_data_score(row_[67], 'P67', "Profile Data")
+                        f_score += get_data_score(row_[68], 'P68', "Profile Data")
+                        f_score += get_data_score(row_[69], 'P69', "Profile Data")
+
+
                         profile_form.datapoint_70 = row_[70]
                         profile_form.datapoint_71 = row_[71]
                         profile_form.datapoint_72 = row_[72]
@@ -1775,6 +1980,17 @@ def master_table_view(request):
                         profile_form.datapoint_77 = row_[77]
                         profile_form.atapoint_78 = row_[78]
                         profile_form.datapoint_79 = row_[79]
+
+                        f_score += get_data_score(row_[70], 'P70', "Profile Data")
+                        f_score += get_data_score(row_[71], 'P71', "Profile Data")
+                        f_score += get_data_score(row_[72], 'P72', "Profile Data")
+                        f_score += get_data_score(row_[73], 'P73', "Profile Data")
+                        f_score += get_data_score(row_[74], 'P74', "Profile Data")
+                        f_score += get_data_score(row_[75], 'P75', "Profile Data")
+                        f_score += get_data_score(row_[76], 'P76', "Profile Data")
+                        f_score += get_data_score(row_[77], 'P77', "Profile Data")
+                        f_score += get_data_score(row_[78], 'P78', "Profile Data")
+                        f_score += get_data_score(row_[79], 'P79', "Profile Data")
 
                         profile_form.datapoint_80 = row_[80]
                         profile_form.datapoint_81 = row_[81]
@@ -1787,16 +2003,37 @@ def master_table_view(request):
                         profile_form.datapoint_88 = row_[88]
                         profile_form.datapoint_89 = row_[89]
 
+
+                        f_score += get_data_score(row_[80], 'P80', "Profile Data")
+                        f_score += get_data_score(row_[81], 'P81', "Profile Data")
+                        f_score += get_data_score(row_[82], 'P82', "Profile Data")
+                        f_score += get_data_score(row_[83], 'P83', "Profile Data")
+                        f_score += get_data_score(row_[84], 'P84', "Profile Data")
+                        f_score += get_data_score(row_[85], 'P85', "Profile Data")
+                        f_score += get_data_score(row_[86], 'P86', "Profile Data")
+                        f_score += get_data_score(row_[87], 'P87', "Profile Data")
+                        f_score += get_data_score(row_[88], 'P88', "Profile Data")
+                        f_score += get_data_score(row_[89], 'P89', "Profile Data")
+
                         profile_form.datapoint_90 = row_[90]
                         profile_form.datapoint_91 = row_[91]
                         profile_form.datapoint_92 = row_[92]
                         profile_form.datapoint_93 = row_[93]
                         profile_form.datapoint_94 = row_[94]
                         profile_form.datapoint_95 = row_[95]
+
+                        f_score += get_data_score(row_[90], 'P90', "Profile Data")
+                        f_score += get_data_score(row_[91], 'P91', "Profile Data")
+                        f_score += get_data_score(row_[92], 'P92', "Profile Data")
+                        f_score += get_data_score(row_[93], 'P93', "Profile Data")
+                        f_score += get_data_score(row_[94], 'P94', "Profile Data")
+                        f_score += get_data_score(row_[95], 'P95', "Profile Data")
+
                         try:
                             profile_form.nsh_id_gdisk = row_[96]
                         except:
                             print("err", row_[93:])
+                        profile_form.u_score_p = f_score
                     profile_form.save()
                     try:
                         data_form = DataFormTable.objects.filter(
@@ -1809,6 +2046,10 @@ def master_table_view(request):
                             profile_data=profile_form,
                             create_datetime=create_datetime
                         )
+
+
+
+                    data_form.u_score = profile_form.u_score_p + data_form.u_score_b
                     data_form.save()
 
 
