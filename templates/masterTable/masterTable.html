@@ -260,6 +260,8 @@
                                  <thead>
                                     <tr class="info">
                                        <th class="sticky-col first-col">Full name</th>
+                                        <th>F Score</th>
+                                        <th>U Score</th>
                                        <th>Date of birth</th>
                                        <th>Client phone</th>
                                        <th>NHS ID</th>
@@ -486,7 +488,8 @@
                                   {% for recor in master_table %}
                                       <tr>
                                           <td class="sticky-col first-col" ><p style="max-width: 150px; width: 150px;overflow: hidden;">{{ recor.pacient.last_name }} {{ recor.pacient.first_name }}<br/>{{ recor.create_datetime.date }}<br/>{{ recor.create_datetime.time }}</p></td>
-
+                                          <td><span>{{ recor.u_score_b }}</span></td>
+                                          <td><span>{{ recor.u_score }}</span></td>
                                           <td><p style="width: 150px;">{% if recor.pacient.date_of_birth != None %}{{ recor.pacient.date_of_birth }}{% endif %}</p></td>
                                           <td><p style="width: 100px;">{{ recor.pacient.phone }}</p></td>
                                           <td> <p style="width: 70px;">{{ recor.pacient.nsh_id }}</p></td>

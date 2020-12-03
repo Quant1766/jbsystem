@@ -984,9 +984,43 @@ def parse_datapoint_62(data,size=0):
 @user_is_role_adm
 def data_dictionatyDelete(request,req_id):
     if request.method == "POST":
-        # ddict = DataDictionary.objects.get(id=req_id)
-        # ddict.is_hide = True
-        # ddict.save()
+        ddict = DataDictionary.objects.get(id=req_id)
+        ddict.is_hide = True
+        try:
+            old_f_score = float(str(ddict.f_score).strip().replace(" ",""))
+        except:
+            old_f_score = 0
+        ddict.save()
+
+        try:
+            data_forms = DataFormTable.objects.all()
+
+        except:
+            data_forms = []
+
+
+        for data_form in data_forms:
+            try:
+
+                old_u_score_b = data_form.u_score_b
+                u_score_b = old_u_score_b - old_f_score
+                data_form.u_score_b =  u_score_b
+                data_form.save()
+            except:
+                continue
+        try:
+            profile_datas = ProfileFormTable.objects.all()
+
+        except:
+            profile_datas = []
+
+
+        for profile_data in profile_datas:
+            old_u_score_b = profile_data.u_score_p
+            u_score_b = old_u_score_b - old_f_score
+            profile_data.u_score_p = u_score_b
+            profile_data.save()
+
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -1022,27 +1056,229 @@ def data_dictionatyEdit(request,req_id):
         data_dictionaty_ = DataDictionary.objects.get(id=req_id)
 
 
-        data_dictionaty_.color=color_spect
-        data_dictionaty_.link_logic=link_logic
-        data_dictionaty_.u_score=u_score
-        data_dictionaty_.display_distenation=display_destination
-        data_dictionaty_.data_point=data_points
-        data_dictionaty_.value=value
-        data_dictionaty_.f_score_b=f_score_b
-        data_dictionaty_.f_score_a=f_score_a
-        data_dictionaty_.f_score=f_score
-        data_dictionaty_.f_code=f_code
+
+
+        try:
+            old_f_score = data_dictionaty_.f_score
+            old_f_score = float(str(old_f_score).strip().replace(' ', ''))
+        except:
+            old_f_score = 0.0
+
+
+        data_dictionaty_.color               = color_spect
+        data_dictionaty_.link_logic          = link_logic
+        data_dictionaty_.u_score             = u_score
+        data_dictionaty_.display_distenation = display_destination
+        data_dictionaty_.data_point          = data_points
+        data_dictionaty_.value               = value
+        data_dictionaty_.f_score_b           = f_score_b
+        data_dictionaty_.f_score_a           = f_score_a
+        data_dictionaty_.f_score             = f_score
+        data_dictionaty_.f_code              = f_code
 
 
         data_dictionaty_.save()
 
+        try:
+            data_forms = DataFormTable.objects.all()
+
+        except:
+            data_forms = []
+
+        print(f_code)
+
+        for data_form in data_forms:
+
+            old_u_score_b = data_form.u_score_b
+            u_score_b = old_u_score_b - old_f_score + f_score
+            data_form.u_score_b =  u_score_b
+            data_form.save()
+
+        try:
+            profile_datas = ProfileFormTable.objects.all()
+
+        except:
+            profile_datas = []
+
+        print(f_code)
+
+        for profile_data in profile_datas:
+            old_u_score_b = profile_data.u_score_p
+            u_score_b = old_u_score_b - old_f_score + f_score
+            profile_data.u_score_p = u_score_b
+            profile_data.save()
+
         return redirect('/datadictionary/')
+
+def run_f_scores_eloading_weig():
+    try:
+        data_forms = DataFormTable.objects.all()
+
+    except:
+        data_forms = []
+
+    for data_form in data_forms:
+        try:
+
+
+
+
+            f_score = 0
+
+            datapoint_7  = data_form.datapoint_7 ;   f_score += get_data_score(datapoint_7 , 'F7')
+            datapoint_8  = data_form.datapoint_8 ;   f_score += get_data_score(datapoint_8 , 'F8')
+            datapoint_9  = data_form.datapoint_9 ;   f_score += get_data_score(datapoint_9 , 'F9')
+            datapoint_10 = data_form.datapoint_10;   f_score += get_data_score(datapoint_10, 'F10')
+
+            datapoint_11  = data_form.datapoint_11  ;f_score += get_data_score(datapoint_11 , 'F11')
+            datapoint_12  = data_form.datapoint_12  ;f_score += get_data_score(datapoint_12 , 'F12')
+            datapoint_13  = data_form.datapoint_13  ;f_score += get_data_score(datapoint_13 , 'F13')
+            datapoint_14  = data_form.datapoint_14  ;f_score += get_data_score(datapoint_14 , 'F14')
+            datapoint_15  = data_form.datapoint_15  ;f_score += get_data_score(datapoint_15 , 'F15')
+            datapoint_16  = data_form.datapoint_16  ;f_score += get_data_score(datapoint_16 , 'F16')
+            datapoint_16a = data_form.datapoint_16a ;f_score += get_data_score(datapoint_16a, 'F17')
+            datapoint_16b = data_form.datapoint_16b ;f_score += get_data_score(datapoint_16b, 'F18')
+            datapoint_17  = data_form.datapoint_17  ;f_score += get_data_score(datapoint_17 , 'F19')
+            datapoint_18  = data_form.datapoint_18  ;f_score += get_data_score(datapoint_18 , 'F20')
+            datapoint_19  = data_form.datapoint_19  ;f_score += get_data_score(datapoint_19 , 'F21')
+
+
+            datapoint_20 = data_form.datapoint_20;   f_score += get_data_score(datapoint_20, 'F22')
+            datapoint_21 = data_form.datapoint_21;   f_score += get_data_score(datapoint_21, 'F23')
+            datapoint_22 = data_form.datapoint_22;   f_score += get_data_score(datapoint_22, 'F24')
+            datapoint_23 = data_form.datapoint_23;   f_score += get_data_score(datapoint_23, 'F25')
+            datapoint_24 = data_form.datapoint_24;   f_score += get_data_score(datapoint_24, 'F26')
+            datapoint_25 = data_form.datapoint_25;   f_score += get_data_score(datapoint_25, 'F27')
+            datapoint_26 = data_form.datapoint_26;   f_score += get_data_score(datapoint_26, 'F28')
+            datapoint_27 = data_form.datapoint_27;   f_score += get_data_score(datapoint_27, 'F29')
+            datapoint_28 = data_form.datapoint_28;   f_score += get_data_score(datapoint_28, 'F30')
+
+
+            datapoint_30 = data_form.datapoint_30;   f_score += get_data_score(datapoint_30, 'F31')
+            datapoint_31 = data_form.datapoint_31;   f_score += get_data_score(datapoint_31, 'F32')
+            datapoint_32 = data_form.datapoint_32;   f_score += get_data_score(datapoint_32, 'F33')
+            datapoint_33 = data_form.datapoint_33;   f_score += get_data_score(datapoint_33, 'F34')
+            datapoint_34 = data_form.datapoint_34;   f_score += get_data_score(datapoint_34, 'F35')
+            datapoint_35 = data_form.datapoint_35;   f_score += get_data_score(datapoint_35, 'F36')
+            datapoint_36 = data_form.datapoint_36;   f_score += get_data_score(datapoint_36, 'F37')
+            datapoint_37 = data_form.datapoint_37;   f_score += get_data_score(datapoint_37, 'F38')
+            datapoint_38 = data_form.datapoint_38;   f_score += get_data_score(datapoint_38, 'F39')
+            datapoint_39 = data_form.datapoint_39;   f_score += get_data_score(datapoint_39, 'F40')
+
+            datapoint_40 = data_form.datapoint_40;   f_score += get_data_score(datapoint_40, 'F41')
+            datapoint_41 = data_form.datapoint_41;   f_score += get_data_score(datapoint_41, 'F42')
+            datapoint_42 = data_form.datapoint_42;   f_score += get_data_score(datapoint_42, 'F43')
+            datapoint_43 = data_form.datapoint_43;   f_score += get_data_score(datapoint_43, 'F44')
+            datapoint_44 = data_form.datapoint_44;   f_score += get_data_score(datapoint_44, 'F45')
+            datapoint_45 = data_form.datapoint_45;   f_score += get_data_score(datapoint_45, 'F46')
+            datapoint_46 = data_form.datapoint_46;   f_score += get_data_score(datapoint_46, 'F47')
+            datapoint_47 = data_form.datapoint_47;   f_score += get_data_score(datapoint_47, 'F48')
+            datapoint_48 = data_form.datapoint_48;   f_score += get_data_score(datapoint_48, 'F49')
+            datapoint_49 = data_form.datapoint_49;   f_score += get_data_score(datapoint_49, 'F50')
+
+            datapoint_50 = data_form.datapoint_50;   f_score += get_data_score(datapoint_50, 'F51')
+            datapoint_51 = data_form.datapoint_51;   f_score += get_data_score(datapoint_51, 'F52')
+            datapoint_52 = data_form.datapoint_52;   f_score += get_data_score(datapoint_52, 'F53')
+            datapoint_53 = data_form.datapoint_53;   f_score += get_data_score(datapoint_53, 'F54')
+            datapoint_54 = data_form.datapoint_54;   f_score += get_data_score(datapoint_54, 'F55')
+            datapoint_55 = data_form.datapoint_55;   f_score += get_data_score(datapoint_55, 'F56')
+            datapoint_56 = data_form.datapoint_56;   f_score += get_data_score(datapoint_56, 'F57')
+            datapoint_57 = data_form.datapoint_57;   f_score += get_data_score(datapoint_57, 'F58')
+            datapoint_58 = data_form.datapoint_58;   f_score += get_data_score(datapoint_58, 'F59')
+            datapoint_59 = data_form.datapoint_59;   f_score += get_data_score(datapoint_59, 'F60')
+
+            datapoint_60 = data_form.datapoint_60;   f_score += get_data_score(datapoint_60, 'F61')
+            datapoint_61 = data_form.datapoint_61;   f_score += get_data_score(datapoint_61, 'F62')
+            datapoint_62 = data_form.datapoint_62;   f_score += get_data_score(datapoint_62, 'F63')
+            datapoint_63 = data_form.datapoint_63;   f_score += get_data_score(datapoint_63, 'F64')
+            datapoint_64 = data_form.datapoint_64;   f_score += get_data_score(datapoint_64, 'F65')
+            datapoint_65 = data_form.datapoint_65;   f_score += get_data_score(datapoint_65, 'F66')
+            datapoint_66 = data_form.datapoint_66;   f_score += get_data_score(datapoint_66, 'F67')
+            datapoint_67 = data_form.datapoint_67;   f_score += get_data_score(datapoint_67, 'F68')
+            datapoint_68 = data_form.datapoint_68;   f_score += get_data_score(datapoint_68, 'F69')
+            datapoint_69 = data_form.datapoint_69;   f_score += get_data_score(datapoint_69, 'F70')
+
+            datapoint_70 = data_form.datapoint_70;   f_score += get_data_score(datapoint_70, 'F71')
+            datapoint_71 = data_form.datapoint_71;   f_score += get_data_score(datapoint_71, 'F72')
+            datapoint_72 = data_form.datapoint_72;   f_score += get_data_score(datapoint_72, 'F73')
+            datapoint_73 = data_form.datapoint_73;   f_score += get_data_score(datapoint_73, 'F74')
+            datapoint_74 = data_form.datapoint_74;   f_score += get_data_score(datapoint_74, 'F75')
+            datapoint_75 = data_form.datapoint_75;   f_score += get_data_score(datapoint_75, 'F76')
+            datapoint_76 = data_form.datapoint_76;   f_score += get_data_score(datapoint_76, 'F77')
+            datapoint_77 = data_form.datapoint_77;   f_score += get_data_score(datapoint_77, 'F78')
+            datapoint_78 = data_form.datapoint_78;   f_score += get_data_score(datapoint_78, 'F79')
+            datapoint_79 = data_form.datapoint_79;   f_score += get_data_score(datapoint_79, 'F80')
+
+            datapoint_80 = data_form.datapoint_80;   f_score += get_data_score(datapoint_80, 'F81')
+            datapoint_81 = data_form.datapoint_81;   f_score += get_data_score(datapoint_81, 'F82')
+            datapoint_82 = data_form.datapoint_82;   f_score += get_data_score(datapoint_82, 'F83')
+            datapoint_83 = data_form.datapoint_83;   f_score += get_data_score(datapoint_83, 'F84')
+            datapoint_84 = data_form.datapoint_84;   f_score += get_data_score(datapoint_84, 'F85')
+            datapoint_85 = data_form.datapoint_85;   f_score += get_data_score(datapoint_85, 'F86')
+            datapoint_86 = data_form.datapoint_86;   f_score += get_data_score(datapoint_86, 'F87')
+            datapoint_87 = data_form.datapoint_87;   f_score += get_data_score(datapoint_87, 'F88')
+            datapoint_88 = data_form.datapoint_88;   f_score += get_data_score(datapoint_88, 'F89')
+            datapoint_89 = data_form.datapoint_89;   f_score += get_data_score(datapoint_89, 'F90')
+
+
+            datapoint_90 = data_form.datapoint_90;   f_score += get_data_score(datapoint_90, 'F91')
+            datapoint_91 = data_form.datapoint_91;   f_score += get_data_score(datapoint_91, 'F92')
+            datapoint_92 = data_form.datapoint_92;   f_score += get_data_score(datapoint_92, 'F93')
+            datapoint_93 = data_form.datapoint_93;   f_score += get_data_score(datapoint_93, 'F94')
+            datapoint_94 = data_form.datapoint_94;   f_score += get_data_score(datapoint_94, 'F95')
+            datapoint_95 = data_form.datapoint_95;   f_score += get_data_score(datapoint_95, 'F96')
+            datapoint_96 = data_form.datapoint_96;   f_score += get_data_score(datapoint_96, 'F97')
+            datapoint_97 = data_form.datapoint_97;   f_score += get_data_score(datapoint_97, 'F98')
+            datapoint_98 = data_form.datapoint_98;   f_score += get_data_score(datapoint_98, 'F99')
+            datapoint_99 = data_form.datapoint_99;   f_score += get_data_score(datapoint_99, 'F100')
+
+            datapoint_100 = data_form.datapoint_100; f_score += get_data_score(datapoint_100, 'F101')
+            datapoint_101 = data_form.datapoint_101; f_score += get_data_score(datapoint_101, 'F102')
+            datapoint_102 = data_form.datapoint_102; f_score += get_data_score(datapoint_102, 'F103')
+            datapoint_103 = data_form.datapoint_103; f_score += get_data_score(datapoint_103, 'F104')
+            datapoint_104 = data_form.datapoint_104; f_score += get_data_score(datapoint_104, 'F105')
+            datapoint_105 = data_form.datapoint_105; f_score += get_data_score(datapoint_105, 'F106')
+            datapoint_106 = data_form.datapoint_106; f_score += get_data_score(datapoint_106, 'F107')
+            datapoint_107 = data_form.datapoint_107; f_score += get_data_score(datapoint_107, 'F108')
+            datapoint_108 = data_form.datapoint_108; f_score += get_data_score(datapoint_108, 'F109')
+            datapoint_109 = data_form.datapoint_109; f_score += get_data_score(datapoint_109, 'F110')
+
+            datapoint_110 = data_form.datapoint_110; f_score += get_data_score(datapoint_110, 'F111')
+            datapoint_111 = data_form.datapoint_111; f_score += get_data_score(datapoint_111, 'F112')
+            datapoint_112 = data_form.datapoint_112; f_score += get_data_score(datapoint_112, 'F113')
+            datapoint_113 = data_form.datapoint_113; f_score += get_data_score(datapoint_113, 'F114')
+            datapoint_114 = data_form.datapoint_114; f_score += get_data_score(datapoint_114, 'F115')
+            datapoint_115 = data_form.datapoint_115; f_score += get_data_score(datapoint_115, 'F116')
+            datapoint_116 = data_form.datapoint_116; f_score += get_data_score(datapoint_116, 'F117')
+            datapoint_117 = data_form.datapoint_117; f_score += get_data_score(datapoint_117, 'F118')
+            datapoint_118 = data_form.datapoint_118; f_score += get_data_score(datapoint_118, 'F119')
+            datapoint_119 = data_form.datapoint_119; f_score += get_data_score(datapoint_119, 'F120')
+
+
+            data_form.u_score_b = f_score
+
+            data_form.u_score = profile_form.u_score_p + data_form.u_score_b
+
+            data_form.save()
+        except:
+            continue
+    try:
+        profile_datas = ProfileFormTable.objects.all()
+
+    except:
+        profile_datas = []
+
+    for profile_data in profile_datas:
+        old_u_score_b = profile_data.u_score_p
+        u_score_b = old_u_score_b - old_f_score
+        profile_data.u_score_p = u_score_b
+        profile_data.save()
+
 
 def data_dictionaty_load(request):
     if 'POST' == request.method:
         file_in_memory = request.FILES['file']
         df = pd.read_excel(file_in_memory)
-        print(df.keys())
 
         for index, row in df.iterrows():
 
@@ -1115,6 +1351,11 @@ def data_dictionaty_load(request):
 
             data_dictionary_form.save()
             #todo function reloading weig
+
+        run_f_scores_eloading_weig()
+
+
+
         return redirect('/datadictionary/')
 
 @login_required(login_url='/login/')
@@ -1180,6 +1421,7 @@ def logic_linkEdit(request,req_id):
 
         return redirect('/datadictionary/')
 
+
 @login_required(login_url='/login/') #redirect when user is not logged in
 def data_dictionaty(request):
     if request.method == "GET":
@@ -1213,20 +1455,64 @@ def data_dictionaty(request):
 
         color_spect = request.POST.get('color_spect')
 
+        try:
+            data_dictionary_ =  DataDictionary.objects.get(
+                f_code=f_code,
+                value=value,
+            )
 
-        data_dictionary_= DataDictionary.objects.create(
-                        color=color_spect,
-                        link_logic=link_logic,
-                        u_score=u_score,
-                        display_distenation=display_destination,
-                        data_point=data_points,
-                        value=value,
-                        f_score_b=f_score_b,
-                        f_score_a=f_score_a,
-                        f_score=f_score,f_code=f_code
-                    )
+            try:
+                old_f_score = data_dictionary_.f_score
+                old_f_score = float(str(old_f_score).strip().replace(' ',''))
+            except:
+                old_f_score = 0.0
+        except:
+
+            old_f_score = 0.0
+            data_dictionary_= DataDictionary.objects.create(
+                f_code=f_code,
+                value=value,
+                        )
+        data_dictionary_.color = color_spect
+        data_dictionary_.link_logic = link_logic
+        data_dictionary_.u_score = u_score
+        data_dictionary_.display_distenation = display_destination
+        data_dictionary_.data_point = data_points
+        data_dictionary_.f_score_b = f_score_b
+        data_dictionary_.f_score_a = f_score_a
+        data_dictionary_.f_score = f_score
+        data_dictionary_.f_code = f_code
 
         data_dictionary_.save()
+
+        try:
+            data_forms = DataFormTable.objects.all()
+
+        except:
+            data_forms = []
+
+        print(f_code)
+
+        for data_form in data_forms:
+
+            old_u_score_b = data_form.u_score_b
+            u_score_b = old_u_score_b - old_f_score + f_score
+            data_form.u_score_b =  u_score_b
+            data_form.save()
+
+        try:
+            profile_datas = ProfileFormTable.objects.all()
+
+        except:
+            profile_datas = []
+
+        print(f_code)
+
+        for profile_data in profile_datas:
+            old_u_score_b = profile_data.u_score_p
+            u_score_b = old_u_score_b - old_f_score + f_score
+            profile_data.u_score_p = u_score_b
+            profile_data.save()
 
 
         return redirect('/datadictionary/')
@@ -1264,9 +1550,6 @@ def get_data_score(data,f_code,model_name="Data Form"):
 @login_required(login_url='/login/')
 def master_table_view(request):
     if request.method == "GET":
-        for field in DataFormTable._meta.get_fields():
-
-            print(field)
 
         search_param = {}
 
@@ -1402,9 +1685,8 @@ def master_table_view(request):
                         pacient_id=pacient_id,
                         create_datetime=create_datetime,
                         profile_data_id=profile_form.id
-
-
                     )
+
                 if data_form:
                     f_score = 0
 
