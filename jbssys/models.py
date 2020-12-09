@@ -1101,7 +1101,7 @@ class ProfileFormTable(models.Model):
                                    max_length=3000,
                                    default='')
 
-    u_score_p = models.CharField('u score', max_length=3,  null=False, blank=True,default="")
+    u_score_p = models.CharField('u score', max_length=9,  null=False, blank=True,default="")
 
 
 
@@ -2181,19 +2181,19 @@ class DataFormTable(models.Model):
 
     datapoint_120 = models.CharField("Id in disk", max_length=30, default='')
 
-    u_score_b = models.CharField('u score', max_length=3,  null=False, blank=True,default="")
+    u_score_b = models.CharField('u score', max_length=9,  null=False, blank=True, default="")
 
 
-    u_score = models.CharField('u score', max_length=3,  null=False, blank=True,default="")
+    u_score = models.CharField('u score', max_length=9,  null=False, blank=True, default="")
 
 
 
 class DataDictionary(models.Model):
     model_name = models.CharField("Model Name", max_length=50, default='Data Form')
-    f_code = models.CharField("F Code", max_length=3, null=False,default="")
-    f_score = models.CharField("F Score", max_length=5,null=False,default="")
-    f_score_a = models.CharField("F Score a", max_length=5, default='',)
-    f_score_b = models.CharField("F Score b", max_length=5, default='',)
+    f_code = models.CharField("F Code", max_length=4, null=False,default="")
+    f_score = models.CharField("F Score", max_length=9,null=False,default="0.0")
+    f_score_a = models.CharField("F Score a", max_length=9, default='0.0',)
+    f_score_b = models.CharField("F Score b", max_length=9, default='0.0',)
 
     data_point_a = models.CharField("Data Point a", max_length=150, default='', )
     data_point_b = models.CharField("Data Point b", max_length=150, default='', )
@@ -2210,7 +2210,7 @@ class DataDictionary(models.Model):
     model_id = models.CharField('model id', max_length=10, null=True, blank=True,default="")
 
     link_logic = models.BooleanField("Is logLink",default=False)
-    u_score = models.CharField('u score', max_length=3,  null=False, blank=True,default="")
+    u_score = models.CharField('u score', max_length=9,  null=False, blank=True,default="")
 
     display_distenation =  models.CharField(
         'display distenation', choices=(

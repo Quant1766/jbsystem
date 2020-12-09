@@ -220,16 +220,16 @@
 
                                  <li class="divider"></li>
                                  <li>
-                                    <a href="/master/download/?{{ res_params }}&format_file=csv">
+                                    <a href="{% url 'master_tableDownloadFile' %}?{{ res_params }}&format_file=csv">
                                     <img src="https://thememinister.com/crm/assets/dist/img/csv.png" width="24" alt="logo"> CSV</a>
                                  </li>
                                  <li>
-                                    <a href="/master/download/?{{ res_params }}&format_file=csv">
+                                    <a href="{% url 'master_tableDownloadFile' %}?{{ res_params }}&format_file=csv">
                                     <img src="https://thememinister.com/crm/assets/dist/img/txt.png" width="24" alt="logo"> TXT</a>
                                  </li>
                                  <li class="divider"></li>
                                  <li>
-                                    <a href="/master/download/?{{ res_params }}&format_file=xls">
+                                    <a href="{% url 'master_tableDownloadFile' %}?{{ res_params }}&format_file=xls">
                                     <img src="https://thememinister.com/crm/assets/dist/img/xls.png" width="24" alt="logo"> XLS</a>
                                  </li>
 
@@ -495,7 +495,7 @@
                                           <td> <p style="width: 70px;">{{ recor.pacient.nsh_id }}</p></td>
                                           <td><textarea readonly style="width: 250px;">{{ recor.datapoint_7 }}</textarea></td>
                                           <td> <p style="width: 30px;">{{ recor.get_datapoint_8_display }}</p></td>
-                                          <td> <p style="width: 70px;">{{ recor.get_datapoint_9_display }}</p></td>
+                                          <td> <p style="width: 70px;">{{ recor.datapoint_9 }}</p></td>
                                           <td> <p style="width: 200px;">{{ recor.get_datapoint_10_display }}</p></td>
 
                                           <td> <p style="width: 200px;">{{ recor.get_datapoint_11_display }}</p></td>

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="u366573383_d1qoigu3e0fd65@sql170.main-hosting.eu" uuid="32dbee0a-8755-43a5-8d24-b1c2701d7133">
-      <driver-ref>mysql.8</driver-ref>
+    <data-source source="LOCAL" name="PostgreSQL - db0v2ql1m613ga@ec2-54-246-65-129.eu-west-1.compute.amazonaws.com" uuid="503c582d-aa0b-41be-a2e3-19e7d1e9fa16">
+      <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://sql170.main-hosting.eu:3306/u366573383_d1qoigu3e0fd65</jdbc-url>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-54-246-65-129.eu-west-1.compute.amazonaws.com:5432/db0v2ql1m613ga</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="dd105tj20kkmms@ec2-63-35-60-54.eu-west-1.compute.amazonaws.com" uuid="4a23000c-a1a9-47a9-ad21-56d3c4d41454">
+    <data-source source="LOCAL" name="dd105tj20kkmms@ec2-63-35-60-54.eu-west-1.compute.amazonaws.com" uuid="2c3da593-d793-4ce4-96d6-b09880db4e9d">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://ec2-63-35-60-54.eu-west-1.compute.amazonaws.com:5432/dd105tj20kkmms</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>
