@@ -1051,13 +1051,14 @@ def data_dictionatyDelete(request,req_id):
 def data_dictionatyEdit(request,req_id):
     if request.method == "POST":
 
+
+
         model_code = request.POST.get('edit_model_code')
         f_code = request.POST.get('edit_f_code')
         f_score = request.POST.get('edit_f_score')
+        print(f_score)
 
         f_code = str(model_code) + str(f_code)
-
-
 
         f_score_a = request.POST.get('edit_f_score_a')
 
@@ -1077,63 +1078,74 @@ def data_dictionatyEdit(request,req_id):
         else:
             link_logic = False
 
-
-
         color_spect = request.POST.get('edit_color_spect')
-        data_dictionaty_ = DataDictionary.objects.get(id=req_id)
-
-
-
 
         try:
-            old_f_score = data_dictionaty_.f_score
-            old_f_score = float(str(old_f_score).strip().replace(' ', ''))
+            data_dictionary_ = DataDictionary.objects.get(
+                f_code=f_code,
+                value=value,
+            )
+            try:
+
+                old_f_score = data_dictionary_.f_score
+                old_f_score = round(float(str(old_f_score).strip().replace(' ', '')), 2)
+            except:
+                old_f_score = 0.0
         except:
+
             old_f_score = 0.0
+            data_dictionary_ = DataDictionary.objects.create(
+                f_code=f_code,
+                value=value,
+            )
+        data_dictionary_.color = color_spect
+        data_dictionary_.link_logic = link_logic
+        data_dictionary_.u_score = u_score
+        data_dictionary_.display_distenation = display_destination
+        data_dictionary_.data_point = data_points
+        data_dictionary_.f_score_b = f_score_b
+        data_dictionary_.f_score_a = f_score_a
+        data_dictionary_.f_score = f_score
+        data_dictionary_.f_code = f_code
 
 
-        data_dictionaty_.color               = color_spect
-        data_dictionaty_.link_logic          = link_logic
-        data_dictionaty_.u_score             = u_score
-        data_dictionaty_.display_distenation = display_destination
-        data_dictionaty_.data_point          = data_points
-        data_dictionaty_.value               = value
-        data_dictionaty_.f_score_b           = f_score_b
-        data_dictionaty_.f_score_a           = f_score_a
-        data_dictionaty_.f_score             = f_score
-        data_dictionaty_.f_code              = f_code
+        data_dictionary_.save()
+
+        if model_code == 'F' or model_code == 'P':
+
+            # try:
+            f_data_query = {}
+            p_data_query = {}
+
+            if "F" in f_code:
+                f_data_query['datapoint_' + f_code.replace('F', '')] = value
+
+            if "P" in f_code:
+                p_data_query['profile_data__datapoint_' + f_code.replace('P', '')] = value
+
+            data_forms = DataFormTable.objects.filter(
+                Q(**f_data_query) | Q(**p_data_query)
+
+            ).distinct()
 
 
-        data_dictionaty_.save()
+            for data_form in data_forms:
 
-        try:
-            data_forms = DataFormTable.objects.all()
+                try:
+                    old_u_score_b = round(float(data_form.u_score_b), 2)
+                except:
+                    old_u_score_b = 0.0
 
-        except:
-            data_forms = []
+                try:
+                    f_score = round(float(f_score), 2)
+                except:
+                    f_score = 0.0
 
-        print(f_code)
+                u_score_b = old_u_score_b - old_f_score + f_score
+                data_form.u_score_b = round(u_score_b, 2)
+                data_form.save()
 
-        for data_form in data_forms:
 
-            old_u_score_b = data_form.u_score_b
-            u_score_b = old_u_score_b - old_f_score + f_score
-            data_form.u_score_b =  u_score_b
-            data_form.save()
-
-        try:
-            profile_datas = ProfileFormTable.objects.all()
-
-        except:
-            profile_datas = []
-
-        print(f_code)
-
-        for profile_data in profile_datas:
-            old_u_score_b = profile_data.u_score_p
-            u_score_b = old_u_score_b - old_f_score + f_score
-            profile_data.u_score_p = u_score_b
-            profile_data.save()
 
         return redirect('/datadictionary/')
 
@@ -1145,12 +1157,9 @@ def run_f_scores_reloading_weig():
 
         try:
             if str(value) != "" and str(value) != None:
-                print('value,f_code:',value,f_code) 
                 try:
                     fcode_val = f_score_data_dict[str(f_code)][str(value).lower()]
-                    print('fcode_val', fcode_val)
                     fcode_val = round(float(str(fcode_val).strip().replace(" ",'')),2)
-                    print('fcode_val',fcode_val)
                     return fcode_val
                 except:
                     return 0.0
@@ -1503,7 +1512,6 @@ def data_dictionaty_load(request):
             )
 
             if data_dictionary_form:
-                print("f_score",f_score)
                 data_dictionary_form.f_score = f_score
 
                 data_dictionary_form.f_score_a = f_score_a
@@ -1707,34 +1715,6 @@ def data_dictionaty(request):
                 data_form.u_score_b =  round(u_score_b,2)
                 data_form.save()
 
-
-        # elif model_code == 'P':
-        #     print("model_code == 'P'")
-        #     try:
-        #         profile_datas = ProfileFormTable.objects.all()
-        #
-        #     except:
-        #         profile_datas = []
-        #
-        #
-        #     for profile_data in profile_datas:
-        #
-        #
-        #         try:
-        #             old_u_score_b = round(float(profile_data.u_scu_score_b2ore_p),2)
-        #         except:
-        #             old_u_score_b = 0.0
-        #
-        #
-        #
-        #         try:
-        #             f_score = round(float(f_score),2)
-        #         except:
-        #             f_score = 0.0
-        #
-        #         u_score_b = float(old_u_score_b) - float(old_f_score) + float(f_score)
-        #         profile_data.u_score_p = round(u_score_b,2)
-        #         profile_data.save()
 
 
         return redirect('/datadictionary/')
@@ -2118,9 +2098,14 @@ def master_table_view(request):
                             pacient_id=pacient_id,
                             create_datetime=create_datetime)
 
+                    try:
+                        f_score_profileform_old = float(profile_form.u_score_p)
+                    except:
+                        f_score_profileform_old = 0.0
 
+                    f_score = 0.0
                     if profile_form:
-                        f_score = 0
+
 
                         profile_form.sex = row_[8]              ; f_score += get_data_score(row_[8], 'P9')
                         profile_form.datapoint_10 = row_[9]     ; f_score += get_data_score(row_[9], 'P10')
@@ -2357,7 +2342,10 @@ def master_table_view(request):
                         except:
                             print("err", row_[93:])
                         profile_form.u_score_p = f_score
+
+
                     profile_form.save()
+
                     try:
                         data_form = DataFormTable.objects.filter(
                             pacient_id=pacient_id,
@@ -2372,7 +2360,22 @@ def master_table_view(request):
 
 
 
-                    data_form.u_score = profile_form.u_score_p + data_form.u_score_b
+                    try:
+                        f_score_dataform_old   =  float(data_form.u_score_b)
+                    except:
+                        f_score_dataform_old   = 0.0
+
+
+
+
+                    f_score_dataform = round(f_score_dataform_old - f_score_profileform_old + f_score,2)
+
+                    data_form.u_score_b = f_score_dataform
+                    if f_score_dataform > 0.5:
+                        u_socre = 1.0
+                    else:
+                        u_socre = 0.0
+                    data_form.u_score = u_socre
                     data_form.save()
 
 
