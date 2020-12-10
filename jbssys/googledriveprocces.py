@@ -89,11 +89,11 @@ class GoogleDrive:
         self.table_size = (table_data[0][4],table_data[0][2])
 
 
-        # try:
-        self.table_data_list = table_data[2]
-        self.table_gd_list_to_list()
-        # except:
-        #     self.get_table_max100()
+        try:
+            self.table_data_list = table_data[2]
+            self.table_gd_list_to_list()
+        except:
+            self.get_table_max100()
 
     def table_gd_list_to_list(self):
         data_list = []
