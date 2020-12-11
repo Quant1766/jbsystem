@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.encoding import smart_str
@@ -1083,7 +1084,7 @@ def data_dictionatyEdit(request,req_id):
         try:
             data_dictionary_ = DataDictionary.objects.get(
                 f_code=f_code,
-                value=value,
+                value=str(value).lower(),
             )
             try:
 
@@ -1096,7 +1097,7 @@ def data_dictionatyEdit(request,req_id):
             old_f_score = 0.0
             data_dictionary_ = DataDictionary.objects.create(
                 f_code=f_code,
-                value=value,
+                value=str(value).lower(),
             )
         data_dictionary_.color = color_spect
         data_dictionary_.link_logic = link_logic
@@ -1118,10 +1119,10 @@ def data_dictionatyEdit(request,req_id):
             p_data_query = {}
 
             if "F" in f_code:
-                f_data_query['datapoint_' + f_code.replace('F', '')] = value
+                f_data_query['datapoint_' + f_code.replace('F', '')] = str(value).lower()
 
             if "P" in f_code:
-                p_data_query['profile_data__datapoint_' + f_code.replace('P', '')] = value
+                p_data_query['profile_data__datapoint_' + f_code.replace('P', '')] = str(value).lower()
 
             data_forms = DataFormTable.objects.filter(
                 Q(**f_data_query) | Q(**p_data_query)
@@ -1508,7 +1509,7 @@ def data_dictionaty_load(request):
 
             data_dictionary_form, created = DataDictionary.objects.get_or_create(
                     f_code=f_code,
-                    value=data_dictionary_
+                    value=str(data_dictionary_).lower()
             )
 
             if data_dictionary_form:
@@ -1587,7 +1588,7 @@ def logic_linkEdit(request,req_id):
         data_dictionaty_.u_score=u_score
         data_dictionaty_.display_distenation=display_destination
         data_dictionaty_.data_point=data_points
-        data_dictionaty_.value=value
+        data_dictionaty_.value=str(value).lower()
         data_dictionaty_.f_score_b=f_score_b
         data_dictionaty_.f_score_a=f_score_a
         data_dictionaty_.f_score=f_score
@@ -1603,9 +1604,22 @@ def logic_linkEdit(request,req_id):
 def data_dictionaty(request):
     if request.method == "GET":
         search_param = {'is_hide':False}
-        page = 1
-        data_dictionary = DataDictionary.objects.filter(**search_param).order_by('-id')[(page - 1) * 50:50 * page]
-        return render(request,'ddactionary/ddactionary.html',{"data_dictionary":data_dictionary})
+
+        page = request.GET.get('page',1)
+
+
+
+        data_dictionary = DataDictionary.objects.filter(**search_param).order_by('-id')
+        paginator = Paginator(data_dictionary, 50)
+
+        try:
+            data_dictionary = paginator.page(page)
+        except PageNotAnInteger:
+            data_dictionary = paginator.page(1)
+        except EmptyPage:
+            data_dictionary = paginator.page(paginator.num_pages)
+
+        return render(request,'ddactionary/ddactionary.html',{"data_dictionary":data_dictionary,'npage':page})
 
     elif request.method=="POST":
         model_code = request.POST.get('model_code')
@@ -1639,7 +1653,7 @@ def data_dictionaty(request):
             print()
             data_dictionary_ =  DataDictionary.objects.get(
                 f_code=f_code,
-                value=value,
+                value=str(value).lower(),
             )
             print('data_dictionary_',data_dictionary_)
             try:
@@ -1655,7 +1669,7 @@ def data_dictionaty(request):
             old_f_score = 0.0
             data_dictionary_= DataDictionary.objects.create(
                 f_code=f_code,
-                value=value,
+                value=str(value).lower(),
                         )
         data_dictionary_.color = color_spect
         data_dictionary_.link_logic = link_logic
@@ -1679,12 +1693,11 @@ def data_dictionaty(request):
             p_data_query = {}
 
             if "F" in f_code:
-                f_data_query['datapoint_'+f_code.replace('F','')] = value
+                f_data_query['datapoint_'+f_code.replace('F','')] = str(value).lower()
 
             if "P" in f_code:
-                p_data_query['profile_data__datapoint_' + f_code.replace('P','')] = value
-            print('f_data_query',f_data_query)
-            print('p_data_query',p_data_query)
+                p_data_query['profile_data__datapoint_' + f_code.replace('P','')] = str(value).lower()
+
             data_forms = DataFormTable.objects.filter(
                 Q(**f_data_query) | Q(**p_data_query)
 
@@ -1741,7 +1754,7 @@ def parse_drugs(data):
 
 def  get_data_score_DB(data,f_code,model_name="Data Form"):
     try:
-        data_dict = DataDictionary.objects.get(f_code=f_code,value=data,model_name=model_name)
+        data_dict = DataDictionary.objects.get(f_code=f_code,value=str(data).lower(),model_name=model_name)
         value = float(data_dict.f_score)
         if type(value) != float:
             return value
@@ -1750,7 +1763,7 @@ def  get_data_score_DB(data,f_code,model_name="Data Form"):
 
 def  get_data_score(data,f_code,model_name="Data Form"):
     try:
-        data_dict = DataDictionary.objects.get(f_code=f_code,value=data,model_name=model_name)
+        data_dict = DataDictionary.objects.get(f_code=f_code,value=str(data).lower(),model_name=model_name)
         value = float(data_dict.f_score)
         if type(value) != float:
             return value

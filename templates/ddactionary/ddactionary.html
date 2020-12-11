@@ -258,6 +258,27 @@
                      </div>
                   </div>
                </div>
+            {% if data_dictionary.has_other_pages %}
+              <ul class="pagination">
+                {% if data_dictionary.has_previous %}
+                  <li><a href="?page={{ data_dictionary.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in data_dictionary.paginator.page_range %}
+                  {% if users.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if data_dictionary.has_next %}
+                  <li><a href="?page={{ data_dictionary.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+              </ul>
+            {% endif %}
                 <div class="modal fade" id="delt" tabindex="-1" role="dialog">
                   <div class="modal-dialog">
                      <div class="modal-content">
