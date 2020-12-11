@@ -2832,4 +2832,4 @@ def register_view(request):
     elif request.method == "GET":
         return render(request, 'auth/sign_up.html')
 
-run_f_scores_reloading_weig()
+# run_f_scores_reloading_weig()

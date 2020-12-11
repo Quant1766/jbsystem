@@ -112,7 +112,7 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASE_URL = 'postgres://u2pn58tqn0j979:p2751df1170edba9abcbacf9ec6b113e822c14c8aae9c244b1555d5b90387fd93@ec2-63-35-60-54.eu-west-1.compute.amazonaws.com:5432/dd105tj20kkmms'
+DATABASE_URL = 'postgres://u6vm47hu9p9u3h:p1de989851be39c6102e9197dc463a57bb28ca018e07da9ddc328b53f0a0c2c4f@ec2-54-220-46-72.eu-west-1.compute.amazonaws.com:5432/d6prjkse3c5pv9'
 
 
 DATABASES = {}
@@ -121,10 +121,10 @@ DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dd105tj20kkmms',
-        'USER': 'u2pn58tqn0j979',
-        'PASSWORD': 'p2751df1170edba9abcbacf9ec6b113e822c14c8aae9c244b1555d5b90387fd93',
-        'HOST': 'ec2-63-35-60-54.eu-west-1.compute.amazonaws.com',
+        'NAME': 'd6prjkse3c5pv9',
+        'USER': 'u6vm47hu9p9u3h',
+        'PASSWORD': 'p1de989851be39c6102e9197dc463a57bb28ca018e07da9ddc328b53f0a0c2c4f',
+        'HOST': 'ec2-54-220-46-72.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }}
 
