@@ -1963,125 +1963,129 @@ def master_table_view(request):
                     data_form.datapoint_28 = row_[29]    ;f_score += get_data_score(row_[29], 'F28')
 
 
-                    data_form.datapoint_30 = row_[31]    ;f_score += get_data_score(row_[31], 'F30')
-                    data_form.datapoint_31 = row_[32]    ;f_score += get_data_score(row_[32], 'F31')
-                    data_form.datapoint_32 = row_[33]    ;f_score += get_data_score(row_[33], 'F32')
-                    data_form.datapoint_33 = row_[34]    ;f_score += get_data_score(row_[34], 'F33')
-                    data_form.datapoint_34 = row_[35]    ;f_score += get_data_score(row_[35], 'F34')
-                    data_form.datapoint_35 = row_[36]    ;f_score += get_data_score(row_[36], 'F35')
-                    data_form.datapoint_36 = row_[37]    ;f_score += get_data_score(row_[37], 'F36')
-                    data_form.datapoint_37 = row_[38]    ;f_score += get_data_score(row_[38], 'F37')
-                    data_form.datapoint_38 = row_[39]    ;f_score += get_data_score(row_[39], 'F38')
-                    data_form.datapoint_39 = row_[40]    ;f_score += get_data_score(row_[40], 'F39')
+                    data_form.datapoint_30 = row_[30]    ;f_score += get_data_score(row_[30], 'F30')
+                    data_form.datapoint_31 = row_[31]    ;f_score += get_data_score(row_[31], 'F31')
+                    data_form.datapoint_32 = row_[32]    ;f_score += get_data_score(row_[32], 'F32')
+                    data_form.datapoint_33 = row_[33]    ;f_score += get_data_score(row_[33], 'F33')
+                    data_form.datapoint_34 = row_[34]    ;f_score += get_data_score(row_[34], 'F34')
+                    data_form.datapoint_35 = row_[35]    ;f_score += get_data_score(row_[35], 'F35')
+                    data_form.datapoint_36 = row_[36]    ;f_score += get_data_score(row_[36], 'F36')
+                    data_form.datapoint_37 = row_[37]    ;f_score += get_data_score(row_[37], 'F37')
+                    data_form.datapoint_38 = row_[38]    ;f_score += get_data_score(row_[38], 'F38')
+                    data_form.datapoint_39 = row_[39]    ;f_score += get_data_score(row_[39], 'F39')
 
 
-                    data_form.datapoint_40 = row_[41]    ;f_score += get_data_score(row_[41], 'F40')
-                    data_form.datapoint_41 = row_[42]    ;f_score += get_data_score(row_[42], 'F41')
-                    data_form.datapoint_42 = row_[43]    ;f_score += get_data_score(row_[43], 'F42')
-                    data_form.datapoint_43 = row_[44]    ;f_score += get_data_score(row_[44], 'F43')
-                    data_form.datapoint_44 = row_[45]    ;f_score += get_data_score(row_[45], 'F44')
-                    data_form.datapoint_45 = row_[46]    ;f_score += get_data_score(row_[46], 'F45')
-                    data_form.datapoint_46 = row_[47]    ;f_score += get_data_score(row_[47], 'F46')
-                    data_form.datapoint_47 = row_[48]    ;f_score += get_data_score(row_[48], 'F47')
-                    data_form.datapoint_48 = row_[49]    ;f_score += get_data_score(row_[49], 'F48')
-                    data_form.datapoint_49 = row_[50]    ;f_score += get_data_score(row_[50], 'F49')
+                    data_form.datapoint_40 = row_[40]    ;f_score += get_data_score(row_[40], 'F40')
+                    data_form.datapoint_41 = row_[41]    ;f_score += get_data_score(row_[41], 'F41')
+                    data_form.datapoint_42 = row_[42]    ;f_score += get_data_score(row_[42], 'F42')
+                    data_form.datapoint_43 = row_[43]    ;f_score += get_data_score(row_[43], 'F43')
+                    data_form.datapoint_44 = row_[44]    ;f_score += get_data_score(row_[44], 'F44')
+                    data_form.datapoint_45 = row_[45]    ;f_score += get_data_score(row_[45], 'F45')
+                    data_form.datapoint_46 = row_[46]    ;f_score += get_data_score(row_[46], 'F46')
+                    data_form.datapoint_47 = row_[47]    ;f_score += get_data_score(row_[47], 'F47')
+                    data_form.datapoint_48 = row_[48]    ;f_score += get_data_score(row_[48], 'F48')
+                    data_form.datapoint_49 = row_[49]    ;f_score += get_data_score(row_[49], 'F49')
 
 
-                    data_form.datapoint_50 = row_[51]    ;f_score += get_data_score(row_[51], 'F50')
-                    data_form.datapoint_51 = row_[52]    ;f_score += get_data_score(row_[52], 'F51')
-                    data_form.datapoint_52 = row_[53]    ;f_score += get_data_score(row_[53], 'F52')
-                    data_form.datapoint_53 = row_[54]    ;f_score += get_data_score(row_[54], 'F53')
-                    data_form.datapoint_54 = row_[55]    ;f_score += get_data_score(row_[55], 'F54')
-                    data_form.datapoint_55 = row_[56]    ;f_score += get_data_score(row_[56], 'F55')
-                    data_form.datapoint_56 = row_[57]    ;f_score += get_data_score(row_[57], 'F56')
-                    data_form.datapoint_57 = row_[58]    ;f_score += get_data_score(row_[58], 'F57')
-                    data_form.datapoint_58 = row_[59]    ;f_score += get_data_score(row_[59], 'F58')
-                    data_form.datapoint_59 = row_[60]    ;f_score += get_data_score(row_[60], 'F59')
+                    data_form.datapoint_50 = row_[50]    ;f_score += get_data_score(row_[50], 'F50')
+                    data_form.datapoint_51 = row_[51]    ;f_score += get_data_score(row_[51], 'F51')
+                    data_form.datapoint_52 = row_[52]    ;f_score += get_data_score(row_[52], 'F52')
+                    data_form.datapoint_53 = row_[53]    ;f_score += get_data_score(row_[53], 'F53')
+                    data_form.datapoint_54 = row_[54]    ;f_score += get_data_score(row_[54], 'F54')
+                    data_form.datapoint_55 = row_[55]    ;f_score += get_data_score(row_[55], 'F55')
+                    data_form.datapoint_56 = row_[56]    ;f_score += get_data_score(row_[56], 'F56')
+                    data_form.datapoint_57 = row_[57]    ;f_score += get_data_score(row_[57], 'F57')
+                    data_form.datapoint_58 = row_[58]    ;f_score += get_data_score(row_[58], 'F58')
+                    data_form.datapoint_59 = row_[59]    ;f_score += get_data_score(row_[59], 'F59')
 
 
-                    data_form.datapoint_60 = row_[61]   ;f_score += get_data_score(row_[61], 'F60')
-                    data_form.datapoint_61 = row_[62]   ;f_score += get_data_score(row_[62], 'F61')
-                    data_form.datapoint_62 = row_[63]   ;f_score += get_data_score(row_[63], 'F62')
-                    data_form.datapoint_63 = row_[64]   ;f_score += get_data_score(row_[64], 'F63')
-                    data_form.datapoint_64 = row_[65]   ;f_score += get_data_score(row_[65], 'F64')
-                    data_form.datapoint_65 = row_[66]   ;f_score += get_data_score(row_[66], 'F65')
-                    data_form.datapoint_66 = row_[67]   ;f_score += get_data_score(row_[67], 'F66')
-                    data_form.datapoint_67 = row_[68]   ;f_score += get_data_score(row_[68], 'F67')
-                    data_form.datapoint_68 = row_[69]   ;f_score += get_data_score(row_[69], 'F68')
-                    data_form.datapoint_69 = row_[70]   ;f_score += get_data_score(row_[70], 'F69')
-
-
-
-
-                    data_form.datapoint_70 = row_[71]   ;f_score += get_data_score(row_[71], 'F70')
-                    data_form.datapoint_71 = row_[72]   ;f_score += get_data_score(row_[72], 'F71')
-                    data_form.datapoint_72 = row_[73]   ;f_score += get_data_score(row_[73], 'F72')
-                    data_form.datapoint_73 = row_[74]   ;f_score += get_data_score(row_[74], 'F73')
-                    data_form.datapoint_74 = row_[75]   ;f_score += get_data_score(row_[75], 'F74')
-                    data_form.datapoint_75 = row_[76]   ;f_score += get_data_score(row_[76], 'F75')
-                    data_form.datapoint_76 = row_[77]   ;f_score += get_data_score(row_[77], 'F76')
-                    data_form.datapoint_77 = row_[78]   ;f_score += get_data_score(row_[78], 'F77')
-                    data_form.datapoint_78 = row_[79]   ;f_score += get_data_score(row_[79], 'F78')
-                    data_form.datapoint_79 = row_[80]   ;f_score += get_data_score(row_[80], 'F79')
-
-
-                    data_form.datapoint_80 = row_[81]   ;f_score += get_data_score(row_[81], 'F80')
-                    data_form.datapoint_81 = row_[82]   ;f_score += get_data_score(row_[82], 'F81')
-                    data_form.datapoint_82 = row_[83]   ;f_score += get_data_score(row_[83], 'F82')
-                    data_form.datapoint_83 = row_[84]   ;f_score += get_data_score(row_[84], 'F83')
-                    data_form.datapoint_84 = row_[85]   ;f_score += get_data_score(row_[85], 'F84')
-                    data_form.datapoint_85 = row_[86]   ;f_score += get_data_score(row_[86], 'F85')
-                    data_form.datapoint_86 = row_[87]   ;f_score += get_data_score(row_[87], 'F86')
-                    data_form.datapoint_87 = row_[88]   ;f_score += get_data_score(row_[88], 'F87')
-                    data_form.datapoint_88 = row_[89]   ;f_score += get_data_score(row_[89], 'F88')
-                    data_form.datapoint_89 = row_[90]   ;f_score += get_data_score(row_[90], 'F89')
-
-
-                    data_form.datapoint_90 = row_[91]    ;f_score += get_data_score(row_[91], 'F90')
-                    data_form.datapoint_91 = row_[92]    ;f_score += get_data_score(row_[92], 'F91')
-                    data_form.datapoint_92 = row_[93]    ;f_score += get_data_score(row_[93], 'F92')
-                    data_form.datapoint_93 = row_[94]    ;f_score += get_data_score(row_[94], 'F93')
-                    data_form.datapoint_94 = row_[95]    ;f_score += get_data_score(row_[95], 'F94')
-                    data_form.datapoint_95 = row_[96]    ;f_score += get_data_score(row_[96], 'F95')
-                    data_form.datapoint_96 = row_[97]    ;f_score += get_data_score(row_[97], 'F96')
-                    data_form.datapoint_97 = row_[98]    ;f_score += get_data_score(row_[98], 'F97')
-                    data_form.datapoint_98 = row_[99]    ;f_score += get_data_score(row_[99], 'F98')
-                    data_form.datapoint_99 = row_[100]   ;f_score += get_data_score(row_[100], 'F99')
-
-                    data_form.datapoint_100 = row_[101]  ;f_score += get_data_score(row_[101], 'F100')
-                    data_form.datapoint_101 = row_[102]  ;f_score += get_data_score(row_[102], 'F101')
-                    data_form.datapoint_102 = row_[103]  ;f_score += get_data_score(row_[103], 'F102')
-                    data_form.datapoint_103 = row_[104]  ;f_score += get_data_score(row_[104], 'F103')
-                    data_form.datapoint_104 = row_[105]  ;f_score += get_data_score(row_[105], 'F104')
-                    data_form.datapoint_105 = row_[106]  ;f_score += get_data_score(row_[106], 'F105')
-                    data_form.datapoint_106 = row_[107]  ;f_score += get_data_score(row_[107], 'F106')
-                    data_form.datapoint_107 = row_[108]  ;f_score += get_data_score(row_[108], 'F107')
-                    data_form.datapoint_108 = row_[109]  ;f_score += get_data_score(row_[109], 'F108')
-                    data_form.datapoint_109 = row_[110]  ;f_score += get_data_score(row_[110], 'F109')
-
-                    data_form.datapoint_110 = row_[111]  ;f_score += get_data_score(row_[111], 'F110')
-                    data_form.datapoint_111 = row_[112]  ;f_score += get_data_score(row_[112], 'F111')
-                    data_form.datapoint_112 = row_[113]  ;f_score += get_data_score(row_[113], 'F112')
-                    data_form.datapoint_113 = row_[114]  ;f_score += get_data_score(row_[114], 'F113')
-                    data_form.datapoint_114 = row_[115]  ;f_score += get_data_score(row_[115], 'F114')
-                    data_form.datapoint_115 = row_[116]  ;f_score += get_data_score(row_[116], 'F115')
-                    data_form.datapoint_116 = row_[117]  ;f_score += get_data_score(row_[117], 'F116')
-                    data_form.datapoint_117 = row_[118]  ;f_score += get_data_score(row_[118], 'F117')
-                    data_form.datapoint_118 = row_[119]  ;f_score += get_data_score(row_[119], 'F118')
-                    data_form.datapoint_119 = row_[120]  ;f_score += get_data_score(row_[119], 'F119')
-
-
-                    data_form.datapoint_120 = row_[121]
-
-
-                    data_form.u_score_b = f_score
-
-                    data_form.u_score = profile_form.u_score_p + data_form.u_score_b
+                    data_form.datapoint_60 = row_[60]   ;f_score += get_data_score(row_[60], 'F60')
+                    data_form.datapoint_61 = row_[61]   ;f_score += get_data_score(row_[61], 'F61')
+                    data_form.datapoint_62 = row_[62]   ;f_score += get_data_score(row_[62], 'F62')
+                    data_form.datapoint_63 = row_[63]   ;f_score += get_data_score(row_[63], 'F63')
+                    data_form.datapoint_64 = row_[64]   ;f_score += get_data_score(row_[64], 'F64')
+                    data_form.datapoint_65 = row_[65]   ;f_score += get_data_score(row_[65], 'F65')
+                    data_form.datapoint_66 = row_[66]   ;f_score += get_data_score(row_[66], 'F66')
+                    data_form.datapoint_67 = row_[67]   ;f_score += get_data_score(row_[67], 'F67')
+                    data_form.datapoint_68 = row_[68]   ;f_score += get_data_score(row_[68], 'F68')
+                    data_form.datapoint_69 = row_[69]   ;f_score += get_data_score(row_[69], 'F69')
 
 
 
 
+                    data_form.datapoint_70 = row_[70]   ;f_score += get_data_score(row_[70], 'F70')
+                    data_form.datapoint_71 = row_[71]   ;f_score += get_data_score(row_[71], 'F71')
+                    data_form.datapoint_72 = row_[72]   ;f_score += get_data_score(row_[72], 'F72')
+                    data_form.datapoint_73 = row_[73]   ;f_score += get_data_score(row_[73], 'F73')
+                    data_form.datapoint_74 = row_[74]   ;f_score += get_data_score(row_[74], 'F74')
+                    data_form.datapoint_75 = row_[75]   ;f_score += get_data_score(row_[75], 'F75')
+                    data_form.datapoint_76 = row_[76]   ;f_score += get_data_score(row_[76], 'F76')
+                    data_form.datapoint_77 = row_[77]   ;f_score += get_data_score(row_[77], 'F77')
+                    data_form.datapoint_78 = row_[78]   ;f_score += get_data_score(row_[78], 'F78')
+                    data_form.datapoint_79 = row_[79]   ;f_score += get_data_score(row_[79], 'F79')
 
+
+                    data_form.datapoint_80 = row_[80]   ;f_score += get_data_score(row_[80], 'F80')
+                    data_form.datapoint_81 = row_[81]   ;f_score += get_data_score(row_[81], 'F81')
+                    data_form.datapoint_82 = row_[82]   ;f_score += get_data_score(row_[82], 'F82')
+                    data_form.datapoint_83 = row_[83]   ;f_score += get_data_score(row_[83], 'F83')
+                    data_form.datapoint_84 = row_[84]   ;f_score += get_data_score(row_[84], 'F84')
+                    data_form.datapoint_85 = row_[85]   ;f_score += get_data_score(row_[85], 'F85')
+                    data_form.datapoint_86 = row_[86]   ;f_score += get_data_score(row_[86], 'F86')
+                    data_form.datapoint_87 = row_[87]   ;f_score += get_data_score(row_[87], 'F87')
+                    data_form.datapoint_88 = row_[88]   ;f_score += get_data_score(row_[88], 'F88')
+                    data_form.datapoint_89 = row_[89]   ;f_score += get_data_score(row_[89], 'F89')
+
+
+                    data_form.datapoint_90 = row_[90]    ;f_score += get_data_score(row_[90], 'F90')
+                    data_form.datapoint_91 = row_[91]    ;f_score += get_data_score(row_[91], 'F91')
+                    data_form.datapoint_92 = row_[92]    ;f_score += get_data_score(row_[92], 'F92')
+                    data_form.datapoint_93 = row_[93]    ;f_score += get_data_score(row_[93], 'F93')
+                    data_form.datapoint_94 = row_[94]    ;f_score += get_data_score(row_[94], 'F94')
+                    data_form.datapoint_95 = row_[95]    ;f_score += get_data_score(row_[95], 'F95')
+                    data_form.datapoint_96 = row_[96]    ;f_score += get_data_score(row_[96], 'F96')
+                    data_form.datapoint_97 = row_[97]    ;f_score += get_data_score(row_[97], 'F97')
+                    data_form.datapoint_98 = row_[98]    ;f_score += get_data_score(row_[98], 'F98')
+                    data_form.datapoint_99 = row_[99]    ;f_score += get_data_score(row_[99], 'F99')
+
+                    data_form.datapoint_100 = row_[100]  ;f_score += get_data_score(row_[100], 'F100')
+                    data_form.datapoint_101 = row_[101]  ;f_score += get_data_score(row_[101], 'F101')
+                    data_form.datapoint_102 = row_[102]  ;f_score += get_data_score(row_[102], 'F102')
+                    data_form.datapoint_103 = row_[103]  ;f_score += get_data_score(row_[103], 'F103')
+                    data_form.datapoint_104 = row_[104]  ;f_score += get_data_score(row_[104], 'F104')
+                    data_form.datapoint_105 = row_[105]  ;f_score += get_data_score(row_[105], 'F105')
+                    data_form.datapoint_106 = row_[106]  ;f_score += get_data_score(row_[106], 'F106')
+                    data_form.datapoint_107 = row_[107]  ;f_score += get_data_score(row_[107], 'F107')
+                    data_form.datapoint_108 = row_[108]  ;f_score += get_data_score(row_[108], 'F108')
+                    data_form.datapoint_109 = row_[109]  ;f_score += get_data_score(row_[109], 'F109')
+
+                    data_form.datapoint_110 = row_[110]  ;f_score += get_data_score(row_[110], 'F110')
+                    data_form.datapoint_111 = row_[111]  ;f_score += get_data_score(row_[111], 'F111')
+                    data_form.datapoint_112 = row_[112]  ;f_score += get_data_score(row_[112], 'F112')
+                    data_form.datapoint_113 = row_[113]  ;f_score += get_data_score(row_[113], 'F113')
+                    data_form.datapoint_114 = row_[114]  ;f_score += get_data_score(row_[114], 'F114')
+                    data_form.datapoint_115 = row_[115]  ;f_score += get_data_score(row_[115], 'F115')
+                    data_form.datapoint_116 = row_[116]  ;f_score += get_data_score(row_[116], 'F116')
+                    data_form.datapoint_117 = row_[117]  ;f_score += get_data_score(row_[117], 'F117')
+                    data_form.datapoint_118 = row_[118]  ;f_score += get_data_score(row_[118], 'F118')
+                    data_form.datapoint_119 = row_[119]  ;f_score += get_data_score(row_[119], 'F119')
+
+
+                    data_form.datapoint_120 = row_[120]
+
+                    try:
+                        profile_form_u_score_p = float(profile_form.u_score_p)
+                    except:
+                        profile_form_u_score_p = 0.0
+
+                    f_score = round(f_score,2)
+
+                    if f_score > 0.5:
+                        data_form.u_score = 1
+                    else:
+                        data_form.u_score = 0
+
+                    data_form.u_score_b = round(profile_form_u_score_p + f_score,2)
                     data_form.save()
 
 
