@@ -1,5 +1,6 @@
 import csv
 import re
+import secrets
 import threading
 from io import BytesIO
 from uuid import uuid4
@@ -38,6 +39,18 @@ from .models import (
 
 import jbssys.validators as vaidator_data
 
+def gen_hashid():
+    hash_id = str(
+        secrets.token_urlsafe(12)).replace(
+        "-",
+        "_").replace(
+        "+",
+        "_").replace(
+        ".",
+        "_").replace(
+        ":",
+        "_")
+    return hash_id
 
 def create_f_score_data_dict():
     f_score_data_dict = {}
@@ -2611,6 +2624,17 @@ def pacientLoad(request):
         gd.request()
         gd.data_from_jjson()
 
+
+def allocation_table(request):
+    if request.method == "GET":
+        doctors = UserProfile.objects.filter(role='doctor')
+
+        return render(request, 'allocationTable/allocation_table.html', {
+                'doctors': doctors
+            })
+
+    elif request.method == "POST":
+        pass
 
 @login_required(login_url='/login/')
 def pacientsView(request):

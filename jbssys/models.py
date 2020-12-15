@@ -76,6 +76,126 @@ class UserProfile(models.Model):
     def __str__(self):
         return "%s %s" % (self.user.username, self.role)
 
+
+class Doctor(models.Model):
+    is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
+
+    profile = models.ForeignKey(UserProfile,on_delete=models.PROTECT,related_name='profile_doctor')
+    status = models.CharField(
+        "status",
+        max_length=100,
+        blank=True,
+        null=True,
+        default='')
+
+    med_reg_num = models.CharField(
+        "GMC",
+        max_length=20,
+        blank=True,
+        null=True,
+        default='')
+
+
+    db_view = models.CharField(
+        max_length=20,
+        choices=(
+            ('View', 'View'),
+            ('Hide', 'Hide'),
+            ('Hide/view','Hide/view'),
+            ('', ''),
+        ),
+        default=''
+    )
+
+    allocation = models.TextField(
+        "Allocations",
+        max_length=500,
+        null=True,
+        blank=True,
+        default="")
+
+    q_1_match = models.IntegerField(validators=[
+        MinValueValidator(0),
+        MaxValueValidator(100)
+    ] )
+
+    q_2_match = models.IntegerField(validators=[
+        MinValueValidator(0),
+        MaxValueValidator(100)
+    ])
+
+    q_3_match = models.IntegerField(validators=[
+        MinValueValidator(0),
+        MaxValueValidator(100)
+    ])
+
+    rating = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+
+
+    def set_allocation(self, x):
+        if x:
+            self.allocation = ", ".join(x)
+        else:
+            self.allocation = ""
+
+    def get_allocation(self):
+        return self.allocation.split(', ')
+
+
+class FeedBackDoctor(models.Model):
+    hashid = models.CharField("Hashid", max_length=20)
+    is_hide = models.BooleanField("is hide",null=True,blank=True,default=False,)
+
+    question_1 = models.TextField(
+        "question_1",
+        max_length=500,
+        null=True,
+        blank=True,
+        default="")
+
+    question_2 = models.TextField(
+        "question_2",
+        max_length=500,
+        null=True,
+        blank=True,
+        default="")
+
+    question_3 = models.TextField(
+        "question_3",
+        max_length=500,
+        null=True,
+        blank=True,
+        default="")
+
+    question_4 = models.TextField(
+        "question_4",
+        max_length=500,
+        null=True,
+        blank=True,
+        default="")
+
+    question_5 = models.TextField(
+        "question_5",
+        max_length=500,
+        null=True,
+        blank=True,
+        default="")
+
+    stars = models.IntegerField(validators=[
+        MinValueValidator(0),
+        MaxValueValidator(5)
+    ] )
+
+    coment = models.TextField(
+        "Coment",
+        max_length=500,
+        null=True,
+
+        blank=True,
+        default="")
+
+    doctor = models.ForeignKey(Doctor,on_delete=models.PROTECT,related_name='doctor_feedback')
+
 def gen_aaaannnna(old_id="AAA0000A"):
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     c1,c2,c3,n1,n2,n3,n4,c4 = tuple(old_id)
@@ -376,6 +496,8 @@ class ProfileFormTable(models.Model):
         null=True,
         default=''
     )
+
+    # clinical_code =
 
     pacient = models.ForeignKey(Pacient,related_name="PacientProfileForm",on_delete=models.PROTECT)
 
@@ -1103,6 +1225,17 @@ class ProfileFormTable(models.Model):
 
     u_score_p = models.CharField('u score', max_length=9,  null=False, blank=True,default="")
 
+
+class PacientFeedback(models.Model):
+    feedback = models.OneToOneField(
+        FeedBackDoctor,
+        related_name="feedback_pacient",
+        on_delete=models.PROTECT)
+
+    pacient = models.OneToOneField(
+        Pacient,
+        related_name="pacient_feedback",
+        on_delete=models.PROTECT)
 
 
 

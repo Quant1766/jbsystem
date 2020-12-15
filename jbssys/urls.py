@@ -30,7 +30,7 @@ urlpatterns = [
     path('master/load/', views.master_tableLoadFile, name='master_tableLoadFile'),
 
 
-
+    path('allocation/', views.allocation_table, name='allocation_table'),
 
 ]
 

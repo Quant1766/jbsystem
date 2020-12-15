@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>CRM Admin Dashboard</title>
+      <title>Doctor list</title>
       <!-- Favicon and touch icons -->
       <link rel="shortcut icon" href="https://thememinister.com/crm/assets/dist/img/ico/favicon.png" type="image/x-icon">
       <!-- Start Global Mandatory Style
@@ -88,7 +88,7 @@
                         <ul class="dropdown-menu">
 
                            <li><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
-                           <li><a href="{% url 'log_out' %}">
+                           <li><a href="{% url 'login_view' %}">
                               <i class="fa fa-sign-out"></i> Signout</a>
                            </li>
                         </ul>
@@ -104,13 +104,13 @@
             <div class="sidebar" style="height: auto;">
                <!-- sidebar menu -->
                <ul class="sidebar-menu">
-                  <li class="active">
+                   <li class="active">
                      <a href="#"><i class="fa fa-tachometer"></i><span>Dashboard</span>
                      <span class="pull-right-container">
                      </span>
                      </a>
                   </li>
-                  <li class="treeview">
+                   <li class="treeview">
                      <a href="{% url 'master_table_view' %}">
                      <span>Master Table</span>
                      <span class="pull-right-container">
@@ -123,7 +123,6 @@
 
                      </a>
                   </li>
-
                    <li class="treeview">
                      <a href="{% url 'data_dictionaty' %}">
                      <i class="fa fa-users"></i><span>Data Dictionary</span>
@@ -147,6 +146,7 @@
                      </a>
                   </li>
 
+
                </ul>
             </div>
             <!-- /.sidebar -->
@@ -162,7 +162,7 @@
                         <div class="panel-heading ui-sortable-handle">
                            <div class="btn-group" id="buttonexport">
                               <a href="#">
-                                 <h4>Pacients</h4>
+                                 <h4>Doctor list</h4>
                               </a>
                            </div>
 
@@ -170,11 +170,14 @@
                         <div class="panel-body">
                            <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
                            <div class="btn-group">
+
                               <div class="buttonexport">
-                                 <a href="#" class="btn btn-add" data-toggle="modal" data-target="#add_pacient"><i class="fa fa-plus"></i> Add Pacient</a>
+                                 <a href="#" class="btn btn-add" data-toggle="modal" data-target="#add_ddictionary"><i class="fa fa-plus"></i> Add Doctor</a>
                               </div>
-                               <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Table Data</button>
-                               <a class="btn btn-add" data-toggle="modal" data-target="#load_pacient" style="margin-left: 21px;"><i class="fa fa-bars"></i> Import Data</a>
+                               <div class="buttonexport">
+                                 <a href="#" class="btn btn-add" data-toggle="modal" data-target="#load_ddictionary"><i class="hvr-buzz-out fa fa-upload"></i> Load Doctor list</a>
+                              </div>
+
                               <ul class="dropdown-menu exp-drop" role="menu">
 
                                  <li class="divider"></li>
@@ -192,6 +195,7 @@
                                     <img src="https://thememinister.com/crm/assets/dist/img/xls.png" width="24" alt="logo"> XLS</a>
                                  </li>
 
+                                 </li>
                               </ul>
                            </div>
                            <!-- ./Plugin content:powerpoint,txt,pdf,png,word,xl -->
@@ -199,38 +203,58 @@
                               <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
                                  <thead>
                                     <tr class="info">
+                                        <th>SI No</th>
+                                        <th>F Code</th>
+                                        <th>F Score</th>
+                                        <th>F Score A</th>
+                                        <th>F Score B</th>
+                                        <th>Data Points</th>
+                                        <th>Data Dictionary</th>
+                                        <th>Display Destination</th>
+                                        <th>u-score</th>
+                                        <th>Link Logic</th>
+                                        <th>Color Spect</th>
                                         <th>Action</th>
-                                       <th>ID</th>
-                                        <th>NSH ID</th>
-                                       <th>First Name</th>
-                                       <th>Last Name</th>
-                                       <th>Date of birth</th>
-                                       <th>Pacient phone</th>
-                                       <th>Email</th>
-                                        <th>City</th>
-                                        <th>Address</th>
                                     </tr>
                                  </thead>
                                   <tbody>
-                                  {% for pacient in pacients %}
+                                  {% for data_ in data_dictionary %}
                                       <tr>
-                                          <td style="position: absolute">
 
-                                              <button type="button" class="btn btn-add btn-xs" onclick="modelUpdateSetID('{{ pacient.id }}')" data-toggle="modal" data-target="#update"><i class="fa fa-pencil"></i></button>
-                                              <button type="button" class="btn btn-danger btn-xs" onclick="modelDeleteSetID('{{ pacient.id }}')" data-toggle="modal" data-target="#delt"><i class="fa fa-trash-o"></i> </button>
+                                          <td><p style="width: 20px;" id="id{{ data_.id }}">{{ data_.id }}</p></td>
+                                          <td><p style="width: 20px;" id="f_code{{ data_.id }}">{{ data_.f_code }}</p></td>
+                                          <td><p style="width: 20px;" id="f_score{{ data_.id }}">{{ data_.f_score }}</p></td>
+                                          <td><p style="width: 20px;" id="f_score_a{{ data_.id }}">{{ data_.f_score_a }}</p></td>
+                                          <td><p style="width: 20px;" id="f_score_b{{ data_.id }}">{{ data_.f_score_b }}</p></td>
+                                          <td><p style="width: 20px;" id="data_point{{ data_.id }}">{{ data_.data_point }}</p></td>
+                                          <td><p style="width: 150px;" id="value{{ data_.id }}">{{ data_.value }}</p></td>
+                                          <td><p style="width: 40px;" id="display_distenation{{ data_.id }}">{{ data_.get_display_distenation_display }}</p></td>
 
+                                          <td><p style="width: 20px;" id="u_score{{ data_.id }}">{{ data_.u_score }}</p></td>
+                                          <td>
+                                              <p id="l_link{{ data_.id }}">{% if data_.link_logic %}Yes{% else %}No{% endif %}</p>
                                           </td>
-                                          <td><p style="width: 20px;">{{ pacient.id }}</p></td>
-                                          <td><p style="width: 80px;">{{ pacient.nsh_id }}</p></td>
-                                          <td><p style="width: 150px;">{{ pacient.first_name }}</p></td>
+                                          <td>
+                                              <p id="color{{ data_.id }}">{{ data_.color }}</p>
+                                          </td>
 
-                                          <td><p style="width: 150px;">{{ pacient.last_name }}</p></td>
-                                          <td><p style="width: 150px;">{{ pacient.date_of_birth }}</p></td>
-                                          <td><p style="width: 150px;">{{ pacient.phone }}</p></td>
+                                      <td>
+                                           <div class="btn-group  m-b-5" style="width: 120px">
+                                              <button type="button" class="btn btn-info">Action</button>
+                                              <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-info" aria-expanded="false">
+                                              <span class="caret"></span>
+                                              <span class="sr-only">info</span>
+                                              </button>
+                                              <ul role="menu" class="dropdown-menu">
 
-                                          <td><p style="width: 150px;">{{ pacient.email }}</p></td>
-                                          <td><p style="width: 250px;">{{ pacient.default_city }}</p></td>
-                                          <td><p style="width: 250px;">{{ pacient.home_addres }}</p></td>
+                                                  <li><button type="button" class="btn btn-danger btn-xs" onclick="modelDeleteSetID('{{ data_.id }}')" data-toggle="modal" data-target="#delt">Delete</button>
+                                                 </li>
+                                                  <li><button type="button" class="btn btn-add btn-xs" onclick="modelUpdateSetID('{{ data_.id }}')" data-toggle="modal" data-target="#edit_ddictionary">Update</button>
+                                                 </li>
+
+                                              </ul>
+                                           </div>
+                                          </td>
                                       </tr>
                                   {% endfor %}
 
@@ -241,6 +265,61 @@
                      </div>
                   </div>
                </div>
+            {% if data_dictionary.has_other_pages %}
+              <ul class="pagination">
+                {% if data_dictionary.has_previous %}
+                  <li><a href="?page={{ data_dictionary.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in data_dictionary.paginator.page_range %}
+                  {% if users.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if data_dictionary.has_next %}
+                  <li><a href="?page={{ data_dictionary.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+                <div class="modal fade" id="delt" tabindex="-1" role="dialog">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-user m-r-5"></i> Delete Notice</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal" id="deleteactionfrom" method="post" >
+                                    {% csrf_token %}
+                                     <fieldset>
+                                       <div class="col-md-12 form-group user-form-group">
+                                          <label class="control-label">Delete Notice</label>
+                                          <div class="pull-right">
+                                             <button type="button" class="btn btn-danger btn-sm">NO</button>
+                                             <button type="submit" class="btn btn-add btn-sm">YES</button>
+                                          </div>
+                                       </div>
+                                    </fieldset>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+
 
                 <div class="modal fade" id="searchmodal" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog">
@@ -253,8 +332,6 @@
                            <div class="row">
                               <div class="col-md-12">
                                  <form class="form-horizontal" id="search_form">
-                                   {% csrf_token %}
-
                                     <fieldset>
                                        <!-- Text input-->
                                        <div class="col-md-4 form-group">
@@ -372,56 +449,107 @@
                   <!-- /.modal-dialog -->
                </div>
 
-                <div class="modal fade" id="add_pacient" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade" id="add_ddictionary" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog">
                      <div class="modal-content">
                         <div class="modal-header modal-header-primary">
                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                           <h3><i class="fa fa-plus m-r-5"></i>Add Pacient</h3>
+                           <h3><i class="fa fa-plus m-r-5"></i>Add Doctor</h3>
                         </div>
                         <div class="modal-body">
                            <div class="row">
                               <div class="col-md-12">
-                                 <form class="form-horizontal" method="post" id="add_pacient_form" action="">
+                                 <form class="form-horizontal" method="post" id="add_data_dictionary_form" action="">
                                     {% csrf_token %}
                                      <fieldset>
                                        <!-- Text input-->
+                                         <div class="col-md-5 form-group">
+                                            <label class="control-label">Model id</label>
+                                          <select class="form-control" id="model_code" name="model_code" style="width: 150px;">
+                                                                    <option value="F">Data Form  ---- F</option>
+                                                                    <option value="P">Profile Form -- P</option>
+
+                                             </select>
+                                        </div>
                                        <div class="col-md-4 form-group">
-                                          <label class="control-label">First Name</label>
-                                          <input type="text" id="first_name" name="first_name" placeholder="First Name" class="form-control">
+                                          <label class="control-label">FP-code</label>
+                                          <select class="form-control" id="f_code" name="f_code" style="width: 100px;">
+                                              <option  value="1">1</option>
+
+
+
+                                             </select>
+
                                        </div>
                                        <!-- Text input-->
                                        <div class="col-md-4 form-group">
-                                          <label class="control-label">Last Name</label>
-                                          <input type="text" id="last_name" name="last_name" placeholder="Surname" class="form-control">
+                                          <label class="control-label">F Score</label>
+                                          <input type="number" step="0.01" id="f_score" name="f_score" placeholder="0.01" class="form-control" required>
+                                       </div>
+
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">F Score A</label>
+                                          <input type="number" step="0.01" id="f_score_a" name="f_score_a" placeholder="0.01" class="form-control" required>
+                                       </div>
+
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">F Score B</label>
+                                          <input type="number" step="0.01" id="f_score_b" name="f_score_b" placeholder="0.01" class="form-control" required>
                                        </div>
 
                                         <div class="col-md-4 form-group">
-                                          <label class="control-label">Date of birth</label>
-                                            <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" name="trip-start" min="1900-01-01" max="2025-12-31">
-
+                                          <label class="control-label">Data Points</label>
+                                          <input type="text" id="data_points" name="data_points" placeholder="ULR" class="form-control">
                                        </div>
 
 
                                         <div class="col-md-4 form-group">
-                                          <label class="control-label">Phone</label>
-                                        <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}|[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                          <label class="control-label">Data Dictionary</label>
+                                          <input type="text" id="data_dictionary" name="data_dictionary" placeholder="value: Upper-inner peripheral" class="form-control" required>
                                        </div>
 
-                                        <div class="col-md-4 form-group">
-                                            <label class="control-label">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email">
+                                        <div class="col-md-5 form-group">
+                                            <label class="control-label">Display Destination</label>
+                                          <select class="form-control" id="display_destination" name="display_destination" style="width: 150px;">
+                                                                    <option value="First Line">First Line</option>
+                                                                    <option value="Subject Line">Subject Line</option>
+                                                                    <option value="Box">Box</option>
+                                                                    <option value="Noho Box">Noho Box</option>
+                                                                    <option value="FAH Box">FAH Box</option>
+                                                                    <option value="DH Box">DH Box</option>
+                                                                    <option value="PMH Box">PMH Box</option>
+                                                                    <option value="REP Box">REP Box</option>
+                                                                    <option value="BPMH Box">BPMH Box</option>
+                                                                    <option value="SOC Box">SOC Box</option>
+                                             </select>
                                         </div>
 
                                          <div class="col-md-4 form-group">
-                                          <label class="control-label">City</label>
-                                          <input type="text" id="city" name="city" placeholder="city" class="form-control">
-                                       </div>
+                                          <label class="control-label">u-score</label>
+                                         <select class="form-control" id="u_score" name="u_score" style="width: 100px;">
+                                                <option style="background-color: #3c990b;color: white;">1</option>
+                                                <option style="background-color: white;color: black">0</option>
+                                             </select>
+                                         </div>
 
                                          <div class="col-md-4 form-group">
-                                          <label class="control-label">Addres</label>
-                                          <input type="text" id="addres" name="addres" placeholder="addres" class="form-control">
+                                           <label class="control-label">Link Logic</label>
+
+                                          <select class="form-control" id="link_logic" name="link_logic" style="width: 100px;">
+                                                <option style="background-color: #3c990b;color: white;">Yes</option>
+                                                <option style="background-color: white;color: black">No</option>
+                                             </select>
                                        </div>
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">Color Spect</label>
+                                                <select class="form-control" id="color_spect" name="color_spect" style="width: 120px;">
+                                                    <option style="background-color: #FA8072;color: white;" value="Faint Red">Faint Red</option>
+                                                     <option style="background-color: #FF2800;color: black" value="Bold Red">Bold Red</option>
+                                                    <option style="background-color: #39ff14;color: white" value="Green">Green</option>
+                                                    <option style="background-color: #202070;color: white" value="Colour">Colour</option>
+
+                                             </select>                                       </div>
+
 
                                         <div class="col-md-12 form-group user-form-group">
                                           <div class="pull-right">
@@ -442,128 +570,166 @@
                   </div>
                   <!-- /.modal-dialog -->
                </div>
-
-                <div class="modal fade" id="update" tabindex="-1" role="dialog">
+                <div class="modal fade" id="edit_ddictionary" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog">
                      <div class="modal-content">
                         <div class="modal-header modal-header-primary">
                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                           <h3><i class="fa fa-plus m-r-5"></i> Update notice board</h3>
+                           <h3><i class="fa fa-plus m-r-5"></i>Edit Doctor</h3>
                         </div>
                         <div class="modal-body">
                            <div class="row">
                               <div class="col-md-12">
-                                 <form class="form-horizontal" id="editactionfrom" method="post">
-                                    {% csrf_token %}
-
-                                    <fieldset>
-                                       <!-- Text input-->
-                                       <div class="col-md-6 form-group">
-                                          <label class="control-label">Notice title</label>
-                                          <input type="text" placeholder="Notice title" class="form-control">
-                                       </div>
-                                       <div class="col-md-6 form-group">
-                                          <label class="control-label">Publish date</label>
-                                          <input type="number" placeholder="Notice title" class="form-control">
-                                       </div>
-                                       <div class="col-md-6 form-group">
-                                          <label class="control-label">Start date</label>
-                                          <input type="number" placeholder="Notice title" class="form-control">
-                                       </div>
-                                       <div class="col-md-6 form-group">
-                                          <label class="control-label">End date</label>
-                                          <input type="number" placeholder="Notice title" class="form-control">
-                                       </div>
-                                       <div class="col-md-6 form-group">
-                                          <label class="control-label">description</label>
-                                          <input type="text" placeholder="description" class="form-control">
-                                       </div>
-                                       <!-- Text input-->
-                                       <div class="col-md-6 form-group">
-                                          <label class="control-label">status</label>
-                                          <input type="text" placeholder="status" class="form-control">
-                                       </div>
-                                       <div class="col-md-12 form-group user-form-group">
-                                          <div class="pull-right">
-                                             <button type="button" class="btn btn-danger btn-sm">Cancel</button>
-                                             <button type="submit" class="btn btn-add btn-sm">Update</button>
-                                          </div>
-                                       </div>
-                                    </fieldset>
-                                 </form>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-                        </div>
-                     </div>
-                     <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-               </div>
-
-            <div class="modal fade" id="delt" tabindex="-1" role="dialog">
-                  <div class="modal-dialog">
-                     <div class="modal-content">
-                        <div class="modal-header modal-header-primary">
-                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                           <h3><i class="fa fa-user m-r-5"></i> Delete Notice</h3>
-                        </div>
-                        <div class="modal-body">
-                           <div class="row">
-                              <div class="col-md-12">
-                                 <form class="form-horizontal" id="deleteactionfrom" method="post" >
+                                 <form class="form-horizontal" method="post" id="edit_data_dictionary_form" action="">
                                     {% csrf_token %}
                                      <fieldset>
-                                       <div class="col-md-12 form-group user-form-group">
-                                          <label class="control-label">Delete Notice</label>
-                                          <div class="pull-right">
-                                             <button type="button" class="btn btn-danger btn-sm">NO</button>
-                                             <button type="submit" class="btn btn-add btn-sm">YES</button>
-                                          </div>
-                                       </div>
-                                    </fieldset>
-                                 </form>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-                        </div>
-                     </div>
-                     <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-               </div>
+                                       <!-- Text input-->
+                                       <div class="col-md-5 form-group">
+                                            <label class="control-label">Model id</label>
+                                           <select class="form-control" id="edit_model_code" name="edit_model_code" style="width: 150px;">
+                                                <option value="F">Data Form  ---- F</option>
+                                                <option value="P">Profile Form -- P</option>
 
-               <!-- items Modal1 -->
-               <div class="modal fade" id="load_pacient" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog">
-                     <div class="modal-content">
-                        <div class="modal-header modal-header-primary">
-                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                           <h3><i class="fa fa-plus m-r-5"></i>Add Pacient From file</h3>
-                        </div>
-                        <div class="modal-body">
-                           <div class="row">
-                              <div class="col-md-12">
-                                 <form class="form-horizontal" method="post" id="add_pacient_form" action="">
-                                    {% csrf_token %}
-                                     <fieldset>
+                                           </select>
+                                        </div>
+                                       <div class="col-md-4 form-group">
+                                          <label class="control-label">FP-code</label>
+                                          <select class="form-control" id="edit_f_code" name="edit_f_code" style="width: 100px;">
+                                              <option  value="1">1</option>
+
+
+
+                                             </select>
+
+                                       </div>
                                        <!-- Text input-->
                                        <div class="col-md-4 form-group">
+                                          <label class="control-label">F Score</label>
+                                          <input type="number" step="0.01" id="edit_f_score" name="edit_f_score" placeholder="0.01" class="form-control" required>
+                                       </div>
+
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">F Score A</label>
+                                          <input type="number" step="0.01" id="edit_f_score_a" name="edit_f_score_a" placeholder="0.01" class="form-control" required>
+                                       </div>
+
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">F Score B</label>
+                                          <input type="number" step="0.01" id="edit_f_score_b" name="edit_f_score_b" placeholder="0.01" class="form-control" required>
+                                       </div>
+
+                                        <div class="col-md-4 form-group">
+                                          <label class="control-label">Data Points</label>
+                                          <input type="text" id="edit_data_points" name="edit_data_points" placeholder="ULR" class="form-control">
+                                       </div>
+
+
+                                        <div class="col-md-4 form-group">
+                                          <label class="control-label">Data Dictionary</label>
+                                          <input type="text" id="edit_data_dictionary" name="edit_data_dictionary" placeholder="value: Upper-inner peripheral" class="form-control" required>
+                                       </div>
+
+                                        <div class="col-md-5 form-group">
+                                            <label class="control-label">Display Destination</label>
+                                          <select class="form-control" id="edit_display_destination" name="edit_display_destination" style="width: 150px;">
+                                                                    <option value="First Line">First Line</option>
+                                                                    <option value="Subject Line">Subject Line</option>
+                                                                    <option value="Box">Box</option>
+                                                                    <option value="Noho Box">Noho Box</option>
+                                                                    <option value="FAH Box">FAH Box</option>
+                                                                    <option value="DH Box">DH Box</option>
+                                                                    <option value="PMH Box">PMH Box</option>
+                                                                    <option value="REP Box">REP Box</option>
+                                                                    <option value="BPMH Box">BPMH Box</option>
+                                                                    <option value="SOC Box">SOC Box</option>
+                                             </select>
+                                        </div>
+
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">u-score</label>
+                                         <select class="form-control" id="edit_u_score" name="edit_u_score" style="width: 100px;">
+                                                <option style="background-color: #3c990b;color: white;">1</option>
+                                                <option style="background-color: white;color: black">0</option>
+                                             </select>
+                                         </div>
+
+                                         <div class="col-md-4 form-group">
+                                           <label class="control-label">Link Logic</label>
+
+                                          <select class="form-control" id="edit_link_logic" name="edit_link_logic" style="width: 100px;">
+                                                <option style="background-color: #3c990b;color: white;">Yes</option>
+                                                <option style="background-color: white;color: black">No</option>
+                                             </select>
+                                       </div>
+                                         <div class="col-md-4 form-group">
+                                          <label class="control-label">Color Spect</label>
+                                                <select class="form-control" id="edit_color_spect" name="edit_color_spect" style="width: 120px;">
+                                                    <option style="background-color: #FA8072;color: white;" value="Faint Red">Faint Red</option>
+                                                     <option style="background-color: #FF2800;color: black" value="Bold Red">Bold Red</option>
+                                                    <option style="background-color: #39ff14;color: white" value="Green">Green</option>
+                                                    <option style="background-color: #202070;color: white" value="Colour">Colour</option>
+
+                                             </select>                                       </div>
+
+
+                                        <div class="col-md-12 form-group user-form-group">
+                                          <div class="pull-right">
+                                             <button type="button" id="form_shearch_cancle" class="btn btn-danger btn-sm">Cancel</button>
+                                             <button type="submit" id="form_shearch_go" class="btn btn-add btn-sm">Save</button>
+                                          </div>
+                                       </div>
+                                    </fieldset>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                     <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+               </div>
+                <div class="modal fade" id="load_ddictionary" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header modal-header-primary">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h3><i class="fa fa-plus m-r-5"></i>Add Doctors From file</h3>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form-horizontal" method="post" id="add_ddictionary" action="/datadictionaty/load/" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                     <fieldset>
+                                       <!-- Text input-->
                                           <label class="control-label">File</label>
-                                          <input type="file" id="file_pacients" name="file_pacients" accept="text/xml; text/csv" class="form-control">
-                                       </div>
-                                       <div class="col-md-4 form-group">
-                                          <label class="control-label">Url google drive</label>
-                                          <input type="text" id="google_drive_url" name="google_drive_url" placeholder="First Name" class="form-control">
-                                       </div>
+                                          <input type="file" id="file" name="file"  onblur="loadChecker()" accept="text/xml;" class="form-control" required>
+
 
 
                                     </fieldset>
+
+                                     <button type="submit" class="btn btn-add btn-sm" disabled='true' id="buttonimportdata">Save</button>
                                  </form>
+                                  <script>
+                                      function validGDurl(url_){
+                                          is_valid = url_.includes("https://docs.google.com/spreadsheets/d/");
+                                          return is_valid;
+                                      }
+                                         function loadChecker(){
+                                             file = document.getElementById('file').value;
+
+                                             if (file){
+                                                 document.getElementById('buttonimportdata').disabled = false;
+
+                                             }else {
+                                                 document.getElementById('buttonimportdata').disabled = true;
+                                             }
+                                         }
+                                     </script>
                               </div>
                            </div>
                         </div>
@@ -575,7 +741,8 @@
                   </div>
                   <!-- /.modal-dialog -->
                </div>
-               <!-- /.modal -->
+
+
                <!-- Modal -->
             </section>
             <!-- /.content -->
@@ -594,22 +761,67 @@
       <!-- jquery-ui -->
       <script src="/static/crm/assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
       <!-- Bootstrap -->
+      <script>
+          function modelDeleteSetID(id_){
+              document.getElementById('deleteactionfrom').action = '/datadictionary/del/'+id_+"/"
+          }
+
+          function modelUpdateSetID(id_){
+              document.getElementById('edit_data_dictionary_form').action = '/datadictionary/edit/'+id_+"/"
+
+
+
+              f_code = document.getElementById('f_code'+id_).textContent;
+
+              if (f_code.indexOf("F") !== -1){
+                  f_code_num = f_code.replace('F','')
+                  document.getElementById('edit_model_code').value = 'F';
+                  document.getElementById('edit_f_code').value = f_code_num;
+              }else if (f_code.indexOf("P") !== -1) {
+                  f_code_num = f_code.replace('P','')
+                  document.getElementById('edit_model_code').value = 'P';
+                  document.getElementById('edit_f_code').value = f_code_num;
+              }
+
+
+              f_score = document.getElementById('f_score'+id_).textContent;
+              document.getElementById('edit_f_score').value = f_score;
+
+              f_score_a = document.getElementById('f_score_a'+id_).textContent;
+              document.getElementById('edit_f_score_a').value = f_score_a;
+
+              f_score_b = document.getElementById('f_score_b'+id_).textContent;
+              document.getElementById('edit_f_score_b').value = f_score_b;
+
+              data_point = document.getElementById('data_point'+id_).textContent;
+              document.getElementById('edit_data_points').value = data_point;
+
+              value = document.getElementById('value'+id_).textContent;
+              document.getElementById('edit_data_dictionary').value = value;
+
+
+              display_distenation = document.getElementById('display_distenation'+id_).textContent;
+              document.getElementById('edit_display_destination').value = display_distenation;
+
+
+              color = document.getElementById('color'+id_).textContent;
+              document.getElementById('edit_color_spect').value = color;
+
+              u_score = document.getElementById('u_score'+id_).textContent;
+              document.getElementById('edit_u_score').value = u_score;
+
+              link_logic = document.getElementById('l_link'+id_).textContent;
+              document.getElementById('edit_link_logic').value = link_logic;
+
+          }
+
+      </script>
       <script src="/static/crm/assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
       <!-- lobipanel -->
       <script src="/static/crm/assets/plugins/lobipanel/lobipanel.min.js" type="text/javascript"></script>
       <!-- Pace js -->
       <script src="/static/crm/assets/plugins/pace/pace.min.js" type="text/javascript"></script>
       <!-- table-export js -->
-      <script>
-          function modelDeleteSetID(id_){
-              document.getElementById('deleteactionfrom').action = '/pacient/del/'+id_+"/"
-          }
-
-          function modelUpdateSetID(id_){
-              document.getElementById('editactionfrom').action = '/pacient/edit/'+id_+"/"
-          }
-
-      </script>
       <script src="/static/crm/assets/plugins/table-export/tableExport.js" type="text/javascript"></script>
       <script src="/static/crm/assets/plugins/table-export/jquery.base64.js" type="text/javascript"></script>
       <script src="/static/crm/assets/plugins/table-export/html2canvas.js" type="text/javascript"></script>
